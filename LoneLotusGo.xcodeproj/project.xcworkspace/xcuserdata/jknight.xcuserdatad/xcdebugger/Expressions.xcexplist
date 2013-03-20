@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[Stone initForGoGame:for_player:x_index:y_index:]:Stone.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[Chain initWithStone:]:Chain.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[self addObject:stone]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[Board initBoardWithCapacity:]:Board.m">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

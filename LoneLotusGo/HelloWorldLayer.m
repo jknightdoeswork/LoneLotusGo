@@ -42,7 +42,7 @@
 	if( (self=[super init]) ) {
 		
 		// create and initialize a Label
-		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Hello World" fontName:@"Marker Felt" fontSize:64];
+		CCLabelTTF *label = [CCLabelTTF labelWithString:@"LoneLotus Go" fontName:@"Helvetica Neue" fontSize:64];
 
 		// ask director for the window size
 		CGSize size = [[CCDirector sharedDirector] winSize];
@@ -58,9 +58,9 @@
 		//
 		// Leaderboards and Achievements
 		//
-		
+        [ CCMenuItemFont setFontName:@"Helvetica Neue"];
 		// Default font size will be 28 points.
-		[CCMenuItemFont setFontSize:28];
+		[CCMenuItemFont setFontSize:24];
 		
 		// Achievement Menu Item using blocks
 		CCMenuItem *itemAchievement = [CCMenuItemFont itemWithString:@"Achievements" block:^(id sender) {
@@ -78,23 +78,38 @@
 									   ];
 
 		// Leaderboard Menu Item using blocks
-		CCMenuItem *itemLeaderboard = [CCMenuItemFont itemWithString:@"Leaderboard" block:^(id sender) {
-			
-			
-			GKLeaderboardViewController *leaderboardViewController = [[GKLeaderboardViewController alloc] init];
-			leaderboardViewController.leaderboardDelegate = self;
-			
-			AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-			
-			[[app navController] presentModalViewController:leaderboardViewController animated:YES];
-			
-			[leaderboardViewController release];
-		}
-									   ];
+//		CCMenuItem *itemLeaderboard = [CCMenuItemFont itemWithString:@"Leaderboard" block:^(id sender) {
+//			
+//			
+//			GKLeaderboardViewController *leaderboardViewController = [[GKLeaderboardViewController alloc] init];
+//			leaderboardViewController.leaderboardDelegate = self;
+//			
+//			AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
+//			
+//			[[app navController] presentModalViewController:leaderboardViewController animated:YES];
+//			
+//			[leaderboardViewController release];
+//		}
+//									   ];
 		
-		CCMenu *menu = [CCMenu menuWithItems:itemAchievement, itemLeaderboard, nil];
+        // BEGIN CUSTOM CODE
+        CCMenuItem *itemPlay = [CCMenuItemFont itemWithString:@"Play Local" block:^(id sender) {
+			
+            [[CCDirector sharedDirector] pushScene: [PlayLayer scene]];
+            
+		}];
+        // BEGIN CUSTOM CODE
+        CCMenuItem *itemPlayOnline = [CCMenuItemFont itemWithString:@"Play Online" block:^(id sender) {
+			
+            [[CCDirector sharedDirector] pushScene: [PlayLayer scene]];
+            
+		}];
+        
+        // END CUSTOM CODE
 		
-		[menu alignItemsHorizontallyWithPadding:20];
+		CCMenu *menu = [CCMenu menuWithItems:itemAchievement, itemPlay, itemPlayOnline, nil];
+
+		[menu alignItemsHorizontallyWithPadding:10];
 		[menu setPosition:ccp( size.width/2, size.height/2 - 50)];
 		
 		// Add the menu to the layer

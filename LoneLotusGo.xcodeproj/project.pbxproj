@@ -9,7 +9,13 @@
 /* Begin PBXBuildFile section */
 		D2045A2716B8C5CF008C94F9 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = D2045A2616B8C5CF008C94F9 /* Utilities.m */; };
 		D208561316C6D6CB00FEB519 /* IndexPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = D208561216C6D6CB00FEB519 /* IndexPoint.m */; };
-		D23A9FCF16F950C000952EA1 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23A9FCE16F950C000952EA1 /* Parse.framework */; };
+		D23A9FD516F953A000952EA1 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23A9FD416F953A000952EA1 /* CFNetwork.framework */; };
+		D23A9FD716F953A900952EA1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23A9FD616F953A900952EA1 /* CoreLocation.framework */; };
+		D23A9FE516F954BF00952EA1 /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D23A9FE416F954BF00952EA1 /* libz.1.1.3.dylib */; };
+		D23A9FE716F954C400952EA1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23A9FE616F954C400952EA1 /* MobileCoreServices.framework */; };
+		D23A9FE916F954D100952EA1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23A9FE816F954D100952EA1 /* Security.framework */; };
+		D23A9FEB16F954D800952EA1 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23A9FEA16F954D800952EA1 /* StoreKit.framework */; };
+		D23A9FED16F954DE00952EA1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23A9FEC16F954DE00952EA1 /* SystemConfiguration.framework */; };
 		D281445816CFE798004F4B33 /* Scoreboard.m in Sources */ = {isa = PBXBuildFile; fileRef = D281445716CFE798004F4B33 /* Scoreboard.m */; };
 		D281445A16D167F9004F4B33 /* blackvswhite.png in Resources */ = {isa = PBXBuildFile; fileRef = D281445916D167F8004F4B33 /* blackvswhite.png */; };
 		D2C6454B16B490F4007291B7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2C6454A16B490F4007291B7 /* QuartzCore.framework */; };
@@ -151,7 +157,13 @@
 		D2045A2616B8C5CF008C94F9 /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
 		D208561116C6D6CB00FEB519 /* IndexPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndexPoint.h; sourceTree = "<group>"; };
 		D208561216C6D6CB00FEB519 /* IndexPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndexPoint.m; sourceTree = "<group>"; };
-		D23A9FCE16F950C000952EA1 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = ../Parse.framework; sourceTree = "<group>"; };
+		D23A9FD416F953A000952EA1 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		D23A9FD616F953A900952EA1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		D23A9FE416F954BF00952EA1 /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
+		D23A9FE616F954C400952EA1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		D23A9FE816F954D100952EA1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		D23A9FEA16F954D800952EA1 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		D23A9FEC16F954DE00952EA1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		D281445616CFE798004F4B33 /* Scoreboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Scoreboard.h; path = ../Scoreboard.h; sourceTree = "<group>"; };
 		D281445716CFE798004F4B33 /* Scoreboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Scoreboard.m; path = ../Scoreboard.m; sourceTree = "<group>"; };
 		D281445916D167F8004F4B33 /* blackvswhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackvswhite.png; sourceTree = "<group>"; };
@@ -434,15 +446,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D23A9FCF16F950C000952EA1 /* Parse.framework in Frameworks */,
+				D2C6455916B490F5007291B7 /* CoreGraphics.framework in Frameworks */,
+				D23A9FD516F953A000952EA1 /* CFNetwork.framework in Frameworks */,
+				D23A9FED16F954DE00952EA1 /* SystemConfiguration.framework in Frameworks */,
+				D23A9FEB16F954D800952EA1 /* StoreKit.framework in Frameworks */,
+				D23A9FE916F954D100952EA1 /* Security.framework in Frameworks */,
 				D2C6454B16B490F4007291B7 /* QuartzCore.framework in Frameworks */,
+				D23A9FE716F954C400952EA1 /* MobileCoreServices.framework in Frameworks */,
+				D23A9FE516F954BF00952EA1 /* libz.1.1.3.dylib in Frameworks */,
+				D2C6455116B490F5007291B7 /* AudioToolbox.framework in Frameworks */,
+				D23A9FD716F953A900952EA1 /* CoreLocation.framework in Frameworks */,
 				D2C6454D16B490F5007291B7 /* OpenGLES.framework in Frameworks */,
 				D2C6454F16B490F5007291B7 /* OpenAL.framework in Frameworks */,
-				D2C6455116B490F5007291B7 /* AudioToolbox.framework in Frameworks */,
 				D2C6455316B490F5007291B7 /* AVFoundation.framework in Frameworks */,
 				D2C6455516B490F5007291B7 /* UIKit.framework in Frameworks */,
 				D2C6455716B490F5007291B7 /* Foundation.framework in Frameworks */,
-				D2C6455916B490F5007291B7 /* CoreGraphics.framework in Frameworks */,
 				D2C6455B16B490F5007291B7 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -453,6 +471,11 @@
 		D2C6453B16B490F4007291B7 = {
 			isa = PBXGroup;
 			children = (
+				D23A9FEC16F954DE00952EA1 /* SystemConfiguration.framework */,
+				D23A9FEA16F954D800952EA1 /* StoreKit.framework */,
+				D23A9FE816F954D100952EA1 /* Security.framework */,
+				D23A9FE616F954C400952EA1 /* MobileCoreServices.framework */,
+				D23A9FE416F954BF00952EA1 /* libz.1.1.3.dylib */,
 				D2C6455C16B490F5007291B7 /* LoneLotusGo */,
 				D2C6454916B490F4007291B7 /* Frameworks */,
 				D2C6454716B490F4007291B7 /* Products */,
@@ -470,6 +493,8 @@
 		D2C6454916B490F4007291B7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D23A9FD616F953A900952EA1 /* CoreLocation.framework */,
+				D23A9FD416F953A000952EA1 /* CFNetwork.framework */,
 				D2C6454A16B490F4007291B7 /* QuartzCore.framework */,
 				D2C6454C16B490F4007291B7 /* OpenGLES.framework */,
 				D2C6454E16B490F5007291B7 /* OpenAL.framework */,
@@ -486,7 +511,6 @@
 		D2C6455C16B490F5007291B7 /* LoneLotusGo */ = {
 			isa = PBXGroup;
 			children = (
-				D23A9FCE16F950C000952EA1 /* Parse.framework */,
 				D281445616CFE798004F4B33 /* Scoreboard.h */,
 				D281445716CFE798004F4B33 /* Scoreboard.m */,
 				D2C646E216B491B8007291B7 /* PlayLayer.h */,

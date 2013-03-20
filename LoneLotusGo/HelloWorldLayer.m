@@ -100,8 +100,8 @@
 		}];
         // BEGIN CUSTOM CODE
         CCMenuItem *itemPlayOnline = [CCMenuItemFont itemWithString:@"Play Online" block:^(id sender) {
-			
-            [[CCDirector sharedDirector] pushScene: [PlayLayer scene]];
+            
+//			[[CCDirector sharedDirector] presentModalViewController:<#(UIViewController *)#> animated:<#(BOOL)#>
             
 		}];
         

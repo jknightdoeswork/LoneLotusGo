@@ -9,4 +9,4 @@
 typedef unsigned char PlayerFlag;
 static const PlayerFlag P_UNDEFINED = '\0';
 static const PlayerFlag P_WHITE = 'w';
-static const PlayerFlag P_BLACK = 'bbbb';
+static const PlayerFlag P_BLACK = 'b';

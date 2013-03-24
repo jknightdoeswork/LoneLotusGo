@@ -6,15 +6,13 @@
 //  Copyright VendAsta Technologiesfffff Inc.  2013. All rights reserved.
 //
 
-
-#import <GameKit/GameKit.h>
-
 // When you import this file, you import all the cocos2d classes
 #import "cocos2d.h"
 #import "PlayLayer.h"
+#import <Parse/Parse.h>
 
 // HelloWorldLayer
-@interface HelloWorldLayer : CCLayer <GKAchievementViewControllerDelegate, GKLeaderboardViewControllerDelegate>
+@interface HelloWorldLayer : CCLayer <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
 {
 }
 

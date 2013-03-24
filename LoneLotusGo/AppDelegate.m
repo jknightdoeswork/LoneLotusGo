@@ -10,7 +10,7 @@
 
 #import "AppDelegate.h"
 #import "IntroLayer.h"
-//#import <Parse/Parse.h>
+#import <Parse/Parse.h>
 
 @implementation AppController
 
@@ -19,8 +19,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Connect to Parse
-//    [Parse setApplicationId:@"Y48msHWJpeju9JGrR2oYk8cdgGBAkEGD8tN8scs9"
-//                  clientKey:@"UcB3nrSEopKVNCHxp7aIPhFwI03uPiiywUriVlN2"];
+    [Parse setApplicationId:@"Y48msHWJpeju9JGrR2oYk8cdgGBAkEGD8tN8scs9"
+                  clientKey:@"UcB3nrSEopKVNCHxp7aIPhFwI03uPiiywUriVlN2"];
     
 	// Create the main window
 	window_ = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

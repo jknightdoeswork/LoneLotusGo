@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		D2045A2716B8C5CF008C94F9 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = D2045A2616B8C5CF008C94F9 /* Utilities.m */; };
 		D208561316C6D6CB00FEB519 /* IndexPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = D208561216C6D6CB00FEB519 /* IndexPoint.m */; };
+		D21D97D416FAA24900727758 /* PlayOnlineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D21D97D216FAA24900727758 /* PlayOnlineViewController.m */; };
+		D21D97D516FAA24900727758 /* PlayOnlineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D21D97D316FAA24900727758 /* PlayOnlineViewController.xib */; };
 		D23A9FD516F953A000952EA1 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23A9FD416F953A000952EA1 /* CFNetwork.framework */; };
 		D23A9FD716F953A900952EA1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23A9FD616F953A900952EA1 /* CoreLocation.framework */; };
 		D23A9FE516F954BF00952EA1 /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D23A9FE416F954BF00952EA1 /* libz.1.1.3.dylib */; };
@@ -150,6 +152,8 @@
 		D2C646F116B4983D007291B7 /* stone_white.png in Resources */ = {isa = PBXBuildFile; fileRef = D2C646EE16B4983D007291B7 /* stone_white.png */; };
 		D2C646F216B4983D007291B7 /* stone_black.png in Resources */ = {isa = PBXBuildFile; fileRef = D2C646EF16B4983D007291B7 /* stone_black.png */; };
 		D2F24D8316B8C0C600E08872 /* go.gif in Resources */ = {isa = PBXBuildFile; fileRef = D2F24D8216B8C0C600E08872 /* go.gif */; };
+		D2F9E5E716FE3C4400B51F89 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2F9E5E616FE3C4400B51F89 /* Parse.framework */; };
+		D2F9E5EA16FF68C300B51F89 /* LLMainMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F9E5E916FF68C300B51F89 /* LLMainMenu.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -157,6 +161,9 @@
 		D2045A2616B8C5CF008C94F9 /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
 		D208561116C6D6CB00FEB519 /* IndexPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndexPoint.h; sourceTree = "<group>"; };
 		D208561216C6D6CB00FEB519 /* IndexPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndexPoint.m; sourceTree = "<group>"; };
+		D21D97D116FAA24900727758 /* PlayOnlineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayOnlineViewController.h; sourceTree = "<group>"; };
+		D21D97D216FAA24900727758 /* PlayOnlineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayOnlineViewController.m; sourceTree = "<group>"; };
+		D21D97D316FAA24900727758 /* PlayOnlineViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayOnlineViewController.xib; sourceTree = "<group>"; };
 		D23A9FD416F953A000952EA1 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		D23A9FD616F953A900952EA1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		D23A9FE416F954BF00952EA1 /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
@@ -439,6 +446,9 @@
 		D2C646EE16B4983D007291B7 /* stone_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stone_white.png; sourceTree = "<group>"; };
 		D2C646EF16B4983D007291B7 /* stone_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stone_black.png; sourceTree = "<group>"; };
 		D2F24D8216B8C0C600E08872 /* go.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = go.gif; path = ../go.gif; sourceTree = "<group>"; };
+		D2F9E5E616FE3C4400B51F89 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = ../Parse.framework; sourceTree = "<group>"; };
+		D2F9E5E816FF68C300B51F89 /* LLMainMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLMainMenu.h; sourceTree = "<group>"; };
+		D2F9E5E916FF68C300B51F89 /* LLMainMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLMainMenu.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -462,6 +472,7 @@
 				D2C6455516B490F5007291B7 /* UIKit.framework in Frameworks */,
 				D2C6455716B490F5007291B7 /* Foundation.framework in Frameworks */,
 				D2C6455B16B490F5007291B7 /* GameKit.framework in Frameworks */,
+				D2F9E5E716FE3C4400B51F89 /* Parse.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -493,6 +504,7 @@
 		D2C6454916B490F4007291B7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D2F9E5E616FE3C4400B51F89 /* Parse.framework */,
 				D23A9FD616F953A900952EA1 /* CoreLocation.framework */,
 				D23A9FD416F953A000952EA1 /* CFNetwork.framework */,
 				D2C6454A16B490F4007291B7 /* QuartzCore.framework */,
@@ -524,6 +536,8 @@
 				D2C646D516B490FA007291B7 /* AppDelegate.m */,
 				D2C646D716B490FA007291B7 /* HelloWorldLayer.h */,
 				D2C646D816B490FA007291B7 /* HelloWorldLayer.m */,
+				D2F9E5E816FF68C300B51F89 /* LLMainMenu.h */,
+				D2F9E5E916FF68C300B51F89 /* LLMainMenu.m */,
 				D2C646DA16B490FA007291B7 /* IntroLayer.h */,
 				D2C646DB16B490FA007291B7 /* IntroLayer.m */,
 				D2C6455D16B490F5007291B7 /* Resources */,
@@ -533,6 +547,9 @@
 				D2045A2616B8C5CF008C94F9 /* Utilities.m */,
 				D208561116C6D6CB00FEB519 /* IndexPoint.h */,
 				D208561216C6D6CB00FEB519 /* IndexPoint.m */,
+				D21D97D116FAA24900727758 /* PlayOnlineViewController.h */,
+				D21D97D216FAA24900727758 /* PlayOnlineViewController.m */,
+				D21D97D316FAA24900727758 /* PlayOnlineViewController.xib */,
 			);
 			path = LoneLotusGo;
 			sourceTree = "<group>";
@@ -972,6 +989,7 @@
 				D2C646F216B4983D007291B7 /* stone_black.png in Resources */,
 				D2F24D8316B8C0C600E08872 /* go.gif in Resources */,
 				D281445A16D167F9004F4B33 /* blackvswhite.png in Resources */,
+				D21D97D516FAA24900727758 /* PlayOnlineViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1092,6 +1110,8 @@
 				D2045A2716B8C5CF008C94F9 /* Utilities.m in Sources */,
 				D208561316C6D6CB00FEB519 /* IndexPoint.m in Sources */,
 				D281445816CFE798004F4B33 /* Scoreboard.m in Sources */,
+				D21D97D416FAA24900727758 /* PlayOnlineViewController.m in Sources */,
+				D2F9E5EA16FF68C300B51F89 /* LLMainMenu.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1157,16 +1177,14 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../..\"",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/..\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = LoneLotusGo/Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"LoneLotusGo/libs/kazmath/include\"";
 				INFOPLIST_FILE = LoneLotusGo/Resources/Info.plist;
-				OTHER_LDFLAGS = (
-					"-lz",
-					"-ObjC",
-				);
+				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1181,15 +1199,13 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../..\"",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/..\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = LoneLotusGo/Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"LoneLotusGo/libs/kazmath/include\"";
 				INFOPLIST_FILE = LoneLotusGo/Resources/Info.plist;
-				OTHER_LDFLAGS = (
-					"-lz",
-					"-ObjC",
-				);
+				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;

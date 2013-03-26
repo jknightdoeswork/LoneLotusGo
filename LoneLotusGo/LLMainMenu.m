@@ -31,13 +31,14 @@
 //        [itemPlay setAnchorPoint:ccp(0.0f,0.5f)];
         CCMenuItem* itemPlayOnline = [CCMenuItemFont itemWithString:@"Play Online" block:^(id sender) {
             NSLog(@"Play Online Moving!");
+            CGSize currentSize = [[CCDirector sharedDirector] winSize];
             if (playOnlineIsShown) {
-                [menu runAction:[CCMoveTo actionWithDuration:0.33f position:ccp(size.width/2.0f, size.height/2.0f)]];
+                [menu runAction:[CCMoveTo actionWithDuration:0.33f position:ccp(currentSize.width/2.0f, currentSize.height/2.0f)]];
                 [playOnlineMenu runAction:[CCFadeOut actionWithDuration:0.33f]];
                 playOnlineIsShown = NO;
             }
             else {
-                [menu runAction:[CCMoveTo actionWithDuration:0.33f position:ccp(size.width*0.15, size.height/2.0f)]];
+                [menu runAction:[CCMoveTo actionWithDuration:0.33f position:ccp(currentSize.width*0.15, currentSize.height/2.0f)]];
                 [playOnlineMenu runAction:[CCFadeIn actionWithDuration:0.33f]];
                 playOnlineIsShown = YES;
             }

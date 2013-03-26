@@ -9,10 +9,11 @@
 // When you import this file, you import all the cocos2d classes
 #import "cocos2d.h"
 #import "PlayLayer.h"
+#import "LLBaseLayer.h"
 #import <Parse/Parse.h>
 
 // HelloWorldLayer
-@interface HelloWorldLayer : CCLayer <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, CCDirectorDelegate>
+@interface HelloWorldLayer : LLBaseLayer <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
 {
 }
 

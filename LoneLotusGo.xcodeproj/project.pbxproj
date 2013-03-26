@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D2045A2716B8C5CF008C94F9 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = D2045A2616B8C5CF008C94F9 /* Utilities.m */; };
 		D208561316C6D6CB00FEB519 /* IndexPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = D208561216C6D6CB00FEB519 /* IndexPoint.m */; };
+		D20D78051701310F0084A749 /* LLBaseLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D20D78041701310F0084A749 /* LLBaseLayer.m */; };
 		D21D97D416FAA24900727758 /* PlayOnlineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D21D97D216FAA24900727758 /* PlayOnlineViewController.m */; };
 		D21D97D516FAA24900727758 /* PlayOnlineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D21D97D316FAA24900727758 /* PlayOnlineViewController.xib */; };
 		D23A9FD516F953A000952EA1 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23A9FD416F953A000952EA1 /* CFNetwork.framework */; };
@@ -162,6 +163,8 @@
 		D2045A2616B8C5CF008C94F9 /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
 		D208561116C6D6CB00FEB519 /* IndexPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndexPoint.h; sourceTree = "<group>"; };
 		D208561216C6D6CB00FEB519 /* IndexPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndexPoint.m; sourceTree = "<group>"; };
+		D20D78031701310F0084A749 /* LLBaseLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLBaseLayer.h; sourceTree = "<group>"; };
+		D20D78041701310F0084A749 /* LLBaseLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLBaseLayer.m; sourceTree = "<group>"; };
 		D21D97D116FAA24900727758 /* PlayOnlineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayOnlineViewController.h; sourceTree = "<group>"; };
 		D21D97D216FAA24900727758 /* PlayOnlineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayOnlineViewController.m; sourceTree = "<group>"; };
 		D21D97D316FAA24900727758 /* PlayOnlineViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayOnlineViewController.xib; sourceTree = "<group>"; };
@@ -540,6 +543,8 @@
 				D2C646D816B490FA007291B7 /* HelloWorldLayer.m */,
 				D2F9E5E816FF68C300B51F89 /* LLMainMenu.h */,
 				D2F9E5E916FF68C300B51F89 /* LLMainMenu.m */,
+				D20D78031701310F0084A749 /* LLBaseLayer.h */,
+				D20D78041701310F0084A749 /* LLBaseLayer.m */,
 				D2C646DA16B490FA007291B7 /* IntroLayer.h */,
 				D2C646DB16B490FA007291B7 /* IntroLayer.m */,
 				D2C6455D16B490F5007291B7 /* Resources */,
@@ -1116,6 +1121,7 @@
 				D281445816CFE798004F4B33 /* Scoreboard.m in Sources */,
 				D21D97D416FAA24900727758 /* PlayOnlineViewController.m in Sources */,
 				D2F9E5EA16FF68C300B51F89 /* LLMainMenu.m in Sources */,
+				D20D78051701310F0084A749 /* LLBaseLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

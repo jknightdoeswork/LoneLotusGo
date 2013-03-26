@@ -175,34 +175,73 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "LoneLotusGo/HelloWorldLayer.m"
-         timestampString = "385837173.903831"
+         timestampString = "385951177.82574"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "158"
-         endingLineNumber = "158">
+         startingLineNumber = "124"
+         endingLineNumber = "124">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "LoneLotusGo/HelloWorldLayer.m"
-         timestampString = "385837173.903831"
+         timestampString = "385951177.82574"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "169"
-         endingLineNumber = "169">
+         startingLineNumber = "135"
+         endingLineNumber = "135">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "LoneLotusGo/HelloWorldLayer.m"
-         timestampString = "385761895.985467"
+         timestampString = "385951177.82574"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "52"
-         endingLineNumber = "52"
+         startingLineNumber = "69"
+         endingLineNumber = "69"
          landmarkName = "-init"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "LoneLotusGo/LLMainMenu.m"
+         timestampString = "385872802.700487"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "43"
+         endingLineNumber = "43"
+         landmarkName = "-initWithScreenSize:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "LoneLotusGo/libs/cocos2d/CCActionManager.m"
+         timestampString = "385868321.836879"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "171"
+         endingLineNumber = "171"
+         landmarkName = "-addAction:target:paused:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "LoneLotusGo/LLMainMenu.m"
+         timestampString = "385873089.203146"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "23"
+         endingLineNumber = "23"
+         landmarkName = "-initWithScreenSize:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

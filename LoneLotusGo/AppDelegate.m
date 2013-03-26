@@ -34,6 +34,7 @@
 									sharegroup:nil
 								 multiSampling:NO
 							   numberOfSamples:0];
+    
     [glView setMultipleTouchEnabled:YES];
 	director_ = (CCDirectorIOS*) [CCDirector sharedDirector];
 
@@ -80,24 +81,24 @@
 	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
 	[director_ pushScene: [IntroLayer scene]]; 
 
-	
 	// Create a Navigation Controller with the Director
 	navController_ = [[UINavigationController alloc] initWithRootViewController:director_];
 	navController_.navigationBarHidden = YES;
-	
+
 	// set the Navigation Controller as the root view controller
 //	[window_ addSubview:navController_.view];	// Generates flicker.
 	[window_ setRootViewController:navController_];
-	
+
 	// make main window visible
 	[window_ makeKeyAndVisible];
-	
+
 	return YES;
 }
 
 // Supported orientations: Landscape. Customize it for your own needs
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
+    
 	return YES;
 }
 

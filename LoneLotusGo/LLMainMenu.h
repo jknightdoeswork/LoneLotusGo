@@ -11,5 +11,6 @@
 #import "PlayLayer.h"
 
 @interface LLMainMenu : CCNode
-
+-(id)initWithScreenSize:(CGSize)size;
+-(void)setScreenSize:(CGSize)size;
 @end

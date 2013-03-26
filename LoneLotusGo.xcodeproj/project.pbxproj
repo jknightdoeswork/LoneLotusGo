@@ -18,6 +18,7 @@
 		D23A9FE916F954D100952EA1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23A9FE816F954D100952EA1 /* Security.framework */; };
 		D23A9FEB16F954D800952EA1 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23A9FEA16F954D800952EA1 /* StoreKit.framework */; };
 		D23A9FED16F954DE00952EA1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23A9FEC16F954DE00952EA1 /* SystemConfiguration.framework */; };
+		D251140D16FFDD8700C349DE /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = D251140C16FFDD8700C349DE /* logo.png */; };
 		D281445816CFE798004F4B33 /* Scoreboard.m in Sources */ = {isa = PBXBuildFile; fileRef = D281445716CFE798004F4B33 /* Scoreboard.m */; };
 		D281445A16D167F9004F4B33 /* blackvswhite.png in Resources */ = {isa = PBXBuildFile; fileRef = D281445916D167F8004F4B33 /* blackvswhite.png */; };
 		D2C6454B16B490F4007291B7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2C6454A16B490F4007291B7 /* QuartzCore.framework */; };
@@ -171,6 +172,7 @@
 		D23A9FE816F954D100952EA1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		D23A9FEA16F954D800952EA1 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		D23A9FEC16F954DE00952EA1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		D251140C16FFDD8700C349DE /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = ../../../../Desktop/logo.png; sourceTree = "<group>"; };
 		D281445616CFE798004F4B33 /* Scoreboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Scoreboard.h; path = ../Scoreboard.h; sourceTree = "<group>"; };
 		D281445716CFE798004F4B33 /* Scoreboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Scoreboard.m; path = ../Scoreboard.m; sourceTree = "<group>"; };
 		D281445916D167F8004F4B33 /* blackvswhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackvswhite.png; sourceTree = "<group>"; };
@@ -557,6 +559,7 @@
 		D2C6455D16B490F5007291B7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D251140C16FFDD8700C349DE /* logo.png */,
 				D281445916D167F8004F4B33 /* blackvswhite.png */,
 				D2F24D8216B8C0C600E08872 /* go.gif */,
 				D2C646EE16B4983D007291B7 /* stone_white.png */,
@@ -990,6 +993,7 @@
 				D2F24D8316B8C0C600E08872 /* go.gif in Resources */,
 				D281445A16D167F9004F4B33 /* blackvswhite.png in Resources */,
 				D21D97D516FAA24900727758 /* PlayOnlineViewController.xib in Resources */,
+				D251140D16FFDD8700C349DE /* logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,6 +10,7 @@
 // Import the interfaces
 #import "HelloWorldLayer.h"
 #import "PlayOnlineViewController.h"
+#import "LLMainMenu.h"
 
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
@@ -17,6 +18,8 @@
 @interface HelloWorldLayer (){
     PlayOnlineViewController* po;
     PFLogInViewController *logInController;
+    LLMainMenu *llmenu;
+    CCSprite *logo;
 }
 @end
 // HelloWorldLayer implementation
@@ -27,7 +30,7 @@
 {
 	// 'scene' is an autorelease object.
 	CCScene *scene = [CCScene node];
-	
+
 	// 'layer' is an autorelease object.
 	HelloWorldLayer *layer = [HelloWorldLayer node];
 	
@@ -38,84 +41,46 @@
 	return scene;
 }
 
+
+-(void)onEnter {
+    // ask director for the window size
+    [super onEnter];
+    NSLog(@"On enter called");
+    CGSize size = [[CCDirector sharedDirector] winSize];
+	
+    // position the label on the center of the screen
+    [logo setPosition:ccp( size.width /2 , size.height )];
+    [llmenu setScreenSize:size];
+}
+
 // on "init" you need to initialize your instance
 -(id) init
 {
 	// always call "super" init
 	// Apple recommends to re-assign "self" with the "super's" return value
 	if( (self=[super init]) ) {
-		
-        // Parse related
+        CGSize size = [[CCDirector sharedDirector] winSize];
+        
+        // Parse login controllers
         logInController = [[PFLogInViewController alloc] init];
         [logInController setDelegate:self];
         [[logInController signUpController] setDelegate:self];
         po = [[PlayOnlineViewController alloc] initWithNibName:@"PlayOnlineViewController" bundle:nil];
-        
-        
-        
-		// create and initialize a Label
-		CCLabelTTF *label = [CCLabelTTF labelWithString:@"LoneLotus Go" fontName:@"Helvetica Neue" fontSize:64];
 
-		// ask director for the window size
-		CGSize size = [[CCDirector sharedDirector] winSize];
-	
-		// position the label on the center of the screen
-		label.position =  ccp( size.width /2 , size.height/2 );
+		// "LoneLotusGo" title
+        logo = [CCSprite spriteWithFile:@"logo.png"];
+        [logo setAnchorPoint:ccp(0.5, 1.0)];
+		[self addChild: logo z:1];
 		
-		// add the label as a child to this Layer
-		[self addChild: label];
-		
-		
-		
-		//
-		// Leaderboards and Achievements
-		//
-        [ CCMenuItemFont setFontName:@"Zapfino"];
-		// Default font size will be 28 points.
-		[CCMenuItemFont setFontSize:24];
+        // Menus
 
-
-		// Leaderboard Menu Item using blocks
-//		CCMenuItem *itemLeaderboard = [CCMenuItemFont itemWithString:@"Leaderboard" block:^(id sender) {
-//			
-//			
-//			GKLeaderboardViewController *leaderboardViewController = [[GKLeaderboardViewController alloc] init];
-//			leaderboardViewController.leaderboardDelegate = self;
-//			
-//			AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-//			
-//			[[app navController] presentModalViewController:leaderboardViewController animated:YES];
-//			
-//			[leaderboardViewController release];
-//		}
-//									   ];
-		
-        // BEGIN CUSTOM CODE
-        CCMenuItem* itemPlay = [CCMenuItemFont itemWithString:@"Play Local" block:^(id sender) {
-			
-            [[CCDirector sharedDirector] pushScene: [PlayLayer scene]];
-            
-		}];
-
-        CCMenuItem* itemPlayOnline = [CCMenuItemFont itemWithString:@"Play Online" block:^(id sender) {
-            [[CCDirector sharedDirector] presentViewController:logInController animated:YES completion:nil];
-		}];
-        
-        
-        
-        // END CUSTOM CODE
-		
-		CCMenu *menu = [CCMenu menuWithItems:itemPlay, itemPlayOnline, nil];
-
-		[menu alignItemsVerticallyWithPadding:10];
-		[menu setPosition:ccp( size.width/2, size.height/2 - 50)];
-		// Add the menu to the layer
-		[self addChild:menu];
-
+        llmenu = [[LLMainMenu alloc] initWithScreenSize:size];
+//        [llmenu setAnchorPoint:ccp(0.0f, 0.0f)];
+//        [llmenu setPosition:ccp(0.0f, 0.0f)];
+        [self addChild:llmenu z:10];
 	}
 	return self;
 }
-
 // on "dealloc" you need to release all your retained objects
 - (void) dealloc
 {

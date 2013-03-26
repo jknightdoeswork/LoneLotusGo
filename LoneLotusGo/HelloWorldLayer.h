@@ -12,7 +12,7 @@
 #import <Parse/Parse.h>
 
 // HelloWorldLayer
-@interface HelloWorldLayer : CCLayer <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
+@interface HelloWorldLayer : CCLayer <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, CCDirectorDelegate>
 {
 }
 

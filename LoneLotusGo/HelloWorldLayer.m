@@ -41,13 +41,42 @@
 	return scene;
 }
 
+// Supported orientations: Landscape. Customize it for your own needs
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    NSLog(@"shouldAutorotateToInterfaceOrientation");
+	return YES;
+}
+-(void) updateProjection {
+    NSLog(@"Update projection");
+}
+-(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+	CGSize size;
+	if(UIInterfaceOrientationIsPortrait(toInterfaceOrientation)) {
+		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+			size = CGSizeMake(768, 1024);
+		else
+			size = CGSizeMake(320, 480 );
+        
+	} else if(UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
+		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+			size = CGSizeMake(1024, 768);
+		else
+			size = CGSizeMake(480, 320 );
+	}
+
+    [llmenu setScreenSize:size];
+    [logo setPosition:ccp(size.width/2, 0)];
+}
+
 
 -(void)onEnter {
     // ask director for the window size
     [super onEnter];
     NSLog(@"On enter called");
     CGSize size = [[CCDirector sharedDirector] winSize];
-	
+	[[CCDirector sharedDirector] setDelegate:self];
     // position the label on the center of the screen
     [logo setPosition:ccp( size.width /2 , size.height )];
     [llmenu setScreenSize:size];

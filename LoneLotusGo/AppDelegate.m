@@ -36,6 +36,7 @@
 							   numberOfSamples:0];
     
     [glView setMultipleTouchEnabled:YES];
+
 	director_ = (CCDirectorIOS*) [CCDirector sharedDirector];
 
 	director_.wantsFullScreenLayout = YES;
@@ -94,14 +95,6 @@
 
 	return YES;
 }
-
-// Supported orientations: Landscape. Customize it for your own needs
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    
-	return YES;
-}
-
 
 // getting a call, pause the game
 -(void) applicationWillResignActive:(UIApplication *)application

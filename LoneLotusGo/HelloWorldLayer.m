@@ -16,7 +16,6 @@
 #import "AppDelegate.h"
 #pragma mark - HelloWorldLayer
 @interface HelloWorldLayer (){
-    PlayOnlineViewController* po;
     PFLogInViewController *logInController;
     LLMainMenu *llmenu;
     CCSprite *logo;
@@ -63,7 +62,6 @@
         logInController = [[PFLogInViewController alloc] init];
         [logInController setDelegate:self];
         [[logInController signUpController] setDelegate:self];
-        po = [[PlayOnlineViewController alloc] initWithNibName:@"PlayOnlineViewController" bundle:nil];
 
 		// "LoneLotusGo" title
         logo = [CCSprite spriteWithFile:@"logo.png"];
@@ -91,7 +89,6 @@
 	// in this particular example nothing needs to be released.
 	// cocos2d will automatically release all the children (Label)
 	[logInController release];
-    [po release];
 	// don't forget to call "super dealloc"
 	[super dealloc];
 }
@@ -101,9 +98,7 @@
 /// Sent to the delegate when a PFUser is logged in.
 - (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user {
     NSLog(@"Logged in!");
-    [[CCDirector sharedDirector] dismissViewControllerAnimated:YES completion:^{
-        [[CCDirector sharedDirector] presentViewController:po animated:YES completion:nil];
-    }];
+    [[CCDirector sharedDirector] dismissViewControllerAnimated:YES completion:nil];
 }
 
 /// Sent to the delegate when the log in attempt fails.

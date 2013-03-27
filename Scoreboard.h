@@ -17,6 +17,10 @@
 
 -(void)setBlackScore:(int)black;
 
+-(int)getWhiteScore;
+
+-(int)getBlackScore;
+    
 -(void)incrementWhiteScore:(int)with_value;
 
 -(void)incrementBlackScore:(int)with_value;

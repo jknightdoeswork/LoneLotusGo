@@ -78,6 +78,14 @@
     [self updateScoreboard];
 }
 
+-(int)getWhiteScore {
+    return w;
+}
+
+-(int)getBlackScore {
+    return b;
+}
+
 -(void)incrementWhiteScore:(int)with_value {
     w += with_value;
     [self updateScoreboard];

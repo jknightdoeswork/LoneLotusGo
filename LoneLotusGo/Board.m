@@ -51,7 +51,6 @@
         
         // init board data
         self.b = [NSMutableDictionary dictionaryWithCapacity:n*n];
-
         [[[CCDirector sharedDirector] touchDispatcher] addStandardDelegate:self priority:0];
         
         unplacedStone = nil;

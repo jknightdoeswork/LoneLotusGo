@@ -43,4 +43,8 @@
  */
 -(void)removeStone:(Stone*)stone;
 
+/**
+ * Returns a 1D index using the size of the board for the 2D piece location.
+ */
+-(int)get_index:(int)i j:(int)j;
 @end

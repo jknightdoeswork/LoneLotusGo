@@ -15,12 +15,26 @@
 @implementation AppController
 
 @synthesize window=window_, navController=navController_, director=director_;
+- (void)application:(UIApplication *)application
+didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken
+{
+    // Store the deviceToken in the current installation and save it to Parse.
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation setDeviceTokenFromData:newDeviceToken];
+    [currentInstallation saveInBackground];
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Connect to Parse
     [Parse setApplicationId:@"Y48msHWJpeju9JGrR2oYk8cdgGBAkEGD8tN8scs9"
                   clientKey:@"UcB3nrSEopKVNCHxp7aIPhFwI03uPiiywUriVlN2"];
+    // Register for pushes
+    [application registerForRemoteNotificationTypes:
+     UIRemoteNotificationTypeBadge |
+     UIRemoteNotificationTypeAlert |
+     UIRemoteNotificationTypeSound];
+    // Register for parse pushes
     
 	// Create the main window
 	window_ = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

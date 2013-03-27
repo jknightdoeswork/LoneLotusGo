@@ -20,6 +20,7 @@
 		D23A9FEB16F954D800952EA1 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23A9FEA16F954D800952EA1 /* StoreKit.framework */; };
 		D23A9FED16F954DE00952EA1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23A9FEC16F954DE00952EA1 /* SystemConfiguration.framework */; };
 		D251140D16FFDD8700C349DE /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = D251140C16FFDD8700C349DE /* logo.png */; };
+		D262A4B117027FC10008185A /* OnlineBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = D262A4B017027FC10008185A /* OnlineBoard.m */; };
 		D281445816CFE798004F4B33 /* Scoreboard.m in Sources */ = {isa = PBXBuildFile; fileRef = D281445716CFE798004F4B33 /* Scoreboard.m */; };
 		D281445A16D167F9004F4B33 /* blackvswhite.png in Resources */ = {isa = PBXBuildFile; fileRef = D281445916D167F8004F4B33 /* blackvswhite.png */; };
 		D2C6454B16B490F4007291B7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2C6454A16B490F4007291B7 /* QuartzCore.framework */; };
@@ -176,6 +177,8 @@
 		D23A9FEA16F954D800952EA1 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		D23A9FEC16F954DE00952EA1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		D251140C16FFDD8700C349DE /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = ../../../../Desktop/logo.png; sourceTree = "<group>"; };
+		D262A4AF17027FC10008185A /* OnlineBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnlineBoard.h; sourceTree = "<group>"; };
+		D262A4B017027FC10008185A /* OnlineBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnlineBoard.m; sourceTree = "<group>"; };
 		D281445616CFE798004F4B33 /* Scoreboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Scoreboard.h; path = ../Scoreboard.h; sourceTree = "<group>"; };
 		D281445716CFE798004F4B33 /* Scoreboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Scoreboard.m; path = ../Scoreboard.m; sourceTree = "<group>"; };
 		D281445916D167F8004F4B33 /* blackvswhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackvswhite.png; sourceTree = "<group>"; };
@@ -535,6 +538,8 @@
 				D2C646E416B491B8007291B7 /* PlayerFlag.h */,
 				D2C646E616B491B8007291B7 /* Board.h */,
 				D2C646E716B491B8007291B7 /* Board.m */,
+				D262A4AF17027FC10008185A /* OnlineBoard.h */,
+				D262A4B017027FC10008185A /* OnlineBoard.m */,
 				D2C646E816B491B8007291B7 /* Stone.h */,
 				D2C646E916B491B8007291B7 /* Stone.m */,
 				D2C646D416B490FA007291B7 /* AppDelegate.h */,
@@ -1122,6 +1127,7 @@
 				D21D97D416FAA24900727758 /* PlayOnlineViewController.m in Sources */,
 				D2F9E5EA16FF68C300B51F89 /* LLMainMenu.m in Sources */,
 				D20D78051701310F0084A749 /* LLBaseLayer.m in Sources */,
+				D262A4B117027FC10008185A /* OnlineBoard.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

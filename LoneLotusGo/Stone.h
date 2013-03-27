@@ -27,4 +27,14 @@
  */
 -(void)updateNeighbours;
 
+-(PlayerFlag)playerFlag;
+
+-(void)setPlayerFlag:(PlayerFlag)flag;
+-(int)getXIndex;
+-(int)getYIndex;
+/**
+ * Returns true if this is the stone that floats around under a users finger.
+ */
+-(bool)isUnplacedStone;
+
 @end

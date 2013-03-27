@@ -53,7 +53,7 @@
         self.b = [NSMutableDictionary dictionaryWithCapacity:n*n];
         [[[CCDirector sharedDirector] touchDispatcher] addStandardDelegate:self priority:0];
         
-        self.unplacedStone = [[Stone alloc] initForGoGame:self for_player:[self currentPlayer] x_index:0 y_index:0];
+        self.unplacedStone = [[Stone alloc] initForGoGame:self for_player:[self currentPlayer] x_index:-1 y_index:-1];
         [self.unplacedStone setVisible:NO];
         [self addChild:self.unplacedStone z:2];
     }

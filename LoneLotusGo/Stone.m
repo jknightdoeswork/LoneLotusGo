@@ -147,6 +147,9 @@
         [self setTexture:texture];
     }
 }
+-(bool)isUnplacedStone {
+    return i == -1 && j == -1;
+}
 -(id)initWithPlayerFlag:(PlayerFlag) flag {
     if (flag == P_BLACK) {
         playerFlag = flag;
@@ -166,4 +169,10 @@
     }
 }
 
+-(int)getXIndex {
+    return i;
+}
+-(int)getYIndex {
+    return j;
+}
 @end

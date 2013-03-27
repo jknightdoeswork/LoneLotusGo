@@ -70,11 +70,23 @@
     NSNumber* ns_n = [NSNumber numberWithInt:[self n]];
     NSNumber* ns_w = [NSNumber numberWithInt:[[self scoreboard] getWhiteScore]];
     NSNumber* ns_b = [NSNumber numberWithInt:[[self scoreboard] getBlackScore]];
-
+    NSMutableArray* pieces = [NSMutableArray arrayWithCapacity:[[self children] count]];
+    for (Stone* stone in [self children]) {
+        if (![stone isUnplacedStone]) {
+            NSDictionary *stone_dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                        [NSNumber numberWithInt:[stone getXIndex]], @"x_index",
+                                        [NSNumber numberWithInt:[stone getYIndex]], @"y_index",
+                                        [NSNumber numberWithChar:[stone playerFlag]], @"player",
+                                        nil];
+            [pieces addObject:stone_dict];
+        }
+    }
+    
     [[self pf_object] setObject:ns_c forKey:@"current_player"];
     [[self pf_object] setObject:ns_n forKey:@"n"];
     [[self pf_object] setObject:ns_w forKey:@"white_score"];
     [[self pf_object] setObject:ns_b forKey:@"black_score"];
+    [[self pf_object] setObject:pieces forKey:@"pieces"];
     
     [[self pf_object] saveInBackground];
 }

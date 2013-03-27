@@ -15,7 +15,6 @@
 #define RIGHT_DIRECTION     'r'
 
 @implementation Board{
-    Stone*  unplacedStone;
     float previous_double_touch_distance;
     CGPoint previous_double_touch_center;
 }
@@ -25,6 +24,7 @@
 @synthesize n;
 @synthesize ws;
 @synthesize scoreboard;
+@synthesize unplacedStone;
 
 -(id)initBoard:(int) cap s_board:(Scoreboard*)s_board {
     if(self = [self initWithFile:@"go.gif"]) {
@@ -53,7 +53,9 @@
         self.b = [NSMutableDictionary dictionaryWithCapacity:n*n];
         [[[CCDirector sharedDirector] touchDispatcher] addStandardDelegate:self priority:0];
         
-        unplacedStone = nil;
+        self.unplacedStone = [[Stone alloc] initForGoGame:self for_player:[self currentPlayer] x_index:0 y_index:0];
+        [self.unplacedStone setVisible:NO];
+        [self addChild:self.unplacedStone z:2];
     }
     return self;
 }
@@ -106,18 +108,9 @@
         int j                               = round(transformed_location.y / (ws));
 
         if ([self canPutPieceAt:i y_index:j]) {
-            if (nil == unplacedStone) {
-                NSLog(@"TapDown New Child");
-                unplacedStone = [[Stone alloc] initForGoGame:self for_player:[self currentPlayer] x_index:i y_index:j];
-                [self addChild:unplacedStone];
-            }
-            else {
-                NSLog(@"WARNING SingleTapDown. Removing stone.");
-                // Weird error case where touch began before proper touch ending
-                [self removeChild:unplacedStone cleanup:YES];
-                [unplacedStone release];
-                unplacedStone = nil;
-            }
+            [unplacedStone setPlayerFlag:[self currentPlayer]];
+            [unplacedStone setPosition:CGPointMake(i * ws, j * ws)];
+            [unplacedStone setVisible:YES];
         }
 	} else if ([touches count] == 2) {
         NSLog(@"Double Touch Start");
@@ -134,16 +127,9 @@
         int i                               = round(transformed_location.x / (ws));
         int j                               = round(transformed_location.y / (ws));
         if ([self canPutPieceAt:i y_index:j]) {
-            if (nil == unplacedStone) {
-                NSLog(@"WARNING TapMove new child");
-                // Weird error case where touch moved without touch began
-                // unplacedStone = [[Stone alloc] initForGoGame:self for_player:[self currentPlayer] x_index:i y_index:j];
-                // [self addChild:unplacedStone];
-            } else {
-                NSLog(@"TapMove Move Stone");
-                // move unplaced stone
-                [unplacedStone setPosition:CGPointMake(i * ws, j * ws)];
-            }
+            [unplacedStone setPlayerFlag:[self currentPlayer]];
+            [unplacedStone setPosition:CGPointMake(i * ws, j * ws)];
+            [unplacedStone setVisible:YES];
         }
 	} else if ([touches count] == 2) {
         NSLog(@"ccTouchesMoved double touch");
@@ -183,26 +169,14 @@
         CGPoint transformed_location        = [self getBoardTouchLocation:[touches anyObject]];
         int i                               = round(transformed_location.x / (ws));
         int j                               = round(transformed_location.y / (ws));
-        if (nil == unplacedStone) {
-            NSLog(@"WARNING TapUp New Child");
-            // Weird error case where touch ended without proper touch began
-            unplacedStone = [[Stone alloc] initForGoGame:self for_player:[self currentPlayer] x_index:i y_index:j];
-            [self addChild:unplacedStone z:1.0 tag:[self get_index:i j:j]];
-            [self nextTurn];
-            [unplacedStone updateNeighbours];
-            [unplacedStone release]; // we retain through addChild
-            unplacedStone = nil;
-        } else {
-            NSLog(@"TapUp Placing Child");
-            // place the unplaced stone by retagging it advancing turn, updating board state
-            [self removeChild:unplacedStone cleanup:YES];
-            [self addChild:unplacedStone z:1.0 tag:[self get_index:i j:j]];
-            [self nextTurn];
-            [unplacedStone updateNeighbours];
-            [unplacedStone release]; // we retain through addChild
-            unplacedStone = nil;
-        }
-//        [self updateScores];
+        NSLog(@"WARNING TapUp New Child");
+        Stone* new_stone = [[Stone alloc] initForGoGame:self for_player:[self currentPlayer] x_index:i y_index:j];
+        [self addChild:new_stone z:1.0 tag:[self get_index:i j:j]];
+        [unplacedStone setVisible:NO];
+        [self nextTurn];
+        [new_stone updateNeighbours];
+        [new_stone release]; // we retain through addChild
+
 	}
 }
 

@@ -10,6 +10,7 @@
 #import "PlayerFlag.h"
 #import "Chain.h"
 #import "Scoreboard.h"
+
 @class Stone;
 
 @interface Board : CCSprite <CCStandardTouchDelegate>
@@ -19,6 +20,7 @@
 @property(nonatomic) float ws;  // Width of the boxes
 @property(nonatomic) int n;     // Size of board
 @property(nonatomic, retain) Scoreboard* scoreboard;
+@property(retain) Stone* unplacedStone; // holds the stone that floats around when touching
 
 /**
  * Returns the piece stored at the given index or nil if bad index or no piece.

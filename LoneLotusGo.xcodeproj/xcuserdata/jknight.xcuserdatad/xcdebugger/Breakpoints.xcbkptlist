@@ -84,11 +84,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "LoneLotusGo/Stone.m"
-         timestampString = "382415902.803809"
+         timestampString = "386044784.986672"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "135"
-         endingLineNumber = "135"
+         startingLineNumber = "151"
+         endingLineNumber = "151"
          landmarkName = "-initWithPlayerFlag:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -97,11 +97,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "LoneLotusGo/Board.m"
-         timestampString = "383715962.526426"
+         timestampString = "386044105.452272"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "295"
-         endingLineNumber = "295"
+         startingLineNumber = "268"
+         endingLineNumber = "268"
          landmarkName = "-getPieceAt:y_index:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -110,11 +110,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "LoneLotusGo/Board.m"
-         timestampString = "383715962.526426"
+         timestampString = "386044105.452272"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "294"
-         endingLineNumber = "294"
+         startingLineNumber = "267"
+         endingLineNumber = "267"
          landmarkName = "-getPieceAt:y_index:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -175,33 +175,33 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "LoneLotusGo/HelloWorldLayer.m"
-         timestampString = "385955404.361723"
+         timestampString = "386043373.156858"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "127"
-         endingLineNumber = "127">
+         startingLineNumber = "122"
+         endingLineNumber = "122">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "LoneLotusGo/HelloWorldLayer.m"
-         timestampString = "385955404.361723"
+         timestampString = "386043373.156858"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "138"
-         endingLineNumber = "138">
+         startingLineNumber = "133"
+         endingLineNumber = "133">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "LoneLotusGo/HelloWorldLayer.m"
-         timestampString = "385955404.361723"
+         timestampString = "386043373.156858"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "66"
-         endingLineNumber = "66"
+         startingLineNumber = "64"
+         endingLineNumber = "64"
          landmarkName = "-init"
          landmarkType = "5">
       </FileBreakpoint>
@@ -249,11 +249,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "LoneLotusGo/AppDelegate.m"
-         timestampString = "385951588.91271"
+         timestampString = "386043373.156858"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "31"
-         endingLineNumber = "31"
+         startingLineNumber = "45"
+         endingLineNumber = "45"
          landmarkName = "-application:didFinishLaunchingWithOptions:"
          landmarkType = "5">
       </FileBreakpoint>

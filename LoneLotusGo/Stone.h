@@ -14,7 +14,6 @@
 #define INITIAL_SCALE 0.5f
 
 @interface Stone : CCSprite
-@property(nonatomic) PlayerFlag playerFlag;
 @property(nonatomic) int i;
 @property(nonatomic) int j;
 

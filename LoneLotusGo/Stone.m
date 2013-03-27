@@ -11,8 +11,8 @@
 
 @implementation Stone {
     Board* parentBoard;
+    PlayerFlag playerFlag;
 }
-@synthesize playerFlag;
 @synthesize i;
 @synthesize j;
 
@@ -131,6 +131,22 @@
     return [self countLiberties] > 0;
 }
 
+-(PlayerFlag)playerFlag {
+    return self.playerFlag;
+}
+
+-(void)setPlayerFlag:(PlayerFlag)flag {
+    if (flag == P_BLACK) {
+        playerFlag = flag;
+        CCTexture2D *texture = [[CCTextureCache sharedTextureCache] addImage: @"stone_black.png"];
+        [self setTexture:texture];
+    }
+    else if (flag == P_WHITE) {
+        playerFlag = flag;
+        CCTexture2D *texture = [[CCTextureCache sharedTextureCache] addImage: @"stone_white.png"];
+        [self setTexture:texture];
+    }
+}
 -(id)initWithPlayerFlag:(PlayerFlag) flag {
     if (flag == P_BLACK) {
         playerFlag = flag;

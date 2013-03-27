@@ -69,9 +69,8 @@
         logo = [CCSprite spriteWithFile:@"logo.png"];
         [logo setAnchorPoint:ccp(0.5, 1.0)];
 		[self addChild: logo z:1];
-		
-        // Menus
 
+        // Menus
         llmenu = [[LLMainMenu alloc] initWithScreenSize:size];
 //        [llmenu setAnchorPoint:ccp(0.0f, 0.0f)];
 //        [llmenu setPosition:ccp(0.0f, 0.0f)];

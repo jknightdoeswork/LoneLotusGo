@@ -12,5 +12,7 @@
 @property (retain) NSString* board_id;
 @property (retain) PFObject* pf_object;
 
--(id) initFromBoardId:(NSString*)boardId scoreboard:(Scoreboard*)scoreboard;
+-(void)load:(NSString*) boardId;
+-(void)save;
+
 @end

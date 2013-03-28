@@ -12,7 +12,6 @@
 /**
  * Parse Schema:
  * Board
- *      "n"                     :   NSNumber*       // nxn board size
  *      "current_player"        :   NSNumber*       // (char) current player
  *      "white_score"           :   NSNumber*       // whites score
  *      "black_score"          :   NSNumber*       // blacks score
@@ -24,37 +23,37 @@
  */
 
 @implementation OnlineBoard
--(id) initFromBoardId:(NSString*)boardId scoreboard:(Scoreboard*)scoreboard {
+
+-(void)load:(NSString*) boardId {
+    [self removeAllChildrenWithCleanup:YES];
+    [[self unplacedStone] setVisible:NO];
+    
     PFQuery *query = [PFQuery queryWithClassName:@"Board"];
     PFObject *gameState = [query getObjectWithId:boardId];
     self.pf_object = gameState;
+    self.board_id = boardId;
+    
     if (gameState == nil) {
         NSLog(@"No board found for id: %@", boardId);
-        return nil;
     }
-    int gs_n = [[gameState objectForKey:@"n"] intValue];
-    if (self = [super initBoard:gs_n s_board:scoreboard]) {
-        self.board_id = boardId;
+    
+    char cp = (char)[[gameState objectForKey:@"current_player"] intValue];
+    int white_score = [[gameState objectForKey:@"white_score"] intValue];
+    int black_score = [[gameState objectForKey:@"black_score"] intValue];
+    
+    [self setCurrentPlayer:cp];
+    [[self scoreboard] setWhiteScore:white_score];
+    [[self scoreboard] setBlackScore:black_score];
+    
+    NSArray* pieces = [gameState objectForKey:@"pieces"];
+    for (NSDictionary* piece_data in pieces) {
+        char player = [[piece_data objectForKey:@"player"] intValue];
+        int x_index = [[piece_data objectForKey:@"x_index"] intValue];
+        int y_index = [[piece_data objectForKey:@"y_index"] intValue];
         
-        char cp = (char)[[gameState objectForKey:@"current_player"] intValue];
-        int white_score = [[gameState objectForKey:@"white_score"] intValue];
-        int black_score = [[gameState objectForKey:@"black_score"] intValue];
-        
-        [self setCurrentPlayer:cp];
-        [[self scoreboard] setWhiteScore:white_score];
-        [[self scoreboard] setBlackScore:black_score];
-        
-        NSArray* pieces = [gameState objectForKey:@"pieces"];
-        for (NSDictionary* piece_data in pieces) {
-            char player = [[piece_data objectForKey:@"player"] intValue];
-            int x_index = [[piece_data objectForKey:@"x_index"] intValue];
-            int y_index = [[piece_data objectForKey:@"y_index"] intValue];
-            
-            Stone* stone = [[Stone alloc] initForGoGame:self for_player:player x_index:x_index y_index:y_index];
-            [self addChild:stone z:1.0 tag:[super get_index:x_index j:y_index]];
-        }
+        Stone* stone = [[Stone alloc] initForGoGame:self for_player:player x_index:x_index y_index:y_index];
+        [self addChild:stone z:1.0 tag:[super get_index:x_index j:y_index]];
     }
-    return self;
 }
 
 -(void)dealloc {

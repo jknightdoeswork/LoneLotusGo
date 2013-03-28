@@ -14,8 +14,8 @@
     CCMenu* playOnlineMenu;
     bool playOnlineIsShown;
 }
-
 @end
+
 @implementation LLMainMenu
 -(id)initWithScreenSize:(CGSize)size {
     if (self == [super init]){
@@ -43,17 +43,17 @@
                 playOnlineIsShown = YES;
             }
         }];
-//        [itemPlayOnline setAnchorPoint:ccp(0.0f,0.5f)];
+        // [itemPlayOnline setAnchorPoint:ccp(0.0f,0.5f)];
 
         // Play Online Sub Menu Items
         CCMenuItem* playOnlineChallengeFriend = [CCMenuItemFont itemWithString:@"Challenge" block:^(id sender) {
             NSLog(@"Challenged a friend");
         }];
-//        [playOnlineChallengeFriend setAnchorPoint:ccp(0.0f, 0.5f)];
+        // [playOnlineChallengeFriend setAnchorPoint:ccp(0.0f, 0.5f)];
         CCMenuItem* playOnlineMatchmaking = [CCMenuItemFont itemWithString:@"Matchmaking" block:^(id sender) {
             NSLog(@"Entered Matchmaking");
         }];
-//        [playOnlineMatchmaking setAnchorPoint:ccp(0.0f, 0.5f)];
+        // [playOnlineMatchmaking setAnchorPoint:ccp(0.0f, 0.5f)];
 
         menu = [CCMenu menuWithItems:itemPlayOnline, itemPlay, nil];
         playOnlineMenu = [CCMenu menuWithItems:playOnlineChallengeFriend, playOnlineMatchmaking, nil];
@@ -62,7 +62,6 @@
         
         [playOnlineMenu alignItemsVerticallyWithPadding:10];
         [menu alignItemsVerticallyWithPadding:10];
-        
 
         // Add the menu to the layer
         [self addChild:playOnlineMenu z:1];

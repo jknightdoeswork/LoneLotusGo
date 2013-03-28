@@ -89,7 +89,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "151"
          endingLineNumber = "151"
-         landmarkName = "-initWithPlayerFlag:"
+         landmarkName = "-isUnplacedStone"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -255,6 +255,32 @@
          startingLineNumber = "45"
          endingLineNumber = "45"
          landmarkName = "-application:didFinishLaunchingWithOptions:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "LoneLotusGo/PlayLayer.m"
+         timestampString = "386128320.275148"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "34"
+         endingLineNumber = "34"
+         landmarkName = "+scene"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "LoneLotusGo/NavBar.m"
+         timestampString = "386130781.543316"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "52"
+         endingLineNumber = "52"
+         landmarkName = "-setScreenSize:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

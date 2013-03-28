@@ -3,7 +3,15 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "-[Stone initForGoGame:for_player:x_index:y_index:]:Stone.m">
+         contextName = "-[Board initBoardWithCapacity:]:Board.m">
+      </ContextState>
+      <ContextState
+         contextName = "+[PlayLayer scene]:PlayLayer.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[navbar.save nodeToWorldTransform]">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "-[Chain initWithStone:]:Chain.m">
@@ -14,7 +22,24 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[Board initBoardWithCapacity:]:Board.m">
+         contextName = "-[Stone initForGoGame:for_player:x_index:y_index:]:Stone.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[NavBar setScreenSize:]:NavBar.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[self.save nodeToWorldTransform]">
+            </PersistentString>
+            <PersistentString
+               value = "[[self save] parentToNodeTransform]">
+            </PersistentString>
+            <PersistentString
+               value = "[[self.save parent] parent]">
+            </PersistentString>
+            <PersistentString
+               value = "[[self.save parent] nodeToWorldTransform]">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
    </ContextStates>
 </VariablesViewState>

@@ -10,6 +10,7 @@
 #import "cocos2d.h"
 #import "Board.h"
 #import "Scoreboard.h"
+#import "NavBar.h"
 
 @interface PlayLayer : CCScene {
     Board *board;

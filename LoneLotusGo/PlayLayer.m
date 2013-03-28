@@ -30,7 +30,13 @@
     
 	// add layer as a child to scene
 	[scene addChild: layer];
-	
+    CGSize screenSize = [[CCDirector sharedDirector] winSize];
+    NavBar* navbar = [[NavBar alloc]init];
+    [navbar setScreenSize:screenSize];
+    navbar.anchorPoint = ccp(0.0f, 0.0f);
+    [navbar setPosition:ccp(0.0f, 0.0f)];
+	[scene addChild:navbar];
+    
 	// return the scene
 	return scene;
 }
@@ -51,8 +57,6 @@
     // add board
     board = [[Board alloc] initBoard:18 s_board:scoreboard];
     [self addChild:board z:1];
-    
-
 }
 
 //-(void) registerWithTouchDispatcher

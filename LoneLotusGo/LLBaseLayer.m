@@ -20,14 +20,12 @@
 
 -(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-
 	CGSize size;
 	if(UIInterfaceOrientationIsPortrait(toInterfaceOrientation)) {
 		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 			size = CGSizeMake(768, 1024);
 		else
 			size = CGSizeMake(320, 480 );
-        
 	} else if(UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
 		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 			size = CGSizeMake(1024, 768);

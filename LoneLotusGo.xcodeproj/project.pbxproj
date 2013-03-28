@@ -21,6 +21,7 @@
 		D23A9FED16F954DE00952EA1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23A9FEC16F954DE00952EA1 /* SystemConfiguration.framework */; };
 		D251140D16FFDD8700C349DE /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = D251140C16FFDD8700C349DE /* logo.png */; };
 		D262A4B117027FC10008185A /* OnlineBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = D262A4B017027FC10008185A /* OnlineBoard.m */; };
+		D2707EB01703D2AF00769DCD /* NavBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D2707EAF1703D2AF00769DCD /* NavBar.m */; };
 		D281445816CFE798004F4B33 /* Scoreboard.m in Sources */ = {isa = PBXBuildFile; fileRef = D281445716CFE798004F4B33 /* Scoreboard.m */; };
 		D281445A16D167F9004F4B33 /* blackvswhite.png in Resources */ = {isa = PBXBuildFile; fileRef = D281445916D167F8004F4B33 /* blackvswhite.png */; };
 		D2C6454B16B490F4007291B7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2C6454A16B490F4007291B7 /* QuartzCore.framework */; };
@@ -179,6 +180,8 @@
 		D251140C16FFDD8700C349DE /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = ../../../../Desktop/logo.png; sourceTree = "<group>"; };
 		D262A4AF17027FC10008185A /* OnlineBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnlineBoard.h; sourceTree = "<group>"; };
 		D262A4B017027FC10008185A /* OnlineBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnlineBoard.m; sourceTree = "<group>"; };
+		D2707EAE1703D2AF00769DCD /* NavBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavBar.h; sourceTree = "<group>"; };
+		D2707EAF1703D2AF00769DCD /* NavBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavBar.m; sourceTree = "<group>"; };
 		D281445616CFE798004F4B33 /* Scoreboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Scoreboard.h; path = ../Scoreboard.h; sourceTree = "<group>"; };
 		D281445716CFE798004F4B33 /* Scoreboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Scoreboard.m; path = ../Scoreboard.m; sourceTree = "<group>"; };
 		D281445916D167F8004F4B33 /* blackvswhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackvswhite.png; sourceTree = "<group>"; };
@@ -552,6 +555,8 @@
 				D20D78041701310F0084A749 /* LLBaseLayer.m */,
 				D2C646DA16B490FA007291B7 /* IntroLayer.h */,
 				D2C646DB16B490FA007291B7 /* IntroLayer.m */,
+				D2707EAE1703D2AF00769DCD /* NavBar.h */,
+				D2707EAF1703D2AF00769DCD /* NavBar.m */,
 				D2C6455D16B490F5007291B7 /* Resources */,
 				D2C6457716B490F5007291B7 /* libs */,
 				D2C646D016B490FA007291B7 /* Supporting Files */,
@@ -1128,6 +1133,7 @@
 				D2F9E5EA16FF68C300B51F89 /* LLMainMenu.m in Sources */,
 				D20D78051701310F0084A749 /* LLBaseLayer.m in Sources */,
 				D262A4B117027FC10008185A /* OnlineBoard.m in Sources */,
+				D2707EB01703D2AF00769DCD /* NavBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

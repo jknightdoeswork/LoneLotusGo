@@ -132,7 +132,7 @@
 }
 
 -(PlayerFlag)playerFlag {
-    return self.playerFlag;
+    return playerFlag;
 }
 
 -(void)setPlayerFlag:(PlayerFlag)flag {

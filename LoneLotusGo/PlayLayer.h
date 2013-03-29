@@ -8,12 +8,12 @@
 
 #import "CCLayer.h"
 #import "cocos2d.h"
-#import "Board.h"
+#import "OnlineBoard.h"
 #import "Scoreboard.h"
 #import "NavBar.h"
 
 @interface PlayLayer : CCScene {
-    Board *board;
+    OnlineBoard *board;
 
 }
 // Returns a CCScene with only this layer added

@@ -16,6 +16,7 @@
 @property(retain) CCMenu* menu;
 @property(retain) CCMenuItem* load;
 @property(retain) CCMenuItem* save;
+@property(retain) CCSprite* bg;
 @end
 @implementation NavBar
 // on "init" you need to initialize your instance
@@ -30,10 +31,12 @@
         // Top Level Menu Items
         self.save = [CCMenuItemFont itemWithString:@"Save" block:^(id sender) {
             NSLog(@"Save");
+            [[self board] save];
         }];
 
         self.load = [CCMenuItemFont itemWithString:@"Load" block:^(id sender) {
             NSLog(@"Load");
+            [[self board] load:@"HRpcOF0Gye"];
         }];
         
         [self.save setAnchorPoint:ccp(1.0f, 1.0f)];
@@ -42,6 +45,10 @@
         self.menu = [CCMenu menuWithItems:self.save, self.load, nil];
         [self.menu setPosition:ccp(0.0f, 0.0f)];
         [self addChild:self.menu z:11];
+        
+        self.bg = [CCSprite spriteWithFile:@"navbarbg.png"];
+        [self.bg setAnchorPoint:ccp(0.0f, 1.0f)];
+        [self addChild:self.bg z:10];
 	}
 	return self;
 }
@@ -53,5 +60,6 @@
     int load_x = save_x - self.save.contentSize.width - padding;
     [[self save] setPosition:ccp(save_x, size.height)];
     [[self load] setPosition:ccp(load_x, size.height)];
+    [[self bg] setPosition:ccp(0.0f,size.height)];
 }
 @end

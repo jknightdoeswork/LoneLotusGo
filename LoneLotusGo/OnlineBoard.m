@@ -14,14 +14,17 @@
  * Board
  *      "current_player"        :   NSNumber*       // (char) current player
  *      "white_score"           :   NSNumber*       // whites score
- *      "black_score"          :   NSNumber*       // blacks score
+ *      "black_score"           :   NSNumber*       // blacks score
  *      "pieces"                :   NSArray*        // array of piece data
  *      Piece Data Schema
  *          "player"    :   NSNumber*   // (char) current player
  *          "x_index"   :   NSNumber*   // x_index
  *          "y_index"   :   NSNumber*   // y_index
  */
+@interface OnlineBoard () {
+}
 
+@end
 @implementation OnlineBoard
 
 -(void)load:(NSString*) boardId {
@@ -47,7 +50,7 @@
     
     NSArray* pieces = [gameState objectForKey:@"pieces"];
     for (NSDictionary* piece_data in pieces) {
-        char player = [[piece_data objectForKey:@"player"] intValue];
+        char player = (char)[[piece_data objectForKey:@"player"] intValue];
         int x_index = [[piece_data objectForKey:@"x_index"] intValue];
         int y_index = [[piece_data objectForKey:@"y_index"] intValue];
         
@@ -65,17 +68,21 @@
     if (self.pf_object == nil) {
         self.pf_object = [PFObject objectWithClassName:@"Board"];
     }
-    NSNumber* ns_c = [NSNumber numberWithChar:[self currentPlayer]];
+    id white_player = self.w_player_id != nil ? self.w_player_id : [NSNull null];
+    id black_player = self.b_player_id != nil ? self.b_player_id : [NSNull null];
+
+    NSNumber* ns_c = [NSNumber numberWithInt:[self currentPlayer]];
     NSNumber* ns_n = [NSNumber numberWithInt:[self n]];
     NSNumber* ns_w = [NSNumber numberWithInt:[[self scoreboard] getWhiteScore]];
     NSNumber* ns_b = [NSNumber numberWithInt:[[self scoreboard] getBlackScore]];
     NSMutableArray* pieces = [NSMutableArray arrayWithCapacity:[[self children] count]];
+
     for (Stone* stone in [self children]) {
         if (![stone isUnplacedStone]) {
             NSDictionary *stone_dict = [NSDictionary dictionaryWithObjectsAndKeys:
                                         [NSNumber numberWithInt:[stone getXIndex]], @"x_index",
                                         [NSNumber numberWithInt:[stone getYIndex]], @"y_index",
-                                        [NSNumber numberWithChar:[stone playerFlag]], @"player",
+                                        [NSNumber numberWithInt:[stone playerFlag]], @"player",
                                         nil];
             [pieces addObject:stone_dict];
         }
@@ -86,6 +93,8 @@
     [[self pf_object] setObject:ns_w forKey:@"white_score"];
     [[self pf_object] setObject:ns_b forKey:@"black_score"];
     [[self pf_object] setObject:pieces forKey:@"pieces"];
+    [[self pf_object] setObject:black_player forKey:@"white_player"];
+    [[self pf_object] setObject:white_player forKey:@"black_player"];
     
     [[self pf_object] saveInBackground];
 }

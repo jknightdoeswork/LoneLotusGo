@@ -24,6 +24,10 @@
 		D2707EB01703D2AF00769DCD /* NavBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D2707EAF1703D2AF00769DCD /* NavBar.m */; };
 		D281445816CFE798004F4B33 /* Scoreboard.m in Sources */ = {isa = PBXBuildFile; fileRef = D281445716CFE798004F4B33 /* Scoreboard.m */; };
 		D281445A16D167F9004F4B33 /* blackvswhite.png in Resources */ = {isa = PBXBuildFile; fileRef = D281445916D167F8004F4B33 /* blackvswhite.png */; };
+		D29A68B31706429800526BB9 /* Matchmaker.m in Sources */ = {isa = PBXBuildFile; fileRef = D29A68B21706429800526BB9 /* Matchmaker.m */; };
+		D2B0935A170785F3009A1579 /* navbaricon.png in Resources */ = {isa = PBXBuildFile; fileRef = D2B09359170785F3009A1579 /* navbaricon.png */; };
+		D2B0935C17078D99009A1579 /* navbarbg.png in Resources */ = {isa = PBXBuildFile; fileRef = D2B0935B17078D99009A1579 /* navbarbg.png */; };
+		D2B0935F1707C4E9009A1579 /* ClickableSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B0935E1707C4E8009A1579 /* ClickableSprite.m */; };
 		D2C6454B16B490F4007291B7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2C6454A16B490F4007291B7 /* QuartzCore.framework */; };
 		D2C6454D16B490F5007291B7 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2C6454C16B490F4007291B7 /* OpenGLES.framework */; };
 		D2C6454F16B490F5007291B7 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2C6454E16B490F5007291B7 /* OpenAL.framework */; };
@@ -185,6 +189,12 @@
 		D281445616CFE798004F4B33 /* Scoreboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Scoreboard.h; path = ../Scoreboard.h; sourceTree = "<group>"; };
 		D281445716CFE798004F4B33 /* Scoreboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Scoreboard.m; path = ../Scoreboard.m; sourceTree = "<group>"; };
 		D281445916D167F8004F4B33 /* blackvswhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackvswhite.png; sourceTree = "<group>"; };
+		D29A68B11706429800526BB9 /* Matchmaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matchmaker.h; sourceTree = "<group>"; };
+		D29A68B21706429800526BB9 /* Matchmaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Matchmaker.m; sourceTree = "<group>"; };
+		D2B09359170785F3009A1579 /* navbaricon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navbaricon.png; sourceTree = "<group>"; };
+		D2B0935B17078D99009A1579 /* navbarbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = navbarbg.png; path = ../navbarbg.png; sourceTree = "<group>"; };
+		D2B0935D1707C4E7009A1579 /* ClickableSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClickableSprite.h; sourceTree = "<group>"; };
+		D2B0935E1707C4E8009A1579 /* ClickableSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClickableSprite.m; sourceTree = "<group>"; };
 		D2C6454616B490F4007291B7 /* LoneLotusGo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoneLotusGo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2C6454A16B490F4007291B7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D2C6454C16B490F4007291B7 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -567,6 +577,10 @@
 				D21D97D116FAA24900727758 /* PlayOnlineViewController.h */,
 				D21D97D216FAA24900727758 /* PlayOnlineViewController.m */,
 				D21D97D316FAA24900727758 /* PlayOnlineViewController.xib */,
+				D29A68B11706429800526BB9 /* Matchmaker.h */,
+				D29A68B21706429800526BB9 /* Matchmaker.m */,
+				D2B0935D1707C4E7009A1579 /* ClickableSprite.h */,
+				D2B0935E1707C4E8009A1579 /* ClickableSprite.m */,
 			);
 			path = LoneLotusGo;
 			sourceTree = "<group>";
@@ -574,6 +588,8 @@
 		D2C6455D16B490F5007291B7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D2B0935B17078D99009A1579 /* navbarbg.png */,
+				D2B09359170785F3009A1579 /* navbaricon.png */,
 				D251140C16FFDD8700C349DE /* logo.png */,
 				D281445916D167F8004F4B33 /* blackvswhite.png */,
 				D2F24D8216B8C0C600E08872 /* go.gif */,
@@ -1009,6 +1025,8 @@
 				D281445A16D167F9004F4B33 /* blackvswhite.png in Resources */,
 				D21D97D516FAA24900727758 /* PlayOnlineViewController.xib in Resources */,
 				D251140D16FFDD8700C349DE /* logo.png in Resources */,
+				D2B0935A170785F3009A1579 /* navbaricon.png in Resources */,
+				D2B0935C17078D99009A1579 /* navbarbg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1134,6 +1152,8 @@
 				D20D78051701310F0084A749 /* LLBaseLayer.m in Sources */,
 				D262A4B117027FC10008185A /* OnlineBoard.m in Sources */,
 				D2707EB01703D2AF00769DCD /* NavBar.m in Sources */,
+				D29A68B31706429800526BB9 /* Matchmaker.m in Sources */,
+				D2B0935F1707C4E9009A1579 /* ClickableSprite.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1148,7 +1168,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jason Knight (YEPAAFTM74)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jason Knight (YEPAAFTM74)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1161,6 +1182,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				PROVISIONING_PROFILE = "25C01868-1DE2-41D0-896D-7106602A6463";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "25C01868-1DE2-41D0-896D-7106602A6463";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1174,7 +1197,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jason Knight (YEPAAFTM74)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jason Knight (YEPAAFTM74)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,
@@ -1185,6 +1209,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				PROVISIONING_PROFILE = "25C01868-1DE2-41D0-896D-7106602A6463";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "25C01868-1DE2-41D0-896D-7106602A6463";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1194,6 +1220,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jason Knight (YEPAAFTM74)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jason Knight (YEPAAFTM74)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1208,6 +1236,8 @@
 				INFOPLIST_FILE = LoneLotusGo/Resources/Info.plist;
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "25C01868-1DE2-41D0-896D-7106602A6463";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "25C01868-1DE2-41D0-896D-7106602A6463";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1216,6 +1246,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jason Knight (YEPAAFTM74)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jason Knight (YEPAAFTM74)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1229,6 +1261,8 @@
 				INFOPLIST_FILE = LoneLotusGo/Resources/Info.plist;
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "25C01868-1DE2-41D0-896D-7106602A6463";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "25C01868-1DE2-41D0-896D-7106602A6463";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};

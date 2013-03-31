@@ -3,7 +3,15 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "-[Board initBoardWithCapacity:]:Board.m">
+         contextName = "-[OnlineBoard load:]:OnlineBoard.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "gameState">
+            </PersistentString>
+            <PersistentString
+               value = "[[gameState objectForKey:@&quot;current_player&quot;] intValue]">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "+[PlayLayer scene]:PlayLayer.m">
@@ -14,15 +22,42 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[Chain initWithStone:]:Chain.m">
+         contextName = "-[NavBar updateNavBarMenu]:NavBar.m">
          <PersistentStrings>
             <PersistentString
-               value = "[self addObject:stone]">
+               value = "self.signOut.retainCount">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[Stone initForGoGame:for_player:x_index:y_index:]:Stone.m">
+         contextName = "__26-[NavBar updateNavBarMenu]_block_invoke:NavBar.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.signOut.retainCount">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__14-[NavBar init]_block_invoke68:NavBar.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[self.signOut nodeToWorldTransform]">
+            </PersistentString>
+            <PersistentString
+               value = "[self.signIn nodeToWorldTransform]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[Board initBoardWithCapacity:]:Board.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[Matchmaker enterMatchmaking]:Matchmaker.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[PFUser currentUser]">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "-[NavBar setScreenSize:]:NavBar.m">
@@ -38,6 +73,42 @@
             </PersistentString>
             <PersistentString
                value = "[[self.save parent] nodeToWorldTransform]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[Stone initForGoGame:for_player:x_index:y_index:]:Stone.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[Chain initWithStone:]:Chain.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[self addObject:stone]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[OnlineBoard save]:OnlineBoard.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[self pf_object]">
+            </PersistentString>
+            <PersistentString
+               value = "[self currentPlayer]">
+            </PersistentString>
+            <PersistentString
+               value = "pieces">
+            </PersistentString>
+            <PersistentString
+               value = "(char)[ns_c intValue]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__14-[NavBar init]_block_invoke:NavBar.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.signOut.retainCount">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

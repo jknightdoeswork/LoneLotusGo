@@ -10,12 +10,12 @@
 #import <Parse/Parse.h>
 @interface OnlineBoard : Board
 
-@property (retain) NSString* board_id;
 @property (retain) PFObject* pf_object;
-@property (retain) NSString* w_player_id;
-@property (retain) NSString* b_player_id;
+@property (retain) NSString* white_player;
+@property (retain) NSString* black_player;
 
 -(void)load:(NSString*) boardId;
 -(void)save;
 
+-(NSString*)getBoardId;
 @end

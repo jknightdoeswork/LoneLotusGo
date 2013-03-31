@@ -9,8 +9,11 @@
 #import "OnlineBoard.h"
 @interface NavBar : CCLayer
 @property(assign) OnlineBoard* board;
+@property(retain) PFLogInViewController* logInController;
 /**
  * Adjusts the children's position to a screensize.
  */
 -(void)setScreenSize:(CGSize)size;
+
+-(void) updateNavBarMenu;
 @end

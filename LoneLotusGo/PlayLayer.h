@@ -12,13 +12,14 @@
 #import "Scoreboard.h"
 #import "NavBar.h"
 
-@interface PlayLayer : CCScene {
-    OnlineBoard *board;
+@interface PlayLayer : CCLayer<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, CCTargetedTouchDelegate>
+    @property(retain) OnlineBoard* board;
 
-}
 // Returns a CCScene with only this layer added
 +(CCScene *) scene;
-
++(CCScene*) loadExistingGame:(NSString*)boardId;
++(CCScene*) startNewOnlineGame:(NSString*)otherUsersId;
+    
 // Advance the current player
 //-(void) nextTurn;
 @end

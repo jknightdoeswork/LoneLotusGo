@@ -28,6 +28,8 @@
 
 -(id)initBoard:(int) cap s_board:(Scoreboard*)s_board {
     if(self = [self initWithFile:@"go.gif"]) {
+        [[[CCDirector sharedDirector]touchDispatcher] addStandardDelegate:self priority:2];
+        
         self.n = cap;
         self.scoreboard = s_board;
         // set rendering params
@@ -51,7 +53,6 @@
         
         // init board data
         self.b = [NSMutableDictionary dictionaryWithCapacity:n*n];
-        [[[CCDirector sharedDirector] touchDispatcher] addStandardDelegate:self priority:0];
         
         self.unplacedStone = [[Stone alloc] initForGoGame:self for_player:[self currentPlayer] x_index:-1 y_index:-1];
         [self.unplacedStone setVisible:NO];
@@ -60,7 +61,16 @@
     return self;
 }
 
+-(void) reset {
+    // TODO make use of reset in init
+    [self removeAllChildrenWithCleanup:YES];
+    [[self unplacedStone] setVisible:NO];
+    [self addChild:self.unplacedStone z:2];
+    [self setCurrentPlayer:P_BLACK];
+}
+
 -(void)dealloc {
+    [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
     NSLog(@"Board being deallocated");
     [[self b] removeAllObjects];
     [super dealloc];
@@ -166,17 +176,23 @@
 
 -(void) ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     if ([touches count] == 1) {
+        [unplacedStone setVisible:NO];
         CGPoint transformed_location        = [self getBoardTouchLocation:[touches anyObject]];
         int i                               = round(transformed_location.x / (ws));
         int j                               = round(transformed_location.y / (ws));
-        NSLog(@"WARNING TapUp New Child");
-        Stone* new_stone = [[Stone alloc] initForGoGame:self for_player:[self currentPlayer] x_index:i y_index:j];
-        [self addChild:new_stone z:1.0 tag:[self get_index:i j:j]];
-        [unplacedStone setVisible:NO];
-        [self nextTurn];
-        [new_stone updateNeighbours];
-        [new_stone release]; // we retain through addChild
+        if ([self canPutPieceAt:i y_index:j]) {
+            Stone* new_stone = [[Stone alloc] initForGoGame:self for_player:[self currentPlayer] x_index:i y_index:j];
+            [self addChild:new_stone z:1.0 tag:[self get_index:i j:j]];
+            [new_stone updateNeighbours];
+            [new_stone release]; // we retain through addChild
+            [self nextTurn];
+        }
+	}
+}
 
+- (void)ccTouchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+    if ([touches count] == 1) {
+        [unplacedStone setVisible:NO];
 	}
 }
 

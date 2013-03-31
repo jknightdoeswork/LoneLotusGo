@@ -31,7 +31,10 @@
  * Initializes a board with enough room for nxn pieces.
  */
 -(id)initBoard:(int) n s_board:(Scoreboard*)s_board;
-
+/**
+ * Resets a board to a starting state.
+ */
+-(void) reset;
 /**
  * Returns the neighbour of the point if availible, or nil if that's spot's empty or off the board.
  */

@@ -10,8 +10,6 @@
 // Import the interfaces
 #import "HelloWorldLayer.h"
 #import "PlayOnlineViewController.h"
-#import "LLMainMenu.h"
-
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
 #pragma mark - HelloWorldLayer
@@ -19,6 +17,7 @@
     PFLogInViewController *logInController;
     LLMainMenu *llmenu;
     CCSprite *logo;
+    Matchmaker *matchmaker;
 }
 @end
 // HelloWorldLayer implementation
@@ -40,16 +39,6 @@
 	return scene;
 }
 
--(void)onEnter {
-    // ask director for the window size
-    [super onEnter];
-    NSLog(@"On enter called");
-    CGSize size = [[CCDirector sharedDirector] winSize];
-    // position the label on the center of the screen
-    [logo setPosition:ccp( size.width /2 , size.height )];
-    [llmenu setScreenSize:size];
-}
-
 // on "init" you need to initialize your instance
 -(id) init
 {
@@ -62,17 +51,22 @@
         logInController = [[PFLogInViewController alloc] init];
         [logInController setDelegate:self];
         [[logInController signUpController] setDelegate:self];
-
+        
 		// "LoneLotusGo" title
         logo = [CCSprite spriteWithFile:@"logo.png"];
         [logo setAnchorPoint:ccp(0.5, 1.0)];
+        [logo setPosition:ccp( size.width /2 , size.height )];
 		[self addChild: logo z:1];
 
         // Menus
-        llmenu = [[LLMainMenu alloc] initWithScreenSize:size];
-//        [llmenu setAnchorPoint:ccp(0.0f, 0.0f)];
-//        [llmenu setPosition:ccp(0.0f, 0.0f)];
+        llmenu = [[LLMainMenu alloc] init];
+        [llmenu setScreenSize:size];
+        [llmenu setDelegate:self];
         [self addChild:llmenu z:10];
+        
+        // Matchmaker
+        matchmaker = [[Matchmaker alloc] init];
+        [matchmaker setDelegate:self];
 	}
 	return self;
 }
@@ -89,9 +83,35 @@
 	// in this particular example nothing needs to be released.
 	// cocos2d will automatically release all the children (Label)
 	[logInController release];
+    [llmenu release];
+    [matchmaker release];
 	// don't forget to call "super dealloc"
 	[super dealloc];
 }
+
+#pragma mark LLMainMenu callbacks
+-(void)signIn {
+    NSLog(@"Sign In");
+    [[CCDirector sharedDirector] presentViewController:logInController animated:YES completion:nil];
+}
+-(void)play {
+    NSLog(@"Play");
+    [[CCDirector sharedDirector] pushScene:[PlayLayer scene]];
+}
+-(void)matchmaking {
+    [matchmaker enterMatchmaking];
+}
+-(void) matchFound:(NSString *)otherUserId {
+    NSLog(@"MATCH FOUND!");
+    [[CCDirector sharedDirector] pushScene:[PlayLayer startNewOnlineGame:otherUserId]];
+}
+
+-(void)signOut {
+    NSLog(@"Sign out");
+    [matchmaker exitMatchmaking];
+    [PFUser logOut];
+}
+
 
 #pragma mark PFLogInViewControllerDelegate Methods
 /*! @name Responding to Actions */

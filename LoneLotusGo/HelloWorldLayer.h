@@ -11,9 +11,10 @@
 #import "PlayLayer.h"
 #import "LLBaseLayer.h"
 #import <Parse/Parse.h>
-
+#import "LLMainMenu.h"
+#import "Matchmaker.h"
 // HelloWorldLayer
-@interface HelloWorldLayer : LLBaseLayer <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
+@interface HelloWorldLayer : LLBaseLayer <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, LLMainMenuDelegate, MatchmakerDelegate>
 {
 }
 

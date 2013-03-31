@@ -15,6 +15,8 @@
  *      "current_player"        :   NSNumber*       // (char) current player
  *      "white_score"           :   NSNumber*       // whites score
  *      "black_score"           :   NSNumber*       // blacks score
+ *      "white_player"          :   NSString*
+ *      "black_player"          :   NSString*
  *      "pieces"                :   NSArray*        // array of piece data
  *      Piece Data Schema
  *          "player"    :   NSNumber*   // (char) current player
@@ -34,7 +36,6 @@
     PFQuery *query = [PFQuery queryWithClassName:@"Board"];
     PFObject *gameState = [query getObjectWithId:boardId];
     self.pf_object = gameState;
-    self.board_id = boardId;
     
     if (gameState == nil) {
         NSLog(@"No board found for id: %@", boardId);
@@ -43,6 +44,12 @@
     char cp = (char)[[gameState objectForKey:@"current_player"] intValue];
     int white_score = [[gameState objectForKey:@"white_score"] intValue];
     int black_score = [[gameState objectForKey:@"black_score"] intValue];
+    
+    NSString* white_player = [gameState objectForKey:@"white_player"];
+    NSString* black_player = [gameState objectForKey:@"black_player"];
+
+    [self setWhite_player:white_player];
+    [self setBlack_player:black_player];
     
     [self setCurrentPlayer:cp];
     [[self scoreboard] setWhiteScore:white_score];
@@ -60,7 +67,9 @@
 }
 
 -(void)dealloc {
-    [self.board_id release];
+    [self.pf_object release];
+    [self.white_player release];
+    [self.black_player release];
     [super dealloc];
 }
 
@@ -68,8 +77,8 @@
     if (self.pf_object == nil) {
         self.pf_object = [PFObject objectWithClassName:@"Board"];
     }
-    id white_player = self.w_player_id != nil ? self.w_player_id : [NSNull null];
-    id black_player = self.b_player_id != nil ? self.b_player_id : [NSNull null];
+    id white_player = self.white_player != nil ? self.white_player : [NSNull null];
+    id black_player = self.black_player != nil ? self.black_player : [NSNull null];
 
     NSNumber* ns_c = [NSNumber numberWithInt:[self currentPlayer]];
     NSNumber* ns_n = [NSNumber numberWithInt:[self n]];
@@ -96,6 +105,17 @@
     [[self pf_object] setObject:black_player forKey:@"white_player"];
     [[self pf_object] setObject:white_player forKey:@"black_player"];
     
-    [[self pf_object] saveInBackground];
+    [[self pf_object] saveInBackgroundWithBlock:^(BOOL succeeded, NSError* error){
+        if(!error) {
+            NSLog(@"Game Saved.");
+        }
+        else {
+            NSLog(@"ERROR Saving Game: %@ %@.", error, [error userInfo]);
+        }
+    }];
+}
+
+-(NSString*)getBoardId {
+    return [[self pf_object]objectId];
 }
 @end

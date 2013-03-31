@@ -16,6 +16,10 @@
 
 @synthesize window=window_, navController=navController_, director=director_;
 - (void)application:(UIApplication *)application
+didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    [PFPush handlePush:userInfo];
+}
+- (void)application:(UIApplication *)application
 didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken
 {
     // Store the deviceToken in the current installation and save it to Parse.

@@ -10,7 +10,14 @@
 #import "cocos2d.h"
 #import "PlayLayer.h"
 
+@protocol LLMainMenuDelegate <NSObject>
+
+-(void)play;
+-(void)signIn;
+-(void)signOut;
+-(void)matchmaking;
+@end
 @interface LLMainMenu : CCNode
--(id)initWithScreenSize:(CGSize)size;
+@property(assign) NSObject<LLMainMenuDelegate>* delegate;
 -(void)setScreenSize:(CGSize)size;
 @end

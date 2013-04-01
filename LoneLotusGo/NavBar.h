@@ -7,9 +7,19 @@
 //
 #import "CCLayer.h"
 #import "OnlineBoard.h"
+#import "CCLabelAtlas.h"
+
+
+@protocol NavBarDelegate <NSObject>
+-(void)clickedNavBarBoardId:(NSString*)boardId;
+@end
+
+
 @interface NavBar : CCLayer
-@property(assign) OnlineBoard* board;
 @property(retain) PFLogInViewController* logInController;
+@property(retain) CCLabelAtlas* score_atlas;
+@property(assign) CCNode<NavBarDelegate>* delegate;
+
 /**
  * Adjusts the children's position to a screensize.
  */

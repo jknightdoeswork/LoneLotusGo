@@ -58,14 +58,30 @@
 }
 
 +(CCScene*) startNewOnlineGame:(NSString*)otherUsersId {
+    if (![PFUser currentUser]) {
+        NSLog(@"No logged in user. Starting regular game.");
+        return [PlayLayer scene];
+    }
     // 'scene' is an autorelease object.
 	CCScene *scene = [CCScene node];
-	
+
 	// 'layer' is an autorelease object.
-	PlayLayer *layer = [PlayLayer node];
-    [[layer board] setWhite_player:otherUsersId];
-    [[layer board] setBlack_player:[PFUser currentUser].objectId];
-    [[layer board] save];
+    PlayLayer *layer = [PlayLayer node];
+    [scene addChild:layer];
+    
+    PFQuery* otherUserQuery = [PFUser query];
+    [otherUserQuery getObjectInBackgroundWithId:otherUsersId block:^(PFObject* other_user, NSError* error){
+        if (!error) {
+            [[layer board] setWhite_player:other_user];
+            [[layer board] setBlack_player:[PFUser currentUser]];
+            [[layer board] save];
+        }
+        else {
+            NSLog(@"%@ %@\nError in startNewOnlineGame.otherUserQuery:withUserId:%@", error, [error userInfo], otherUsersId);
+            
+        }
+    }];
+
 //    NSString* boardId = [[layer board] getBoardId];
 //    [[PFUser currentUser] addObject:boardId forKey:@"boardIds"];
 //    [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError* error) {
@@ -80,7 +96,7 @@
     layer.anchorPoint = ccp(0.5, 0.5);
     
 	// add layer as a child to scene
-	[scene addChild: layer];
+
     
 	// return the scene
 	return scene;
@@ -99,19 +115,40 @@
         [self addChild:scoreboard z:2];
         
         // add board
-        self.board = [[OnlineBoard alloc] initBoard:18 s_board:scoreboard];
+        self.board = [[OnlineBoard alloc] initBoard:19 s_board:scoreboard];
+        [self.board setDelegate:self];
         [self addChild:self.board z:1];
 
         self.navbar = [[NavBar alloc]init];
         [[self.navbar logInController] setDelegate:self];
         [[[self.navbar logInController] signUpController] setDelegate:self];
-        [self.navbar setBoard: self.board];
+        [self.navbar setDelegate:self];
         [self.navbar setScreenSize:screenSize];
         self.navbar.anchorPoint = ccp(0.0f, 0.0f);
         [self.navbar setPosition:ccp(0.0f, 0.0f)];
         [self addChild:self.navbar z:5];
     }
     return self;
+}
+
+-(void)nextTurn {
+    [[self.navbar score_atlas] setString:[NSString stringWithFormat:@"%d", [self.board getScore]]];
+    [[self.navbar score_atlas] visit];
+}
+
+-(void)receivedPushedBoardId:(NSString*)pushedBoardId {
+    if ([[self.board getBoardId] isEqualToString:pushedBoardId]) {
+        NSLog(@"Updating visible board.");
+        [self.board load:pushedBoardId];
+    }
+    else {
+        NSLog(@"Updating navbar");
+        [self.navbar updateNavBarMenu];
+    }
+}
+
+-(void)clickedNavBarBoardId:(NSString*)boardId {
+    [self.board load:boardId];
 }
 
 //-(void) registerWithTouchDispatcher

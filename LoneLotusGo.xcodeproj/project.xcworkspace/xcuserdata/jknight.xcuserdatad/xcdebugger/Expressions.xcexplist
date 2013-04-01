@@ -22,34 +22,27 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[NavBar updateNavBarMenu]:NavBar.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.signOut.retainCount">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "__26-[NavBar updateNavBarMenu]_block_invoke:NavBar.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.signOut.retainCount">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "__14-[NavBar init]_block_invoke68:NavBar.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "[self.signOut nodeToWorldTransform]">
+               value = "[currentUser objectId]">
             </PersistentString>
             <PersistentString
-               value = "[self.signIn nodeToWorldTransform]">
+               value = "[[currentUser objectId] isEqualToString: [w objectId]]">
+            </PersistentString>
+            <PersistentString
+               value = "[w objectId]">
+            </PersistentString>
+            <PersistentString
+               value = "[currentUser objectId] == [w objectId]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "-[Board initBoardWithCapacity:]:Board.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[OnlineBoard nextTurn]:OnlineBoard.m">
       </ContextState>
       <ContextState
          contextName = "-[Matchmaker enterMatchmaking]:Matchmaker.m">
@@ -77,6 +70,23 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[OnlineBoard canPutPieceAt:y_index:]:OnlineBoard.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[[PFUser currentUser] objectId]">
+            </PersistentString>
+            <PersistentString
+               value = "[[self white_player] objectId]">
+            </PersistentString>
+            <PersistentString
+               value = "[[self black_player] objectId]">
+            </PersistentString>
+            <PersistentString
+               value = "[self currentPlayer]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[Stone initForGoGame:for_player:x_index:y_index:]:Stone.m">
       </ContextState>
       <ContextState
@@ -91,7 +101,7 @@
          contextName = "-[OnlineBoard save]:OnlineBoard.m">
          <PersistentStrings>
             <PersistentString
-               value = "[self pf_object]">
+               value = "(char)[ns_c intValue]">
             </PersistentString>
             <PersistentString
                value = "[self currentPlayer]">
@@ -100,17 +110,12 @@
                value = "pieces">
             </PersistentString>
             <PersistentString
-               value = "(char)[ns_c intValue]">
+               value = "[self pf_object]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "__14-[NavBar init]_block_invoke:NavBar.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.signOut.retainCount">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "-[Board ccTouchesEnded:withEvent:]:Board.m">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

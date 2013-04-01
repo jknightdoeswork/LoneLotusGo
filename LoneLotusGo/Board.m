@@ -8,7 +8,7 @@
 
 #import "Board.h"
 #import "Stone.h"
-
+#import "scoring.c"
 #define TOP_DIRECTION       't'
 #define BOTTOM_DIRECTION    'b'
 #define LEFT_DIRECTION      'l'
@@ -17,14 +17,16 @@
 @implementation Board{
     float previous_double_touch_distance;
     CGPoint previous_double_touch_center;
+    char* board_as_string;
+    int score;
 }
 @synthesize b;
-@synthesize score;
 @synthesize currentPlayer;
 @synthesize n;
 @synthesize ws;
 @synthesize scoreboard;
 @synthesize unplacedStone;
+@synthesize justpassed;
 
 -(id)initBoard:(int) cap s_board:(Scoreboard*)s_board {
     if(self = [self initWithFile:@"go.gif"]) {
@@ -48,15 +50,25 @@
         [self setCurrentPlayer:P_BLACK];
         
         // width of boxes
-        self.ws = floorf((self.contentSize.width) / n);
+        self.ws = floorf((self.contentSize.width) / (n-1));
         NSLog(@"WS: %.2f", ws);
         
         // init board data
         self.b = [NSMutableDictionary dictionaryWithCapacity:n*n];
         
+        // pass
+        self.justpassed = NO;
+
         self.unplacedStone = [[Stone alloc] initForGoGame:self for_player:[self currentPlayer] x_index:-1 y_index:-1];
         [self.unplacedStone setVisible:NO];
         [self addChild:self.unplacedStone z:2];
+        
+        // Sent to scorer.
+        board_as_string = malloc(sizeof(char)* (n*n + 1));
+        for(int t = 0; t < n*n; t++) {
+            board_as_string[t] = P_UNDEFINED;
+        }
+        board_as_string[n*n] = '\0';
     }
     return self;
 }
@@ -67,6 +79,15 @@
     [[self unplacedStone] setVisible:NO];
     [self addChild:self.unplacedStone z:2];
     [self setCurrentPlayer:P_BLACK];
+}
+
+-(void) pass {
+    [self setJustpassed:YES];
+    [self nextTurn];
+}
+
+-(int)getScore {
+    return score;
 }
 
 -(void)dealloc {
@@ -153,6 +174,8 @@
         NSLog(@"POS: %.1f x %.1f", new_position.x, new_position.y);
         // TODO: Clamp new position, min_x, min_y etc
         [self setPosition:new_position];
+        
+        // Zoom Board
         previous_double_touch_center = double_touch_center;
         
         float currentDistance = [self getDoubleTouchDistance:touches];
@@ -182,7 +205,11 @@
         int j                               = round(transformed_location.y / (ws));
         if ([self canPutPieceAt:i y_index:j]) {
             Stone* new_stone = [[Stone alloc] initForGoGame:self for_player:[self currentPlayer] x_index:i y_index:j];
-            [self addChild:new_stone z:1.0 tag:[self get_index:i j:j]];
+            int index =[self get_index:i j:j];
+            [self addChild:new_stone z:1.0 tag:index];
+            board_as_string[index] = [self currentPlayer];
+            score = score_input(board_as_string);
+            NSLog(@"Score: %d", score);
             [new_stone updateNeighbours];
             [new_stone release]; // we retain through addChild
             [self nextTurn];
@@ -265,6 +292,9 @@
  * Return true if a user can place a piece at a given point.
  */
 -(BOOL)canPutPieceAt:(int)x_index y_index:(int)y_index {
+    if (x_index < 0 || x_index >= self.n || y_index < 0 || y_index >= self.n) {
+        return NO;
+    }
     int stone_key = [self get_index:x_index j:y_index];
     return ([self getChildByTag:stone_key] == nil);
 }
@@ -319,5 +349,6 @@
         NSLog(@"ERROR: Unrecognized current player");
     }
     NSLog(@"Next Turn: %c", [self currentPlayer]);
+    [self.delegate nextTurn];
 }
 @end

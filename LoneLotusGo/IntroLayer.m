@@ -33,6 +33,20 @@
 	return scene;
 }
 
++(CCScene*)sceneWithTransitionToBoard:(NSString*)boardId {
+    // 'scene' is an autorelease object.
+	CCScene *scene = [CCScene node];
+	
+	// 'layer' is an autorelease object.
+	IntroLayer *layer = [IntroLayer node];
+	[layer setTransitionToBoardId:boardId];
+	// add layer as a child to scene
+	[scene addChild: layer];
+	
+	// return the scene
+	return scene;
+}
+
 // 
 -(void) onEnter
 {
@@ -52,14 +66,17 @@
 	background.position = ccp(size.width/2, size.height/2);
 
 	// add the label as a child to this Layer
-	[self addChild: background];
-	
-	// In one second transition to the new scene
-	[self scheduleOnce:@selector(makeTransition:) delay:1];
+    [self scheduleOnce:@selector(makeTransition:) delay:1];
 }
 
 -(void) makeTransition:(ccTime)dt
 {
-	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[HelloWorldLayer scene] withColor:ccWHITE]];
+    if(self.transitionToBoardId == nil) {
+        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[HelloWorldLayer scene] withColor:ccWHITE]];
+    }
+    else {
+        NSLog(@"Transitioning to boardid: %@", [self transitionToBoardId]);
+        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[PlayLayer loadExistingGame:[self transitionToBoardId]] withColor:ccWHITE]];
+    }
 }
 @end

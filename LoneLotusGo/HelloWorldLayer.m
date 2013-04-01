@@ -71,6 +71,11 @@
 	return self;
 }
 
+-(void)onEnter {
+    [super onEnter];
+    [llmenu onUserChange];
+    NSLog(@"HelloWorldLayer.onEnter called");
+}
 -(void)screenSizeChangedTo:(CGSize)size {
     [llmenu setScreenSize:size];
     [logo setPosition:ccp(size.width/2.0f, size.height)];
@@ -110,6 +115,7 @@
     NSLog(@"Sign out");
     [matchmaker exitMatchmaking];
     [PFUser logOut];
+    [llmenu onUserChange];
 }
 
 
@@ -119,21 +125,44 @@
 - (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user {
     NSLog(@"Logged in!");
     [[CCDirector sharedDirector] dismissViewControllerAnimated:YES completion:nil];
+    [llmenu onUserChange];
+    // Register for push notifications
+    PFInstallation* currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation addUniqueObject: [PFUser currentUser].objectId forKey:@"channels"];
+    [currentInstallation saveInBackgroundWithBlock:^(BOOL succeeded, NSError* error) {
+        if(succeeded && !error) {
+            NSLog(@"Installation saved.");
+        }else {
+            NSLog(@"%@ %@\nInstallation Save Error.", error, [error userInfo]);
+        }
+    }];
 }
 
 /// Sent to the delegate when the log in attempt fails.
 - (void)logInViewController:(PFLogInViewController *)logInController didFailToLogInWithError:(NSError *)error {
     NSLog(@"Error Logging in!");
+    [llmenu onUserChange];
 }
 
 /// Sent to the delegate when the log in screen is dismissed.
 - (void)logInViewControllerDidCancelLogIn:(PFLogInViewController *)logInController {
     NSLog(@"Cancel Logging In!");
     [[CCDirector sharedDirector] dismissViewControllerAnimated:YES completion:nil];
+    [llmenu onUserChange];
 }
 // Sent to the delegate when a PFUser is signed up.
 - (void)signUpViewController:(PFSignUpViewController *)signUpController didSignUpUser:(PFUser *)user {
     NSLog(@"Signed up user");
     [[CCDirector sharedDirector] dismissViewControllerAnimated:YES completion:NULL];
+    [llmenu onUserChange];
+    PFInstallation* currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation addUniqueObject: [PFUser currentUser].objectId forKey:@"channels"];
+    [currentInstallation saveInBackgroundWithBlock:^(BOOL succeeded, NSError* error) {
+        if(succeeded && !error) {
+            NSLog(@"Installation saved.");
+        }else {
+            NSLog(@"%@ %@\nInstallation Save Error.", error, [error userInfo]);
+        }
+    }];
 }
 @end

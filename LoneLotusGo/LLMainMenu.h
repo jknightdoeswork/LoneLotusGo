@@ -20,4 +20,5 @@
 @interface LLMainMenu : CCNode
 @property(assign) NSObject<LLMainMenuDelegate>* delegate;
 -(void)setScreenSize:(CGSize)size;
+-(void) onUserChange;
 @end

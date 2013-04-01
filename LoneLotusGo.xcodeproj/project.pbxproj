@@ -25,6 +25,7 @@
 		D281445816CFE798004F4B33 /* Scoreboard.m in Sources */ = {isa = PBXBuildFile; fileRef = D281445716CFE798004F4B33 /* Scoreboard.m */; };
 		D281445A16D167F9004F4B33 /* blackvswhite.png in Resources */ = {isa = PBXBuildFile; fileRef = D281445916D167F8004F4B33 /* blackvswhite.png */; };
 		D29A68B31706429800526BB9 /* Matchmaker.m in Sources */ = {isa = PBXBuildFile; fileRef = D29A68B21706429800526BB9 /* Matchmaker.m */; };
+		D2A5B6151708DA0300940509 /* scoring.c in Sources */ = {isa = PBXBuildFile; fileRef = D2A5B6141708DA0300940509 /* scoring.c */; };
 		D2B0935A170785F3009A1579 /* navbaricon.png in Resources */ = {isa = PBXBuildFile; fileRef = D2B09359170785F3009A1579 /* navbaricon.png */; };
 		D2B0935C17078D99009A1579 /* navbarbg.png in Resources */ = {isa = PBXBuildFile; fileRef = D2B0935B17078D99009A1579 /* navbarbg.png */; };
 		D2B0935F1707C4E9009A1579 /* ClickableSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B0935E1707C4E8009A1579 /* ClickableSprite.m */; };
@@ -191,6 +192,7 @@
 		D281445916D167F8004F4B33 /* blackvswhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackvswhite.png; sourceTree = "<group>"; };
 		D29A68B11706429800526BB9 /* Matchmaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matchmaker.h; sourceTree = "<group>"; };
 		D29A68B21706429800526BB9 /* Matchmaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Matchmaker.m; sourceTree = "<group>"; };
+		D2A5B6141708DA0300940509 /* scoring.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = scoring.c; sourceTree = "<group>"; };
 		D2B09359170785F3009A1579 /* navbaricon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navbaricon.png; sourceTree = "<group>"; };
 		D2B0935B17078D99009A1579 /* navbarbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = navbarbg.png; path = ../navbarbg.png; sourceTree = "<group>"; };
 		D2B0935D1707C4E7009A1579 /* ClickableSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClickableSprite.h; sourceTree = "<group>"; };
@@ -544,6 +546,7 @@
 		D2C6455C16B490F5007291B7 /* LoneLotusGo */ = {
 			isa = PBXGroup;
 			children = (
+				D2A5B6141708DA0300940509 /* scoring.c */,
 				D281445616CFE798004F4B33 /* Scoreboard.h */,
 				D281445716CFE798004F4B33 /* Scoreboard.m */,
 				D2C646E216B491B8007291B7 /* PlayLayer.h */,
@@ -1154,6 +1157,7 @@
 				D2707EB01703D2AF00769DCD /* NavBar.m in Sources */,
 				D29A68B31706429800526BB9 /* Matchmaker.m in Sources */,
 				D2B0935F1707C4E9009A1579 /* ClickableSprite.m in Sources */,
+				D2A5B6151708DA0300940509 /* scoring.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

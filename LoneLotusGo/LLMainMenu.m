@@ -9,12 +9,25 @@
 #import "LLMainMenu.h"
 #define PLAY_ONLINE_SUBMENU_TAG 1
 
-@interface LLMainMenu () {
-    CCMenu* menu;
-}
+@interface LLMainMenu ()
+@property(retain) CCMenu* menu;
+
+@property(retain) CCMenuItem* signIn;
+@property(retain) CCMenuItem* signOut;
+@property(retain) CCMenuItem* play;
+@property(retain) CCMenuItem* matchmaking;
 @end
 
 @implementation LLMainMenu
+-(void) dealloc {
+    [[self menu] release];
+    [[self signIn] release];
+    [[self signOut] release];
+    [[self play] release];
+    [[self matchmaking] release];
+    [super dealloc];
+}
+
 -(id)init {
     if (self == [super init]){
         
@@ -22,36 +35,49 @@
         [CCMenuItemFont setFontSize:18];
 
         // Top Level Menu Items
-        CCMenuItem* play = [CCMenuItemFont itemWithString:@"Play Local" block:^(id sender) {
+        self.play = [CCMenuItemFont itemWithString:@"Play Local" block:^(id sender) {
             [[self delegate] play];
         }];
-        CCMenuItem* signIn = [CCMenuItemFont itemWithString:@"Log In" block:^(id sender) {
+        self.signIn = [CCMenuItemFont itemWithString:@"Log In" block:^(id sender) {
             [[self delegate] signIn];
         }];
-        CCMenuItem* signOut = [CCMenuItemFont itemWithString:@"Log Out" block:^(id sender) {
+        self.signOut = [CCMenuItemFont itemWithString:@"Log Out" block:^(id sender) {
             [[self delegate] signOut];
         }];
-        CCMenuItem* matchmaking = [CCMenuItemFont itemWithString:@"Matchmaking" block:^(id sender) {
+        self.matchmaking = [CCMenuItemFont itemWithString:@"Matchmaking" block:^(id sender) {
             [[self delegate] matchmaking];
         }];
 
 //        CCMenuItem* challenge = [CCMenuItemFont itemWithString:@"Challenge" block:^(id sender) {
 //            [[self delegate] challenge];
 //        }];
-
-        menu = [CCMenu menuWithItems:play, signIn, matchmaking, signOut, nil];
         
-        [menu alignItemsVerticallyWithPadding:10];
-
+        self.menu = [[CCMenu alloc]init];
+        [self onUserChange];
         // Add the menu to the layer
-        [self addChild:menu z:2];
+        [self addChild:self.menu z:2];
     }
     return self;
 }
 
 -(void)setScreenSize:(CGSize)size {
     [self setContentSize:size];
-    [menu setPosition:ccp(size.width/2.0, size.height/2.0)];
+    [self.menu setPosition:ccp(size.width/2.0, size.height/2.0)];
+}
+
+-(void) onUserChange {
+    [self.menu removeAllChildrenWithCleanup:NO]; // cleanup dumps the function blocks of menu items
+    if ([PFUser currentUser]) {
+        [self.menu addChild:self.play];
+        [self.menu addChild:self.matchmaking];
+        [self.menu addChild:self.signOut];
+    }
+    else {
+        [self.menu addChild:self.signIn];
+        [self.menu addChild:self.play];
+        [self.menu addChild:self.matchmaking];
+    }
+    [self.menu alignItemsVerticallyWithPadding:10];
 }
 
 @end

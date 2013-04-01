@@ -17,8 +17,34 @@
 @synthesize window=window_, navController=navController_, director=director_;
 - (void)application:(UIApplication *)application
 didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    NSString* updatedBoardId = [userInfo objectForKey:@"boardid"];
+    
     [PFPush handlePush:userInfo];
+    NSLog(@"Notification Recieved. Board id: %@", updatedBoardId);
+
+    SEL sceneHandlerMethod = @selector(receivedPushedBoardId:);
+    CCNode* runningLayer = [[[[CCDirector sharedDirector] runningScene] children] objectAtIndex:0];
+    if ([runningLayer respondsToSelector:sceneHandlerMethod]) {
+        [runningLayer performSelector:sceneHandlerMethod withObject:updatedBoardId];
+    }
 }
+
+//- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+//    // Create empty photo object
+//    NSString *photoId = [userInfo objectForKey:@"p"];
+//    PFObject *targetPhoto = [PFObject objectWithoutDataWithClassName:@"Photo"
+//                                                            objectId:photoId];
+//    
+//    // Fetch photo object
+//    [targetPhoto fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+//        // Show photo view controller
+//        if (!error && [PFUser currentUser]) {
+//            PhotoVC *viewController = [[PhotoVC alloc] initWithPhoto:object];
+//            [self.navController pushViewController:viewController animated:YES];
+//        }
+//    }];
+//}
+
 - (void)application:(UIApplication *)application
 didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken
 {
@@ -26,7 +52,11 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:newDeviceToken];
     [currentInstallation saveInBackground];
+    
+    NSLog(@"Registered for notifications");
 }
+
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -38,7 +68,6 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken
      UIRemoteNotificationTypeBadge |
      UIRemoteNotificationTypeAlert |
      UIRemoteNotificationTypeSound];
-    // Register for parse pushes
     
 	// Create the main window
 	window_ = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -76,8 +105,8 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken
 //	[director setProjection:kCCDirectorProjection3D];
 
 	// Enables High Res mode (Retina Display) on iPhone 4 and maintains low res on all other devices
-	if( ! [director_ enableRetinaDisplay:YES] )
-		CCLOG(@"Retina Display Not supported");
+//	if( ! [director_ enableRetinaDisplay:YES] )
+//		CCLOG(@"Retina Display Not supported");
 
 	// Default texture format for PNG/BMP/TIFF/JPEG/GIF images
 	// It can be RGBA8888, RGBA4444, RGB5_A1, RGB565
@@ -98,8 +127,20 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken
 	[CCTexture2D PVRImagesHavePremultipliedAlpha:YES];
 
 	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
-	[director_ pushScene: [IntroLayer scene]]; 
-
+    
+	
+    // handle notification data
+    NSDictionary *notificationPayload = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
+    
+    NSString *boardid = [notificationPayload objectForKey:@"boardid"];
+    if (boardid != nil) {
+        NSLog(@"Pushing introlayer with transition to boardid: %@", boardid);
+        [director_ pushScene:[IntroLayer sceneWithTransitionToBoard:boardid]];
+    }
+    else {
+        NSLog(@"Pushing default introlayer");
+        [director_ pushScene: [IntroLayer scene]];
+    }
 	// Create a Navigation Controller with the Director
 	navController_ = [[UINavigationController alloc] initWithRootViewController:director_];
 	navController_.navigationBarHidden = YES;

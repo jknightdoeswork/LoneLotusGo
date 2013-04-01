@@ -11,11 +11,12 @@
 @interface OnlineBoard : Board
 
 @property (retain) PFObject* pf_object;
-@property (retain) NSString* white_player;
-@property (retain) NSString* black_player;
+@property (retain) PFObject* white_player;
+@property (retain) PFObject* black_player;
 
 -(void)load:(NSString*) boardId;
 -(void)save;
+-(void)saveWithName:(NSString*)name;
 
 -(NSString*)getBoardId;
 @end

@@ -12,21 +12,26 @@
 #import "Scoreboard.h"
 
 @class Stone;
-
+@protocol NextTurnDelegate <NSObject>
+-(void)nextTurn;
+@end
 @interface Board : CCSprite <CCStandardTouchDelegate>
-@property(atomic) int score;
 @property(atomic) PlayerFlag currentPlayer;
 @property(nonatomic, retain) NSMutableDictionary* b; // mapping of (Index) -> (Stone) or (NSNull)
 @property(nonatomic) float ws;  // Width of the boxes
 @property(nonatomic) int n;     // Size of board
 @property(nonatomic, retain) Scoreboard* scoreboard;
+@property(nonatomic) BOOL justpassed;
 @property(retain) Stone* unplacedStone; // holds the stone that floats around when touching
+@property(assign) CCNode<NextTurnDelegate>* delegate;
 
 /**
  * Returns the piece stored at the given index or nil if bad index or no piece.
  */
 -(Stone*)getPieceAt:(int)x_index y_index:(int)y_index;
 
+-(BOOL)canPutPieceAt:(int)x_index y_index:(int)y_index;
+    
 /**
  * Initializes a board with enough room for nxn pieces.
  */
@@ -52,4 +57,8 @@
  * Returns a 1D index using the size of the board for the 2D piece location.
  */
 -(int)get_index:(int)i j:(int)j;
+
+-(int)getScore;
+
+-(void) nextTurn;
 @end

@@ -22,6 +22,7 @@
 @property(nonatomic) int n;     // Size of board
 @property(nonatomic, retain) Scoreboard* scoreboard;
 @property(nonatomic) BOOL justpassed;
+@property(nonatomic) BOOL gameOver;
 @property(retain) Stone* unplacedStone; // holds the stone that floats around when touching
 @property(assign) CCNode<NextTurnDelegate>* delegate;
 
@@ -40,6 +41,9 @@
  * Resets a board to a starting state.
  */
 -(void) reset;
+
+-(void) pass;
+    
 /**
  * Returns the neighbour of the point if availible, or nil if that's spot's empty or off the board.
  */

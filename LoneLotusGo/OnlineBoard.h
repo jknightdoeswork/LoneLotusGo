@@ -15,6 +15,7 @@
 @property (retain) PFObject* black_player;
 
 -(void)load:(NSString*) boardId;
+-(void)refresh;
 -(void)save;
 -(void)saveWithName:(NSString*)name;
 

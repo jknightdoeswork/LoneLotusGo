@@ -27,6 +27,7 @@
 @synthesize scoreboard;
 @synthesize unplacedStone;
 @synthesize justpassed;
+@synthesize gameOver;
 
 -(id)initBoard:(int) cap s_board:(Scoreboard*)s_board {
     if(self = [self initWithFile:@"go.gif"]) {
@@ -58,6 +59,7 @@
         
         // pass
         self.justpassed = NO;
+        self.gameOver = NO;
 
         self.unplacedStone = [[Stone alloc] initForGoGame:self for_player:[self currentPlayer] x_index:-1 y_index:-1];
         [self.unplacedStone setVisible:NO];
@@ -82,8 +84,13 @@
 }
 
 -(void) pass {
-    [self setJustpassed:YES];
+    if([self justpassed]) {
+        NSLog(@"Game over");
+        [self setCurrentPlayer:P_UNDEFINED];
+        [self setGameOver:YES];
+    }
     [self nextTurn];
+    [self setJustpassed:YES];
 }
 
 -(int)getScore {
@@ -349,6 +356,7 @@
         NSLog(@"ERROR: Unrecognized current player");
     }
     NSLog(@"Next Turn: %c", [self currentPlayer]);
+    [self setJustpassed:NO];
     [self.delegate nextTurn];
 }
 @end

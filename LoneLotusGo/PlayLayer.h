@@ -6,13 +6,13 @@
 //  Copyright (c) 2013 VendAsta Technologies Inc. . All rights reserved.
 //
 
-#import "CCLayer.h"
+#import "LLBaseLayer.h"
 #import "cocos2d.h"
 #import "OnlineBoard.h"
 #import "Scoreboard.h"
 #import "NavBar.h"
 
-@interface PlayLayer : CCLayer<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, CCTargetedTouchDelegate, NextTurnDelegate, NavBarDelegate>
+@interface PlayLayer : LLBaseLayer<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, CCTargetedTouchDelegate, NextTurnDelegate, NavBarDelegate>
     @property(retain) OnlineBoard* board;
 
 // Returns a CCScene with only this layer added

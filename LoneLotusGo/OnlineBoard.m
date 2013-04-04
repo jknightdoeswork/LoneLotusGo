@@ -19,7 +19,8 @@
  *      "black_player"          :   NSString*
  *      "pieces"                :   NSArray*        // array of piece data
  *      "savename"              :   NSString*       // displays in menu
- *      "justpassed"            :   NSNumber*         // true if the last player passed
+ *      "justpassed"            :   NSNumber*       // true if the last player passed
+ *      "gameover"              :   NSNumber*       // true if the game is over
  *      Piece Data Schema
  *          "player"    :   NSNumber*   // (char) current player
  *          "x_index"   :   NSNumber*   // x_index
@@ -31,14 +32,21 @@
 @end
 @implementation OnlineBoard
 
+-(void)refresh {
+    if([self getBoardId] != nil) {
+        [self load:[self getBoardId]];
+    }
+}
+
 -(void)load:(NSString*) boardId {
+    NSLog(@"Loading with boardId: %@", boardId);
     [self removeAllChildrenWithCleanup:NO];
     [[self unplacedStone] setVisible:NO];
     
     PFQuery *query = [PFQuery queryWithClassName:@"Board"];
     [query includeKey:@"white_player"];
     [query includeKey:@"black_player"];
-    
+
     PFObject *gameState = [query getObjectWithId:boardId];
     self.pf_object = gameState;
     
@@ -54,6 +62,10 @@
     BOOL just_passed = [[gameState objectForKey:@"justpassed"] boolValue];
     [self setJustpassed:just_passed];
     
+    // Game Over
+    BOOL gameOver = [[gameState objectForKey:@"gameover"] boolValue];
+    [self setGameOver:gameOver];
+
     // Players
     PFObject* white_player = [gameState objectForKey:@"white_player"];
     PFObject* black_player = [gameState objectForKey:@"black_player"];
@@ -112,6 +124,7 @@
     id black_player = self.black_player != nil ? self.black_player : [NSNull null];
     
     NSNumber* ns_j = [NSNumber numberWithBool:[self justpassed]];
+    NSNumber* ns_g = [NSNumber numberWithBool:[self gameOver]];
     NSNumber* ns_c = [NSNumber numberWithInt:[self currentPlayer]];
     NSNumber* ns_n = [NSNumber numberWithInt:[self n]];
     NSNumber* ns_w = [NSNumber numberWithInt:[[self scoreboard] getWhiteScore]];
@@ -130,6 +143,7 @@
     }
     
     [[self pf_object] setObject:ns_j forKey:@"justpassed"];
+    [[self pf_object] setObject:ns_g forKey:@"gameover"];
     [[self pf_object] setObject:ns_c forKey:@"current_player"];
     [[self pf_object] setObject:ns_n forKey:@"n"];
     [[self pf_object] setObject:ns_w forKey:@"white_score"];

@@ -12,6 +12,8 @@
 
 @protocol NavBarDelegate <NSObject>
 -(void)clickedNavBarBoardId:(NSString*)boardId;
+-(void)clickedPass;
+-(void)clickedRefresh;
 @end
 
 

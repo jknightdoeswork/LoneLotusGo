@@ -151,6 +151,19 @@
     [self.board load:boardId];
 }
 
+-(void)clickedRefresh {
+    [self.board refresh];
+}
+
+-(void)clickedPass {
+    [self.board pass];
+}
+
+-(void)screenSizeChangedTo:(CGSize)size {
+    [self.navbar setScreenSize:size];
+    [self.board setPosition:ccp(size.width/2, size.height/2)];
+}
+
 //-(void) registerWithTouchDispatcher
 //{
 ////	[[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];

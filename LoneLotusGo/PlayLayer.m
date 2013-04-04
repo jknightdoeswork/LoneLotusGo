@@ -111,11 +111,8 @@
         v_sh = screenSize.height;
         NSLog(@"%fx%f Screen", v_sw,v_sh);
         
-        Scoreboard* scoreboard = [[Scoreboard alloc] initWithScores:0 black:0];
-        [self addChild:scoreboard z:2];
-        
         // add board
-        self.board = [[OnlineBoard alloc] initBoard:19 s_board:scoreboard];
+        self.board = [[OnlineBoard alloc] initBoard:19];
         [self.board setDelegate:self];
         [self addChild:self.board z:1];
 

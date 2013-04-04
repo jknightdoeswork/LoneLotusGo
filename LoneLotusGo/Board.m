@@ -24,17 +24,15 @@
 @synthesize currentPlayer;
 @synthesize n;
 @synthesize ws;
-@synthesize scoreboard;
 @synthesize unplacedStone;
 @synthesize justpassed;
 @synthesize gameOver;
 
--(id)initBoard:(int) cap s_board:(Scoreboard*)s_board {
+-(id)initBoard:(int) cap {
     if(self = [self initWithFile:@"go.gif"]) {
         [[[CCDirector sharedDirector]touchDispatcher] addStandardDelegate:self priority:2];
         
         self.n = cap;
-        self.scoreboard = s_board;
         // set rendering params
         CGSize size = [[CCDirector sharedDirector] winSize];
         

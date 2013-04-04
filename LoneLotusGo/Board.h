@@ -9,7 +9,6 @@
 #import "cocos2d.h"
 #import "PlayerFlag.h"
 #import "Chain.h"
-#import "Scoreboard.h"
 
 @class Stone;
 @protocol NextTurnDelegate <NSObject>
@@ -20,7 +19,6 @@
 @property(nonatomic, retain) NSMutableDictionary* b; // mapping of (Index) -> (Stone) or (NSNull)
 @property(nonatomic) float ws;  // Width of the boxes
 @property(nonatomic) int n;     // Size of board
-@property(nonatomic, retain) Scoreboard* scoreboard;
 @property(nonatomic) BOOL justpassed;
 @property(nonatomic) BOOL gameOver;
 @property(retain) Stone* unplacedStone; // holds the stone that floats around when touching
@@ -36,7 +34,7 @@
 /**
  * Initializes a board with enough room for nxn pieces.
  */
--(id)initBoard:(int) n s_board:(Scoreboard*)s_board;
+-(id)initBoard:(int) n;
 /**
  * Resets a board to a starting state.
  */

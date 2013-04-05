@@ -146,8 +146,8 @@
     [[self pf_object] setObject:ns_g forKey:@"gameover"];
     [[self pf_object] setObject:ns_c forKey:@"current_player"];
     [[self pf_object] setObject:ns_n forKey:@"n"];
-    [[self pf_object] setObject:ns_w forKey:@"white_score"];
-    [[self pf_object] setObject:ns_b forKey:@"black_score"];
+//    [[self pf_object] setObject:ns_w forKey:@"white_score"];
+//    [[self pf_object] setObject:ns_b forKey:@"black_score"];
     [[self pf_object] setObject:pieces forKey:@"pieces"];
     [[self pf_object] setObject:black_player forKey:@"white_player"];
     [[self pf_object] setObject:white_player forKey:@"black_player"];

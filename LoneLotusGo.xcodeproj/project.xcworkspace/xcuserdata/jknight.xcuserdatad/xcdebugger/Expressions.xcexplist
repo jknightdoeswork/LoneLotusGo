@@ -101,16 +101,16 @@
          contextName = "-[OnlineBoard save]:OnlineBoard.m">
          <PersistentStrings>
             <PersistentString
-               value = "(char)[ns_c intValue]">
+               value = "[self pf_object]">
             </PersistentString>
             <PersistentString
                value = "[self currentPlayer]">
             </PersistentString>
             <PersistentString
-               value = "pieces">
+               value = "(char)[ns_c intValue]">
             </PersistentString>
             <PersistentString
-               value = "[self pf_object]">
+               value = "pieces">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

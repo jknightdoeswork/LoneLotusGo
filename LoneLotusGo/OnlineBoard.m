@@ -127,8 +127,8 @@
     NSNumber* ns_g = [NSNumber numberWithBool:[self gameOver]];
     NSNumber* ns_c = [NSNumber numberWithInt:[self currentPlayer]];
     NSNumber* ns_n = [NSNumber numberWithInt:[self n]];
-    NSNumber* ns_w = [NSNumber numberWithInt:[[self scoreboard] getWhiteScore]];
-    NSNumber* ns_b = [NSNumber numberWithInt:[[self scoreboard] getBlackScore]];
+//    NSNumber* ns_w = [NSNumber numberWithInt:[[self scoreboard] getWhiteScore]];
+//    NSNumber* ns_b = [NSNumber numberWithInt:[[self scoreboard] getBlackScore]];
     NSMutableArray* pieces = [NSMutableArray arrayWithCapacity:[[self children] count]];
 
     for (Stone* stone in [self children]) {

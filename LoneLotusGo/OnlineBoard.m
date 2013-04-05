@@ -89,6 +89,8 @@
         Stone* stone = [[Stone alloc] initForGoGame:self for_player:player x_index:x_index y_index:y_index];
         [self addChild:stone z:1.0 tag:[super get_index:x_index j:y_index]];
     }
+    
+    NSLog(@"Loaded %@\n\twhite: %@\tblack: %@\ncurrentturn: %c\ncurrentUser: %@", [self getBoardId], [[self white_player] objectId], [[self black_player] objectId], [self currentPlayer], [[PFUser currentUser] objectId]);
 }
 
 -(void)dealloc {

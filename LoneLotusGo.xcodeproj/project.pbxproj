@@ -21,6 +21,7 @@
 		D23A9FED16F954DE00952EA1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23A9FEC16F954DE00952EA1 /* SystemConfiguration.framework */; };
 		D249FFC9170D2C95003812CA /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = D249FFC7170D2C95003812CA /* refresh.png */; };
 		D249FFCA170D2C95003812CA /* skip.png in Resources */ = {isa = PBXBuildFile; fileRef = D249FFC8170D2C95003812CA /* skip.png */; };
+		D251140D16FFDD8700C349DE /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = D251140C16FFDD8700C349DE /* logo.png */; };
 		D262A4B117027FC10008185A /* OnlineBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = D262A4B017027FC10008185A /* OnlineBoard.m */; };
 		D2707EB01703D2AF00769DCD /* NavBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D2707EAF1703D2AF00769DCD /* NavBar.m */; };
 		D281445816CFE798004F4B33 /* Scoreboard.m in Sources */ = {isa = PBXBuildFile; fileRef = D281445716CFE798004F4B33 /* Scoreboard.m */; };
@@ -165,7 +166,7 @@
 		D2F9E5E716FE3C4400B51F89 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2F9E5E616FE3C4400B51F89 /* Parse.framework */; };
 		D2F9E5EA16FF68C300B51F89 /* LLMainMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F9E5E916FF68C300B51F89 /* LLMainMenu.m */; };
 		D2FA43C4170E1D3C00BEEE45 /* CCScrollLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D2FA43C3170E1D3C00BEEE45 /* CCScrollLayer.m */; };
-		D2FA43C9170E4F2800BEEE45 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = D2FA43C8170E4F2800BEEE45 /* logo.png */; };
+		D2FA43C7170E1E0000BEEE45 /* LLMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D2FA43C6170E1E0000BEEE45 /* LLMenu.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -187,6 +188,7 @@
 		D23A9FEC16F954DE00952EA1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		D249FFC7170D2C95003812CA /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
 		D249FFC8170D2C95003812CA /* skip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = skip.png; sourceTree = "<group>"; };
+		D251140C16FFDD8700C349DE /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = ../../../../Desktop/logo.png; sourceTree = "<group>"; };
 		D262A4AF17027FC10008185A /* OnlineBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnlineBoard.h; sourceTree = "<group>"; };
 		D262A4B017027FC10008185A /* OnlineBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnlineBoard.m; sourceTree = "<group>"; };
 		D2707EAE1703D2AF00769DCD /* NavBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavBar.h; sourceTree = "<group>"; };
@@ -478,7 +480,8 @@
 		D2F9E5E916FF68C300B51F89 /* LLMainMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLMainMenu.m; sourceTree = "<group>"; };
 		D2FA43C2170E1D3C00BEEE45 /* CCScrollLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCScrollLayer.h; path = libs/cocos2d/CCScrollLayer.h; sourceTree = "<group>"; };
 		D2FA43C3170E1D3C00BEEE45 /* CCScrollLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCScrollLayer.m; path = libs/cocos2d/CCScrollLayer.m; sourceTree = "<group>"; };
-		D2FA43C8170E4F2800BEEE45 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = ../logo.png; sourceTree = "<group>"; };
+		D2FA43C5170E1E0000BEEE45 /* LLMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLMenu.h; sourceTree = "<group>"; };
+		D2FA43C6170E1E0000BEEE45 /* LLMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLMenu.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -591,6 +594,8 @@
 				D29A68B21706429800526BB9 /* Matchmaker.m */,
 				D2B0935D1707C4E7009A1579 /* ClickableSprite.h */,
 				D2B0935E1707C4E8009A1579 /* ClickableSprite.m */,
+				D2FA43C5170E1E0000BEEE45 /* LLMenu.h */,
+				D2FA43C6170E1E0000BEEE45 /* LLMenu.m */,
 			);
 			path = LoneLotusGo;
 			sourceTree = "<group>";
@@ -598,11 +603,11 @@
 		D2C6455D16B490F5007291B7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D2FA43C8170E4F2800BEEE45 /* logo.png */,
 				D249FFC8170D2C95003812CA /* skip.png */,
 				D249FFC7170D2C95003812CA /* refresh.png */,
 				D2B0935B17078D99009A1579 /* navbarbg.png */,
 				D2B09359170785F3009A1579 /* navbaricon.png */,
+				D251140C16FFDD8700C349DE /* logo.png */,
 				D281445916D167F8004F4B33 /* blackvswhite.png */,
 				D2F24D8216B8C0C600E08872 /* go.gif */,
 				D2C646EE16B4983D007291B7 /* stone_white.png */,
@@ -1038,11 +1043,11 @@
 				D2F24D8316B8C0C600E08872 /* go.gif in Resources */,
 				D281445A16D167F9004F4B33 /* blackvswhite.png in Resources */,
 				D21D97D516FAA24900727758 /* PlayOnlineViewController.xib in Resources */,
+				D251140D16FFDD8700C349DE /* logo.png in Resources */,
 				D2B0935A170785F3009A1579 /* navbaricon.png in Resources */,
 				D2B0935C17078D99009A1579 /* navbarbg.png in Resources */,
 				D249FFC9170D2C95003812CA /* refresh.png in Resources */,
 				D249FFCA170D2C95003812CA /* skip.png in Resources */,
-				D2FA43C9170E4F2800BEEE45 /* logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1172,6 +1177,7 @@
 				D2B0935F1707C4E9009A1579 /* ClickableSprite.m in Sources */,
 				D2A5B6151708DA0300940509 /* scoring.c in Sources */,
 				D2FA43C4170E1D3C00BEEE45 /* CCScrollLayer.m in Sources */,
+				D2FA43C7170E1E0000BEEE45 /* LLMenu.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

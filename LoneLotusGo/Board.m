@@ -31,7 +31,6 @@
 -(id)initBoard:(int) cap {
     if(self = [self initWithFile:@"go.gif"]) {
         [[[CCDirector sharedDirector]touchDispatcher] addStandardDelegate:self priority:2];
-        
         self.n = cap;
         // set rendering params
         CGSize size = [[CCDirector sharedDirector] winSize];
@@ -156,6 +155,7 @@
 }
 
 - (void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    NSLog(@"CCTouchesMoved: %d", [touches count]);
 	if ([touches count] == 1) {
         // reset double touch in case touches are at different times
         previous_double_touch_distance      = 0;

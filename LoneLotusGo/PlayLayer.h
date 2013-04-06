@@ -7,12 +7,13 @@
 //
 
 #import "LLBaseLayer.h"
+#import "LLMenu.h"
 #import "cocos2d.h"
 #import "OnlineBoard.h"
 #import "Scoreboard.h"
 #import "NavBar.h"
 
-@interface PlayLayer : LLBaseLayer<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, CCTargetedTouchDelegate, NextTurnDelegate, NavBarDelegate>
+@interface PlayLayer : LLBaseLayer<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, CCTargetedTouchDelegate, NextTurnDelegate, NavBarDelegate, LLMenuDelegate>
     @property(retain) OnlineBoard* board;
 
 // Returns a CCScene with only this layer added

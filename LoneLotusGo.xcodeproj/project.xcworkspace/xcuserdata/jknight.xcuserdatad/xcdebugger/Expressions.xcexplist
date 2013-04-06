@@ -42,6 +42,17 @@
          contextName = "-[Board initBoardWithCapacity:]:Board.m">
       </ContextState>
       <ContextState
+         contextName = "-[PlayLayer signOut]:PlayLayer.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[currentInstallation objectForKey:@&quot;channels&quot;]">
+            </PersistentString>
+            <PersistentString
+               value = "[PFUser currentUser].objectId">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[OnlineBoard nextTurn]:OnlineBoard.m">
       </ContextState>
       <ContextState
@@ -101,7 +112,7 @@
          contextName = "-[OnlineBoard save]:OnlineBoard.m">
          <PersistentStrings>
             <PersistentString
-               value = "[self pf_object]">
+               value = "pieces">
             </PersistentString>
             <PersistentString
                value = "[self currentPlayer]">
@@ -110,7 +121,7 @@
                value = "(char)[ns_c intValue]">
             </PersistentString>
             <PersistentString
-               value = "pieces">
+               value = "[self pf_object]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

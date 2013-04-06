@@ -9,16 +9,13 @@
 #import "OnlineBoard.h"
 #import "CCLabelAtlas.h"
 
-
 @protocol NavBarDelegate <NSObject>
--(void)clickedNavBarBoardId:(NSString*)boardId;
+-(void)clickedNavIcon;
 -(void)clickedPass;
 -(void)clickedRefresh;
 @end
 
-
 @interface NavBar : CCLayer
-@property(retain) PFLogInViewController* logInController;
 @property(retain) CCLabelAtlas* score_atlas;
 @property(assign) CCNode<NavBarDelegate>* delegate;
 
@@ -26,6 +23,4 @@
  * Adjusts the children's position to a screensize.
  */
 -(void)setScreenSize:(CGSize)size;
-
--(void) updateNavBarMenu;
 @end

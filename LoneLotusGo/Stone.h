@@ -11,7 +11,7 @@
 
 @class Board;
 
-#define INITIAL_SCALE 0.5f
+#define INITIAL_SCALE 0.66f
 
 @interface Stone : CCSprite
 @property(nonatomic) int i;

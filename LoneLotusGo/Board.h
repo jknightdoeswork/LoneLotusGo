@@ -13,16 +13,19 @@
 @class Stone;
 @protocol NextTurnDelegate <NSObject>
 -(void)nextTurn;
+-(void)gameOver;
 @end
 @interface Board : CCSprite <CCStandardTouchDelegate>
 @property(atomic) PlayerFlag currentPlayer;
-@property(nonatomic, retain) NSMutableDictionary* b; // mapping of (Index) -> (Stone) or (NSNull)
 @property(nonatomic) float ws;  // Width of the boxes
 @property(nonatomic) int n;     // Size of board
 @property(nonatomic) BOOL justpassed;
 @property(nonatomic) BOOL gameOver;
 @property(retain) Stone* unplacedStone; // holds the stone that floats around when touching
 @property(assign) CCNode<NextTurnDelegate>* delegate;
+@property(nonatomic, assign) BOOL isTouchEnabled;
+@property(assign) int blackcaps;
+@property(assign) int whitecaps;
 
 /**
  * Returns the piece stored at the given index or nil if bad index or no piece.

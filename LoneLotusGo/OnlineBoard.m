@@ -73,11 +73,10 @@
     [self setWhite_player:white_player];
     [self setBlack_player:black_player];
     
-    // TODO LOAD/SAVE BLACK/WHITE CAPTURES
-    //    int white_score = [[gameState objectForKey:@"white_score"] intValue];
-    //    [[self scoreboard] setWhiteScore:white_score];
-    //    int black_score = [[gameState objectForKey:@"black_score"] intValue];
-    //    [[self scoreboard] setBlackScore:black_score];
+    int white_score = [[gameState objectForKey:@"white_score"] intValue];
+    [self setWhitecaps:white_score];
+    int black_score = [[gameState objectForKey:@"black_score"] intValue];
+    [self setBlackcaps:black_score];
     
     // Pieces
     NSArray* pieces = [gameState objectForKey:@"pieces"];
@@ -89,8 +88,6 @@
         Stone* stone = [[Stone alloc] initForGoGame:self for_player:player x_index:x_index y_index:y_index];
         [self addChild:stone z:1.0 tag:[super get_index:x_index j:y_index]];
     }
-    
-    NSLog(@"Loaded %@\n\twhite: %@\tblack: %@\ncurrentturn: %c\ncurrentUser: %@", [self getBoardId], [[self white_player] objectId], [[self black_player] objectId], [self currentPlayer], [[PFUser currentUser] objectId]);
 }
 
 -(void)dealloc {
@@ -106,6 +103,7 @@
     }
     [self.pf_object setObject:name forKey:@"savename"];
     [self save];
+    [self.pf_object removeObjectForKey:@"savename"]; // subsequent saves not with filename
 }
 
 -(void)save {
@@ -114,8 +112,15 @@
         return;
     }
     if(![[[PFUser currentUser] objectId] isEqualToString:[[self white_player] objectId]] && ![[[PFUser currentUser] objectId] isEqualToString: [[self black_player] objectId]] ) {
-        NSLog(@"User id: %@ not found in game player ids: %@ %@\nNot saving.", [[PFUser currentUser] objectId], [[self white_player] objectId], [[self black_player] objectId]);
-        return;
+        NSLog(@"User id: %@ not found in game player ids: %@ %@.", [[PFUser currentUser] objectId], [[self white_player] objectId], [[self black_player] objectId]);
+        if([self black_player] == nil && [self white_player] == nil) {
+            NSLog(@"set black player to be current player");
+            self.black_player = [PFUser currentUser];
+        }
+        else {
+            NSLog(@"This is not the current users game to save. Not saving.");
+            return;
+        }
     }
     NSString* otherPlayerId = [[PFUser currentUser] objectId] == [[self white_player] objectId] ? [[self black_player] objectId]: [[self white_player] objectId];
 
@@ -129,8 +134,8 @@
     NSNumber* ns_g = [NSNumber numberWithBool:[self gameOver]];
     NSNumber* ns_c = [NSNumber numberWithInt:[self currentPlayer]];
     NSNumber* ns_n = [NSNumber numberWithInt:[self n]];
-//    NSNumber* ns_w = [NSNumber numberWithInt:[[self scoreboard] getWhiteScore]];
-//    NSNumber* ns_b = [NSNumber numberWithInt:[[self scoreboard] getBlackScore]];
+    NSNumber* ns_w = [NSNumber numberWithInt:[self whitecaps]];
+    NSNumber* ns_b = [NSNumber numberWithInt:[self blackcaps]];
     NSMutableArray* pieces = [NSMutableArray arrayWithCapacity:[[self children] count]];
 
     for (Stone* stone in [self children]) {
@@ -148,8 +153,8 @@
     [[self pf_object] setObject:ns_g forKey:@"gameover"];
     [[self pf_object] setObject:ns_c forKey:@"current_player"];
     [[self pf_object] setObject:ns_n forKey:@"n"];
-//    [[self pf_object] setObject:ns_w forKey:@"white_score"];
-//    [[self pf_object] setObject:ns_b forKey:@"black_score"];
+    [[self pf_object] setObject:ns_w forKey:@"white_score"];
+    [[self pf_object] setObject:ns_b forKey:@"black_score"];
     [[self pf_object] setObject:pieces forKey:@"pieces"];
     [[self pf_object] setObject:white_player forKey:@"white_player"];
     [[self pf_object] setObject:black_player forKey:@"black_player"];
@@ -195,7 +200,6 @@
     // TODO PUSH TO OTHER GUY
 }
 
-
 -(BOOL)canPutPieceAt:(int)x_index y_index:(int)y_index {
     if([self currentPlayer] == P_WHITE) {
         if ([self white_player] == nil || [[[self white_player] objectId] isEqualToString:[[PFUser currentUser] objectId]]) {
@@ -208,6 +212,13 @@
         }
     }
     return NO;
+}
+
+-(void)reset {
+    [super reset];
+    self.black_player = nil;
+    self.white_player = nil;
+    self.pf_object = nil;
 }
 
 @end

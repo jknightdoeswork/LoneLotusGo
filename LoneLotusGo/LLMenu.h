@@ -11,6 +11,7 @@
 @protocol LLMenuDelegate<NSObject>
 -(void)resume;
 -(void)load:(NSString*)boardId;
+-(void)newGame;
 -(void)signIn;
 -(void)signOut;
 @end

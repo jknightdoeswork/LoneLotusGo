@@ -8,11 +8,14 @@
 
 #import "PlayLayer.h"
 #import <Parse/Parse.h>
+#import "LLLogInViewController.h"
+#import "LLSignupViewController.h"
 
 @interface PlayLayer ()
 @property(retain) NavBar* navbar;
 @property(retain) LLMenu* llmenu;
-@property(retain) PFLogInViewController* loginController;
+@property(retain) LLLogInViewController* loginController;
+@property(retain) CCSprite* background;
 @end
 @implementation PlayLayer
     float v_sw;
@@ -22,7 +25,7 @@
     NSLog(@"PlayLayer being deallocated");
     [self.board release];
     [self.navbar release];
-    // TODO RELEASE EVERYHTING
+    [self.background release];
     [super dealloc];
 }
 
@@ -114,25 +117,40 @@
         NSLog(@"%fx%f Screen", v_sw,v_sh);
         
         // add board
-        self.board = [[OnlineBoard alloc] initBoard:19];
+        self.board = [[[OnlineBoard alloc] initBoard:19]autorelease];
         [self.board setDelegate:self];
         [self addChild:self.board z:1];
         
-        self.llmenu = [[LLMenu alloc] init];
-        [self addChild:self.llmenu z:2];
+        self.llmenu = [[[LLMenu alloc] init]autorelease];
+        [self addChild:self.llmenu z:10];
         [self.llmenu setVisible:NO];
+        [self.llmenu setShowPagesIndicator:NO];
         [self.llmenu setMenuDelegate:self];
+        [self.llmenu setPagesIndicatorNormalColor:ccc4(140, 140, 140, 255)];
+        [self.llmenu setPagesIndicatorSelectedColor:ccc4(15, 222, 210, 255)];
+
         
-        self.loginController = [[PFLogInViewController alloc] init];
+        self.loginController = [[[LLLogInViewController alloc] init]autorelease];
         [self.loginController setDelegate:self];
+        LLSignupViewController* signUp = [[[LLSignupViewController alloc]init]autorelease];
+        [self.loginController setSignUpController:signUp];
         [[self.loginController signUpController] setDelegate:self];
 
-        self.navbar = [[NavBar alloc]init];
+        
+
+        self.navbar = [[[NavBar alloc]init]autorelease];
         [self.navbar setDelegate:self];
         self.navbar.anchorPoint = ccp(0.0f, 0.0f);
         [self.navbar setPosition:ccp(0.0f, 0.0f)];
         [self addChild:self.navbar z:5];
         
+        self.background = [CCSprite spriteWithFile:@"black.bmp"];
+        [self.background setAnchorPoint:ccp(0,0)];
+        [self.background setPosition:ccp(0,0)];
+        [self.background setOpacity:200];
+        [self.background setVisible:NO];
+        [self addChild:self.background z:9];
+
         [self screenSizeChangedTo:screenSize];
     }
     return self;
@@ -141,6 +159,9 @@
 -(void)nextTurn {
     [[self.navbar score_atlas] setString:[NSString stringWithFormat:@"%d", [self.board getScore]]];
     [[self.navbar score_atlas] visit];
+    [self.navbar.whitecaps setString:[NSString stringWithFormat:@"%d", [self.board whitecaps]]];
+    [self.navbar.blackcaps setString:[NSString stringWithFormat:@"%d", [self.board blackcaps]]];
+    [self.navbar setActivePlayer:self.board.currentPlayer];
 }
 
 -(void)receivedPushedBoardId:(NSString*)pushedBoardId {
@@ -158,10 +179,26 @@
 //LLMenu
 -(void)load:(NSString *)boardId {
     [self.board load:boardId];
+    if(self.board.black_player) {
+        [self.navbar.blackPlayerName setString:[self.board.black_player objectForKey:@"username"]];
+    }
+    else {
+        [self.navbar.blackPlayerName setString:@"Black"];
+    }
+    if(self.board.white_player) {
+        [self.navbar.whitePlayerName setString:[self.board.white_player objectForKey:@"username"]];
+    }
+    else {
+        [self.navbar.blackPlayerName setString:@"White"];
+    }
+    [self.navbar setActivePlayer:self.board.currentPlayer];
 }
 
 -(void)resume {
+    [self.board setIsTouchEnabled:YES];
+    [self.navbar setIsTouchEnabled:YES];
     [self.llmenu setVisible:NO];
+    [self.background setVisible:NO];
 }
 
 -(void)signIn {
@@ -179,25 +216,65 @@
 //            }
 //        }];        
 //    }
+    [self.board reset];
+    [self nextTurn]; // updates nav bar
     [PFUser logOut];
     [self.llmenu onUserChange];
 }
 
+-(void)newGame {
+    [self.board reset];
+    [self nextTurn]; // Updates nav bar
+    [self resume];
+}
+
 //Nav bar
 -(void)clickedNavIcon {
+    [self.llmenu onUserChange];
     [self.llmenu setVisible:YES];
+    [self.background setVisible:YES];
+    [self.board setIsTouchEnabled:NO];
+    [self.navbar setIsTouchEnabled:NO];
 }
 -(void)clickedRefresh {
     [self.board refresh];
 }
 
+-(void)clickedSave {
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Save" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Save", nil];
+
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    UITextField * alertTextField = [alert textFieldAtIndex:0];
+    alertTextField.keyboardType = UIKeyboardTypeDefault;
+    alertTextField.placeholder = @"Name this board";
+    [alert show];
+    [alert release];
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSString* detailString = [[alertView textFieldAtIndex:0] text];
+    NSLog(@"String is: %@", detailString);
+    if([detailString length] <= 0 || buttonIndex == 0) {
+        NSLog(@"Cancelled");
+    }
+
+    else{
+        [[self board] saveWithName:detailString];
+        return; //If cancel or 0 length string the string doesn't matter
+    }
+}
+
 -(void)clickedPass {
     [self.board pass];
 }
-
+-(void)gameOver {
+    [self.board save];
+    NSLog(@"Game over");
+}
 -(void)screenSizeChangedTo:(CGSize)size {
     [self.navbar setScreenSize:size];
     [self.board setPosition:ccp(size.width/2, size.height/2)];
+    [self.background setScaleX:size.width];
+    [self.background setScaleY:size.height];
     [self.llmenu setScreenSizeChangedTo:size];
 }
 
@@ -268,6 +345,7 @@
 //        }
 //    }];
     [[CCDirector sharedDirector] dismissViewControllerAnimated:YES completion:nil];
+    [self screenSizeChangedTo: [[CCDirector sharedDirector] winSize]];
 }
 
 /// Sent to the delegate when the log in attempt fails.
@@ -280,11 +358,13 @@
 - (void)logInViewControllerDidCancelLogIn:(PFLogInViewController *)logInController {
     NSLog(@"Cancel Logging In!");
     [self.llmenu onUserChange];
-    [[CCDirector sharedDirector] dismissViewControllerAnimated:YES completion:nil];
+    [self screenSizeChangedTo: [[CCDirector sharedDirector] winSize]];
+//    [[CCDirector sharedDirector] dismissViewControllerAnimated:YES completion:nil];
 }
 // Sent to the delegate when a PFUser is signed up.
 - (void)signUpViewController:(PFSignUpViewController *)signUpController didSignUpUser:(PFUser *)user {
     NSLog(@"Signed up user");
+    [self screenSizeChangedTo: [[CCDirector sharedDirector] winSize]];
     [self.llmenu onUserChange];
     // Register for push notifications
 //    PFInstallation* currentInstallation = [PFInstallation currentInstallation];

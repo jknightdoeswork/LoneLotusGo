@@ -20,7 +20,6 @@
     char* board_as_string;
     int score;
 }
-@synthesize b;
 @synthesize currentPlayer;
 @synthesize n;
 @synthesize ws;
@@ -31,10 +30,12 @@
 -(id)initBoard:(int) cap {
     if(self = [self initWithFile:@"go.gif"]) {
         [[[CCDirector sharedDirector]touchDispatcher] addStandardDelegate:self priority:2];
+        self.isTouchEnabled = YES;
         self.n = cap;
+
         // set rendering params
         CGSize size = [[CCDirector sharedDirector] winSize];
-        
+
         // Scale
         float x_scale = size.width / self.contentSize.width;    
         float y_scale = size.height / self.contentSize.height;
@@ -46,17 +47,18 @@
         
         // Initial player
         [self setCurrentPlayer:P_BLACK];
-        
+
         // width of boxes
         self.ws = floorf((self.contentSize.width) / (n-1));
         NSLog(@"WS: %.2f", ws);
-        
-        // init board data
-        self.b = [NSMutableDictionary dictionaryWithCapacity:n*n];
-        
+                
         // pass
         self.justpassed = NO;
         self.gameOver = NO;
+        
+        //caps
+        [self setBlackcaps:0];
+        [self setWhitecaps:0];
 
         self.unplacedStone = [[Stone alloc] initForGoGame:self for_player:[self currentPlayer] x_index:-1 y_index:-1];
         [self.unplacedStone setVisible:NO];
@@ -78,6 +80,10 @@
     [[self unplacedStone] setVisible:NO];
     [self addChild:self.unplacedStone z:2];
     [self setCurrentPlayer:P_BLACK];
+    [self setJustpassed:NO];
+    [self setGameOver:NO];
+    [self setBlackcaps:0];
+    [self setWhitecaps:0];
 }
 
 -(void) pass {
@@ -85,6 +91,7 @@
         NSLog(@"Game over");
         [self setCurrentPlayer:P_UNDEFINED];
         [self setGameOver:YES];
+        [self.delegate gameOver];
     }
     [self nextTurn];
     [self setJustpassed:YES];
@@ -134,6 +141,7 @@
 }
 
 - (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    if(!self.isTouchEnabled) return;
 	if ([touches count] == 1) {
         // reset double touch in case touches are at different times
         previous_double_touch_distance      = 0;
@@ -155,6 +163,7 @@
 }
 
 - (void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    if(!self.isTouchEnabled) return;
     NSLog(@"CCTouchesMoved: %d", [touches count]);
 	if ([touches count] == 1) {
         // reset double touch in case touches are at different times
@@ -203,6 +212,7 @@
 }
 
 -(void) ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    if(!self.isTouchEnabled) return;
     if ([touches count] == 1) {
         [unplacedStone setVisible:NO];
         CGPoint transformed_location        = [self getBoardTouchLocation:[touches anyObject]];
@@ -289,6 +299,11 @@
  * Removes the stone from the dictionary representation.
  */
 -(void)removeStone:(Stone*)stone {
+    if([stone playerFlag] == P_WHITE) {
+        [self setBlackcaps:self.blackcaps+1];
+    }else if([stone playerFlag] == P_BLACK) {
+        [self setWhitecaps:self.whitecaps+1];
+    }
     int stone_key = [self get_index:[stone i] j:[stone j]];
     [self removeChildByTag:stone_key cleanup:TRUE];
 }

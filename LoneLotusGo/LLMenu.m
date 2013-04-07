@@ -34,6 +34,9 @@
     
     NSMutableArray* layers = [NSMutableArray arrayWithCapacity:2];
     // Top Level Menu Items
+    [CCMenuItemFont setFontName:@"Zapfino"];
+    [CCMenuItemFont setFontSize:18];
+    
     self.play = [CCMenuItemFont itemWithString:@"Play" block:^(id sender) {
         NSLog(@"Resume");
         [[self menuDelegate] resume];
@@ -120,7 +123,7 @@
         [both_query findObjectsInBackgroundWithBlock:^(NSArray* objects, NSError* error){
             if(!error) {
                 NSLog(@"Query for players board ids successful. %d found.", [objects count]);
-                [self.gamesPage removeAllChildrenWithCleanup:NO];
+                [self.gamesPage removeAllChildrenWithCleanup:YES];
                 for(PFObject* board in objects) {
                     PFUser* w = [board objectForKey:@"white_player"];
                     PFUser* b = [board objectForKey:@"black_player"];
@@ -142,6 +145,24 @@
         }];
     }
     [self updatePages];
+}
+
+-(void)updateGamesList:(NSArray*) games {
+    [self.gamesPage removeAllChildrenWithCleanup:YES];
+    for(PFObject* board in games) {
+        PFUser* w = [board objectForKey:@"white_player"];
+        PFUser* b = [board objectForKey:@"black_player"];
+        NSString* saveName = [board objectForKey:@"savename"];
+        if (saveName == nil) {
+            saveName = [NSString stringWithFormat:@"vs %@",[[w objectId] isEqualToString:[[PFUser currentUser] objectId]] ? [b username] : [w username]];
+        }
+        CCMenuItem* item = [CCMenuItemFont itemWithString:saveName block:^(id sender) {
+            [[self menuDelegate] load:[board objectId]];
+        }];
+        [item setAnchorPoint:ccp(0.5f, 0.5f)];
+        [self.gamesPage addChild:item];
+    }
+    [self.gamesPage alignItemsVerticallyWithPadding:5.0f];
 }
 
 -(void)setScreenSizeChangedTo:(CGSize)size {

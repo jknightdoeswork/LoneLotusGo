@@ -8,11 +8,18 @@
 
 #import "Board.h"
 #import <Parse/Parse.h>
-@interface OnlineBoard : Board
 
+@protocol OnlineBoardDelegate <NSObject>
+
+-(void)boardDidLoad;
+
+@end
+
+@interface OnlineBoard : Board
 @property (retain) PFObject* pf_object;
 @property (retain) PFObject* white_player;
 @property (retain) PFObject* black_player;
+@property (assign) CCNode<OnlineBoardDelegate>* loadDelegate;
 
 -(void)load:(NSString*) boardId;
 -(void)refresh;

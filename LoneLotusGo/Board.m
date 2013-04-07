@@ -93,8 +93,8 @@
         [self setGameOver:YES];
         [self.delegate gameOver];
     }
-    [self nextTurn];
     [self setJustpassed:YES];
+    [self nextTurn];
 }
 
 -(int)getScore {
@@ -104,20 +104,43 @@
 -(void)dealloc {
     [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
     NSLog(@"Board being deallocated");
-    [[self b] removeAllObjects];
     [super dealloc];
 }
 
-// Handle input a half square outside the board
--(BOOL) claimTouch:(UITouch*)touch {
-    CGPoint transformed_location = [self getBoardTouchLocation:touch];
-    float max_size                      = ([self n]+0.499f) * [self ws];
-    float min_size                      = (-0.499f) * [self ws];
-    return (min_size < transformed_location.x && transformed_location.x < max_size &&
-            min_size < transformed_location.y && transformed_location.y < max_size);
-
+/**
+ * Returns true if the touch was for this board. Used to prevent the board using navbar touches to place pieces.
+ */
+-(BOOL) claimTouches:(NSSet*)touches {
+    if([touches count] == 1) {
+        return [self claimTouch:[touches anyObject]];
+    }
+    else if([touches count] == 2) {
+        NSArray* touchesArray = [touches allObjects];
+        return [self claimTouch:[touchesArray objectAtIndex:0]] && [self claimTouch:[touchesArray objectAtIndex:1]];
+    }
+    else {
+        return NO;
+    }
 }
 
+/**
+ * Helper function with hard coded nav bar sizes to avoid claiming nav bar touches as piece entries.
+ */
+-(BOOL)claimTouch:(UITouch*) touch {
+    float max_y                         = [[CCDirector sharedDirector] winSize].height - 32; // nav bar is 32 pixels high
+    float max_nav_icon_y                = [[CCDirector sharedDirector] winSize].height - 50; // top right icon is 50 x 50
+    float max_nav_icon_x                = [[CCDirector sharedDirector] winSize].width - 50;
+    CGPoint touchLocation = [self getScreenTouchLocation:touch];
+    if (touchLocation.x < max_nav_icon_x) {
+        return touchLocation.y < max_y;
+    } else {
+        return touchLocation.y < max_nav_icon_y;
+    }
+}
+
+-(CGPoint)getScreenTouchLocation:(UITouch*)touch {
+    return [[CCDirector sharedDirector] convertToGL:[touch locationInView:[touch view]]];
+}
 -(CGPoint)getBoardTouchLocation:(UITouch*)touch {
     return [self convertToNodeSpace: [[CCDirector sharedDirector] convertToGL:[touch locationInView:[touch view]]]];
 }
@@ -142,6 +165,7 @@
 
 - (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     if(!self.isTouchEnabled) return;
+    if(![self claimTouches:touches]) return;
 	if ([touches count] == 1) {
         // reset double touch in case touches are at different times
         previous_double_touch_distance      = 0;
@@ -164,6 +188,7 @@
 
 - (void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     if(!self.isTouchEnabled) return;
+    if(![self claimTouches:touches]) return;
     NSLog(@"CCTouchesMoved: %d", [touches count]);
 	if ([touches count] == 1) {
         // reset double touch in case touches are at different times
@@ -213,6 +238,7 @@
 
 -(void) ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     if(!self.isTouchEnabled) return;
+    if(![self claimTouches:touches]) return;
     if ([touches count] == 1) {
         [unplacedStone setVisible:NO];
         CGPoint transformed_location        = [self getBoardTouchLocation:[touches anyObject]];
@@ -227,6 +253,7 @@
             NSLog(@"Score: %d", score);
             [new_stone updateNeighbours];
             [new_stone release]; // we retain through addChild
+            [self setJustpassed:NO];
             [self nextTurn];
         }
 	}
@@ -369,7 +396,6 @@
         NSLog(@"ERROR: Unrecognized current player");
     }
     NSLog(@"Next Turn: %c", [self currentPlayer]);
-    [self setJustpassed:NO];
     [self.delegate nextTurn];
 }
 @end

@@ -158,10 +158,10 @@
     [self.save setPosition:ccp(0.0f, size.height)];
     [self.pass setPosition:ccp(32, size.height)];
     [self.refresh setPosition:ccp(64, size.height)];
-    [self.blackPlayerName setPosition:ccp(158,size.height-10)];
+    [self.blackPlayerName setPosition:ccp(158,size.height)];
     [self.blackStone setPosition:ccp(158, size.height-10)];
     [self.blackcaps setPosition:ccp(182, size.height-10)];
-    [self.whitePlayerName setPosition:ccp(235, size.height-10)];
+    [self.whitePlayerName setPosition:ccp(235, size.height)];
     [self.whiteStone setPosition:ccp(235, size.height-10)];
     [self.whitecaps setPosition:ccp(259, size.height-10)];
     [self.bg setPosition:ccp(0.0f,size.height)];

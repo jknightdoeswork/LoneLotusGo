@@ -72,7 +72,7 @@
 -(void) makeTransition:(ccTime)dt
 {
     if(self.transitionToBoardId == nil) {
-        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[HelloWorldLayer scene] withColor:ccWHITE]];
+        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[PlayLayer scene] withColor:ccWHITE]];
     }
     else {
         NSLog(@"Transitioning to boardid: %@", [self transitionToBoardId]);

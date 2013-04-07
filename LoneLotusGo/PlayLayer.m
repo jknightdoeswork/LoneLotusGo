@@ -16,6 +16,7 @@
 @property(retain) LLMenu* llmenu;
 @property(retain) LLLogInViewController* loginController;
 @property(retain) CCSprite* background;
+@property(retain) CCLabelTTF* gameOverLabel;
 @end
 @implementation PlayLayer
     float v_sw;
@@ -26,6 +27,7 @@
     [self.board release];
     [self.navbar release];
     [self.background release];
+    [self.gameOverLabel release];
     [super dealloc];
 }
 
@@ -37,10 +39,9 @@
 	PlayLayer *layer = [PlayLayer node];
     scene.anchorPoint = ccp(0.5, 0.5);
     layer.anchorPoint = ccp(0.5, 0.5);
-    
 	// add layer as a child to scene
 	[scene addChild: layer];
-
+    [layer clickedNavIcon]; // Open up the menu
 	// return the scene
 	return scene;
 }
@@ -119,17 +120,17 @@
         // add board
         self.board = [[[OnlineBoard alloc] initBoard:19]autorelease];
         [self.board setDelegate:self];
+        [self.board setLoadDelegate:self];
         [self addChild:self.board z:1];
         
         self.llmenu = [[[LLMenu alloc] init]autorelease];
-        [self addChild:self.llmenu z:10];
+        [self addChild:self.llmenu z:11];
         [self.llmenu setVisible:NO];
         [self.llmenu setShowPagesIndicator:NO];
         [self.llmenu setMenuDelegate:self];
         [self.llmenu setPagesIndicatorNormalColor:ccc4(140, 140, 140, 255)];
         [self.llmenu setPagesIndicatorSelectedColor:ccc4(15, 222, 210, 255)];
 
-        
         self.loginController = [[[LLLogInViewController alloc] init]autorelease];
         [self.loginController setDelegate:self];
         LLSignupViewController* signUp = [[[LLSignupViewController alloc]init]autorelease];
@@ -144,13 +145,20 @@
         [self.navbar setPosition:ccp(0.0f, 0.0f)];
         [self addChild:self.navbar z:5];
         
+        //BG
         self.background = [CCSprite spriteWithFile:@"black.bmp"];
         [self.background setAnchorPoint:ccp(0,0)];
         [self.background setPosition:ccp(0,0)];
         [self.background setOpacity:200];
         [self.background setVisible:NO];
         [self addChild:self.background z:9];
-
+        
+        // Game Over text
+        self.gameOverLabel = [CCLabelTTF labelWithString:@"Game Over" fontName:@"Zapfino" fontSize:32];
+        [self.gameOverLabel setVisible:NO];
+        [self.gameOverLabel setAnchorPoint:ccp(0.5f, 0.5f)];
+        [self addChild:self.gameOverLabel z:8];
+        [self.gameOverLabel setColor:ccc3(15, 222, 210)];
         [self screenSizeChangedTo:screenSize];
     }
     return self;
@@ -167,7 +175,7 @@
 -(void)receivedPushedBoardId:(NSString*)pushedBoardId {
     if ([[self.board getBoardId] isEqualToString:pushedBoardId]) {
         NSLog(@"Updating visible board.");
-        [self.board load:pushedBoardId];
+        [self load:pushedBoardId];
     }
     else {
         NSLog(@"Updating navbar");
@@ -179,6 +187,8 @@
 //LLMenu
 -(void)load:(NSString *)boardId {
     [self.board load:boardId];
+}
+-(void)boardDidLoad {
     if(self.board.black_player) {
         [self.navbar.blackPlayerName setString:[self.board.black_player objectForKey:@"username"]];
     }
@@ -189,11 +199,12 @@
         [self.navbar.whitePlayerName setString:[self.board.white_player objectForKey:@"username"]];
     }
     else {
-        [self.navbar.blackPlayerName setString:@"White"];
+        [self.navbar.whitePlayerName setString:@"White"];
     }
-    [self.navbar setActivePlayer:self.board.currentPlayer];
+    [self.gameOverLabel setVisible:self.board.gameOver];
+    [self nextTurn];
+    [self resume];
 }
-
 -(void)resume {
     [self.board setIsTouchEnabled:YES];
     [self.navbar setIsTouchEnabled:YES];
@@ -224,6 +235,7 @@
 
 -(void)newGame {
     [self.board reset];
+    [self.gameOverLabel setVisible:NO];
     [self nextTurn]; // Updates nav bar
     [self resume];
 }
@@ -267,7 +279,9 @@
     [self.board pass];
 }
 -(void)gameOver {
-    [self.board save];
+    [self.gameOverLabel setVisible:YES];
+//    [self.background setVisible:YES];
+    
     NSLog(@"Game over");
 }
 -(void)screenSizeChangedTo:(CGSize)size {
@@ -276,6 +290,7 @@
     [self.background setScaleX:size.width];
     [self.background setScaleY:size.height];
     [self.llmenu setScreenSizeChangedTo:size];
+    [self.gameOverLabel setPosition:ccp(size.width/2.0f, size.height/2.0f)];
 }
 
 

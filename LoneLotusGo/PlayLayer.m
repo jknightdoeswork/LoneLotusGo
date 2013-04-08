@@ -17,6 +17,7 @@
 @property(retain) LLLogInViewController* loginController;
 @property(retain) CCSprite* background;
 @property(retain) CCLabelTTF* gameOverLabel;
+@property(retain) Matchmaker* matchmaker;
 @end
 @implementation PlayLayer
     float v_sw;
@@ -28,6 +29,7 @@
     [self.navbar release];
     [self.background release];
     [self.gameOverLabel release];
+    [self.matchmaker release];
     [super dealloc];
 }
 
@@ -160,8 +162,30 @@
         [self addChild:self.gameOverLabel z:8];
         [self.gameOverLabel setColor:ccc3(15, 222, 210)];
         [self screenSizeChangedTo:screenSize];
+        
+        //Matchmaker
+        self.matchmaker = [[[Matchmaker alloc] init] autorelease];
+        [self schedule:@selector(updateMatchmaker) interval:10.0f];
+        [self.matchmaker setDelegate:self];
     }
     return self;
+}
+
+-(void) updateMatchmaker {
+    NSLog(@"Updating matchmaker");
+    [self.matchmaker doUpdate];
+ }
+
+-(void)boardsDidUpdate {
+    if([self.llmenu visible]) {
+        [self.llmenu updateBoardList];
+    }
+}
+-(NSArray*)getBoardList {
+    return [self.matchmaker currentUsersBoards];
+}
+-(void)matchFound:(NSString *)otherUserId {
+    NSLog(@"Match found: %@", otherUserId);
 }
 
 -(void)nextTurn {

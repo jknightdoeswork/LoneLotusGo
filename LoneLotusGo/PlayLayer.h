@@ -12,8 +12,9 @@
 #import "OnlineBoard.h"
 #import "Scoreboard.h"
 #import "NavBar.h"
+#import "Matchmaker.h"
 
-@interface PlayLayer : LLBaseLayer<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, NextTurnDelegate, NavBarDelegate, LLMenuDelegate, OnlineBoardDelegate>
+@interface PlayLayer : LLBaseLayer<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, NextTurnDelegate, NavBarDelegate, LLMenuDelegate, OnlineBoardDelegate, MatchmakerDelegate>
     @property(retain) OnlineBoard* board;
 
 // Returns a CCScene with only this layer added

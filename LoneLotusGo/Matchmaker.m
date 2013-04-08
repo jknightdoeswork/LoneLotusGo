@@ -8,7 +8,7 @@
 
 #import "Matchmaker.h"
 #import <Parse/Parse.h>
-
+#import "OnlineBoard.h"
 /**
  * Parse Schema
  * Class: Matchmaker
@@ -19,6 +19,19 @@
 @end
 
 @implementation Matchmaker
+
+-(id)init {
+    if(self = [super init]) {
+        self.currentUsersBoards = [NSMutableArray arrayWithCapacity:6];
+    }
+    return self;
+}
+
+-(void)dealloc {
+    [self.currentUsersBoards removeAllObjects];
+    [self.currentUsersBoards release];
+    [super dealloc];
+}
 
 -(void)enterMatchmaking {
     if (![PFUser currentUser]) {
@@ -74,4 +87,39 @@
         }
     }];
 }
+-(void)doUpdate {
+    [self updateCurrentUsersBoards];
+}
+-(void)updateCurrentUsersBoards {
+    if(![PFUser currentUser]) {
+        return;
+    }
+    PFQuery* white_query = [PFQuery queryWithClassName:@"Board"];
+    [white_query whereKey:@"white_player" equalTo:[PFUser currentUser]];
+    
+    PFQuery* black_query = [PFQuery queryWithClassName:@"Board"];
+    [black_query whereKey:@"black_player" equalTo:[PFUser currentUser]];
+    
+    NSArray* queries = [NSArray arrayWithObjects:white_query, black_query, nil];
+    PFQuery* both_query = [PFQuery orQueryWithSubqueries:queries];
+    
+    [both_query includeKey:@"white_player"]; // Fetch the player entities, as well.
+    [both_query includeKey:@"black_player"];
+    
+    [both_query findObjectsInBackgroundWithBlock:^(NSArray* objects, NSError* error){
+        if(!error) {
+            NSLog(@"Query for players board ids successful. %d found.", [objects count]);
+            [self.currentUsersBoards removeAllObjects];
+            for(PFObject* board in objects) {
+                [self.currentUsersBoards addObject:[OnlineBoard getBoardDisplayInfoDict:board]];
+            }
+            [[self delegate] boardsDidUpdate];
+        }
+        else {
+            NSLog(@"updateCurrentUsersBoards Error %@ %@", error, [error userInfo]);
+        }
+    }];
+}
+
+
 @end

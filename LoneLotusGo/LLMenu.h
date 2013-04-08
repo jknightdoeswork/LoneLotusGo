@@ -14,9 +14,11 @@
 -(void)newGame;
 -(void)signIn;
 -(void)signOut;
+-(NSArray*)getBoardList;
 @end
 @interface LLMenu : CCScrollLayer
 @property(assign)CCNode<LLMenuDelegate>* menuDelegate;
 -(void)onUserChange;
+-(void)updateBoardList;
 -(void)setScreenSizeChangedTo:(CGSize)size;
 @end

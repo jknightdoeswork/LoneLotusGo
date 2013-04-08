@@ -224,4 +224,29 @@
     self.pf_object = nil;
 }
 
+/**
+ * Returns a dictionary representation of information for the view layer to display a board with.
+ * {
+ *      @"name" : <either the boards saved name or 'vs otherPlayerName'
+ *      @"isCurrentPlayersTurn": True if it's [PFUser currentUser]'s turn to play
+ *      @"isOnlineGame": True if the board has 2 PFUser's associated with it
+ *      @"boardId": Id to retrieve the board from parse
+ * }
+ */
++(NSDictionary*)getBoardDisplayInfoDict:(PFObject*)board {
+    if (![PFUser currentUser]) {
+        NSLog(@"Error. constructBoardDictionary. Not logged in");
+    }
+    PFUser* w = [board objectForKey:@"white_player"];
+    PFUser* b = [board objectForKey:@"black_player"];
+    NSString* saveName = [board objectForKey:@"savename"];
+    if (saveName == nil) {
+        saveName = [NSString stringWithFormat:@"vs %@",[[w objectId] isEqualToString:[[PFUser currentUser] objectId]] ? [b username] : [w username]];
+    }
+    NSNumber* isCurrentPlayersTurn = [NSNumber numberWithBool:([[board objectForKey:@"current_player"] charValue] == P_BLACK ? [[b objectId] isEqualToString:[PFUser currentUser].objectId] : [[w objectId] isEqualToString:[PFUser currentUser].objectId])];
+    NSNumber* isOnlineGame = [NSNumber numberWithBool:([board objectForKey:@"white_player"] != [NSNull null] && [board objectForKey:@"black_player"] != [NSNull null])];
+    NSLog(@"BoardName: %@,\tisCurrentPlayersTurn: %@,\tisOnlineGame: %@", saveName, isCurrentPlayersTurn, isOnlineGame);
+    return [NSDictionary dictionaryWithObjectsAndKeys:saveName, @"name", isCurrentPlayersTurn, @"isCurrentPlayersTurn", isOnlineGame, @"isOnlineGame", [board objectId], @"boardId", nil];
+}
+
 @end

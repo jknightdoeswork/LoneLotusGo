@@ -100,69 +100,43 @@
         [self.mainPage addChild:self.signIn];
     }
     [self setVisible:self.visible];// Will make the pages indicator visible if the users logged in and self is visible
-    
     [self.mainPage alignItemsVerticallyWithPadding:5.0f];
-    
-    // Update games page
-    [self.gamesPage removeAllChildrenWithCleanup:YES];
-    if([PFUser currentUser]) {
-        PFQuery* white_query = [PFQuery queryWithClassName:@"Board"];
-        [white_query whereKey:@"white_player" equalTo:[PFUser currentUser]];
-        
-        PFQuery* black_query = [PFQuery queryWithClassName:@"Board"];
-        [black_query whereKey:@"black_player" equalTo:[PFUser currentUser]];
-        
-        NSArray* queries = [NSArray arrayWithObjects:white_query, black_query, nil];
-        PFQuery* both_query = [PFQuery orQueryWithSubqueries:queries];
-        
-        [both_query includeKey:@"white_player"]; // Fetch the player entities, as well.
-        [both_query includeKey:@"black_player"];
-        
-        [CCMenuItemFont setFontName:@"HelveticaNeue-UltraLightItalic"];
-        [CCMenuItemFont setFontSize:24];
-        [both_query findObjectsInBackgroundWithBlock:^(NSArray* objects, NSError* error){
-            if(!error) {
-                NSLog(@"Query for players board ids successful. %d found.", [objects count]);
-                [self.gamesPage removeAllChildrenWithCleanup:YES];
-                for(PFObject* board in objects) {
-                    PFUser* w = [board objectForKey:@"white_player"];
-                    PFUser* b = [board objectForKey:@"black_player"];
-                    NSString* saveName = [board objectForKey:@"savename"];
-                    if (saveName == nil) {
-                        saveName = [NSString stringWithFormat:@"vs %@",[[w objectId] isEqualToString:[[PFUser currentUser] objectId]] ? [b username] : [w username]];
-                    }
-                    CCMenuItem* item = [CCMenuItemFont itemWithString:saveName block:^(id sender) {
-                        [[self menuDelegate] load:[board objectId]];
-                    }];
-                    [item setAnchorPoint:ccp(0.5f, 0.5f)];
-                    [self.gamesPage addChild:item];
-                }
-            }
-            else {
-                NSLog(@"GetGamesList Error %@ %@", error, [error userInfo]);
-            }
-            [self.gamesPage alignItemsVerticallyWithPadding:5.0f];
-        }];
-    }
-    [self updatePages];
+    [self updateBoardList];
 }
-
--(void)updateGamesList:(NSArray*) games {
+-(void)updateBoardList {
+    [CCMenuItemFont setFontName:@"HelveticaNeue-UltraLightItalic"];
+    [CCMenuItemFont setFontSize:24];
+    NSArray* boards = [self.menuDelegate getBoardList];
     [self.gamesPage removeAllChildrenWithCleanup:YES];
-    for(PFObject* board in games) {
-        PFUser* w = [board objectForKey:@"white_player"];
-        PFUser* b = [board objectForKey:@"black_player"];
-        NSString* saveName = [board objectForKey:@"savename"];
-        if (saveName == nil) {
-            saveName = [NSString stringWithFormat:@"vs %@",[[w objectId] isEqualToString:[[PFUser currentUser] objectId]] ? [b username] : [w username]];
-        }
-        CCMenuItem* item = [CCMenuItemFont itemWithString:saveName block:^(id sender) {
-            [[self menuDelegate] load:[board objectId]];
+    for (NSDictionary* board in boards) {
+        NSString* boardName = [board objectForKey:@"name"];
+        NSString* boardId = [board objectForKey:@"boardId"];
+        BOOL isCurrentPlayersTurn = [[board objectForKey:@"isCurrentPlayersTurn"] boolValue];
+        BOOL isOnline = [[board objectForKey:@"isOnlineGame"]boolValue];
+        CCMenuItem* item = [CCMenuItemFont itemWithString:boardName block:^(id sender) {
+            [[self menuDelegate] load:boardId];
         }];
-        [item setAnchorPoint:ccp(0.5f, 0.5f)];
+
+        if(isCurrentPlayersTurn) {
+            CCSprite* turnSprite = [CCSprite spriteWithFile:@"logo.png"];
+            [turnSprite setScale:0.125f];
+            [turnSprite setAnchorPoint:ccp(1.0f, 0.0f)];
+            [turnSprite setPosition:ccp(-10.0f, 0.0f)];
+            [item addChild:turnSprite];
+
+        }
+        if(isOnline) {
+            CCSprite* onlineSprite = [CCSprite spriteWithFile:@"logo.png"];
+            [onlineSprite setScale:0.125f];
+            [onlineSprite setAnchorPoint:ccp(1.0f, 0.0f)];
+            [onlineSprite setPosition:ccp(-42.0f, 0.0f)];
+            [item addChild:onlineSprite];
+        }
         [self.gamesPage addChild:item];
+        [item setAnchorPoint:ccp(0.0f, 0.5f)];
     }
-    [self.gamesPage alignItemsVerticallyWithPadding:5.0f];
+    [[self gamesPage] alignItemsVerticallyWithPadding:5.0f];
+    
 }
 
 -(void)setScreenSizeChangedTo:(CGSize)size {
@@ -172,7 +146,6 @@
     [self.gamesText setPosition:ccp(size.width/2.0f, size.height)];
     [self setPagesIndicatorPosition:ccp(size.width/2, 20)];
     [self updatePages];
-
 }
 
 -(void)setVisible:(BOOL)visible {

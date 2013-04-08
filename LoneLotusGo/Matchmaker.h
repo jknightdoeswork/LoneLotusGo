@@ -10,11 +10,14 @@
 
 @protocol MatchmakerDelegate <NSObject>
 -(void)matchFound:(NSString*) otherUserId;
+-(void)boardsDidUpdate;
 @end
 
 @interface Matchmaker : NSObject
+@property(retain) NSMutableArray* currentUsersBoards; //array of board display info dicts for current user
+// TODO make this^^ not a mutable array
 @property(assign) NSObject<MatchmakerDelegate>* delegate;
-
+-(void)doUpdate;
 -(void)enterMatchmaking;
 -(void)exitMatchmaking;
 @end

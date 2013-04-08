@@ -134,20 +134,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[PlayLayer boardDidLoad]:PlayLayer.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.board.white_player">
-            </PersistentString>
-            <PersistentString
-               value = "[self.board.black_player objectForKey:@&quot;username&quot;]">
-            </PersistentString>
-            <PersistentString
-               value = "self.board.black_player">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "-[Stone initForGoGame:for_player:x_index:y_index:]:Stone.m">
       </ContextState>
       <ContextState
@@ -179,13 +165,10 @@
          contextName = "-[Board ccTouchesEnded:withEvent:]:Board.m">
       </ContextState>
       <ContextState
-         contextName = "__20-[OnlineBoard load:]_block_invoke:OnlineBoard.m">
+         contextName = "+[OnlineBoard getBoardDisplayInfoDict:]:OnlineBoard.m">
          <PersistentStrings>
             <PersistentString
-               value = "(white_player != [NSNull null])">
-            </PersistentString>
-            <PersistentString
-               value = "[gameState objectForKey:@&quot;white_player&quot;]">
+               value = "">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

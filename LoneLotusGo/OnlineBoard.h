@@ -25,6 +25,6 @@
 -(void)refresh;
 -(void)save;
 -(void)saveWithName:(NSString*)name;
-
 -(NSString*)getBoardId;
++(NSDictionary*)getBoardDisplayInfoDict:(PFObject*)board;
 @end

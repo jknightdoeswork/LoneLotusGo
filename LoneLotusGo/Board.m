@@ -19,6 +19,7 @@
     CGPoint previous_double_touch_center;
     char* board_as_string;
     int score;
+    BOOL isMoving;
 }
 @synthesize currentPlayer;
 @synthesize n;
@@ -208,12 +209,28 @@
         [unplacedStone setVisible:NO];
         CGPoint double_touch_center = [self getDoubleTouchCenter:touches];
         CGPoint to_move = ccpSub(double_touch_center, previous_double_touch_center);
-
         to_move = ccpMult(to_move, [self scale]);
         CGPoint current_position = [self position];
         CGPoint new_position = ccpAdd(current_position, to_move);
         NSLog(@"POS: %.1f x %.1f", new_position.x, new_position.y);
-        // TODO: Clamp new position, min_x, min_y etc
+        CGSize maxSize = [[CCDirector sharedDirector] winSize];
+        if (new_position.x > maxSize.width * 0.75){
+            NSLog(@"clamping max X");
+            new_position.x = maxSize.width * 0.75;
+        }
+        if (new_position.x < 0){
+            NSLog(@"clamping min X");
+            new_position.x = 0;
+        }
+        if (new_position.y > maxSize.height * 0.75){
+            NSLog(@"clamping max Y");
+            new_position.x = maxSize.height * 0.75;
+        }
+        if (new_position.y < 0){
+            NSLog(@"clamping min y");
+            new_position.y = 0;
+        }
+        
         [self setPosition:new_position];
         
         // Zoom Board

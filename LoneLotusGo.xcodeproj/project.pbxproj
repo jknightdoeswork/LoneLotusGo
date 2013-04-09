@@ -44,6 +44,7 @@
 		D2BAF09F1713AD03006D5518 /* onlineicon.png in Resources */ = {isa = PBXBuildFile; fileRef = D2BAF09E1713AD03006D5518 /* onlineicon.png */; };
 		D2BAF0A11713ADB1006D5518 /* exclaim.png in Resources */ = {isa = PBXBuildFile; fileRef = D2BAF0A01713ADB1006D5518 /* exclaim.png */; };
 		D2BAF0A41713B4CA006D5518 /* CCMenuAdvanced.m in Sources */ = {isa = PBXBuildFile; fileRef = D2BAF0A31713B4CA006D5518 /* CCMenuAdvanced.m */; };
+		D2BAF0A81713CAED006D5518 /* board.gif in Resources */ = {isa = PBXBuildFile; fileRef = D2BAF0A71713CAED006D5518 /* board.gif */; };
 		D2C6454B16B490F4007291B7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2C6454A16B490F4007291B7 /* QuartzCore.framework */; };
 		D2C6454D16B490F5007291B7 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2C6454C16B490F4007291B7 /* OpenGLES.framework */; };
 		D2C6454F16B490F5007291B7 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2C6454E16B490F5007291B7 /* OpenAL.framework */; };
@@ -167,7 +168,6 @@
 		D2C646EA16B491B8007291B7 /* PlayLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C646E316B491B8007291B7 /* PlayLayer.m */; };
 		D2C646EC16B491B8007291B7 /* Board.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C646E716B491B8007291B7 /* Board.m */; };
 		D2C646ED16B491B8007291B7 /* Stone.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C646E916B491B8007291B7 /* Stone.m */; };
-		D2F24D8316B8C0C600E08872 /* go.gif in Resources */ = {isa = PBXBuildFile; fileRef = D2F24D8216B8C0C600E08872 /* go.gif */; };
 		D2F9E5E716FE3C4400B51F89 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2F9E5E616FE3C4400B51F89 /* Parse.framework */; };
 		D2F9E5EA16FF68C300B51F89 /* LLMainMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F9E5E916FF68C300B51F89 /* LLMainMenu.m */; };
 		D2FA43C4170E1D3C00BEEE45 /* CCScrollLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D2FA43C3170E1D3C00BEEE45 /* CCScrollLayer.m */; };
@@ -225,6 +225,7 @@
 		D2BAF0A01713ADB1006D5518 /* exclaim.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = exclaim.png; path = ../exclaim.png; sourceTree = "<group>"; };
 		D2BAF0A21713B4CA006D5518 /* CCMenuAdvanced.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMenuAdvanced.h; sourceTree = "<group>"; };
 		D2BAF0A31713B4CA006D5518 /* CCMenuAdvanced.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMenuAdvanced.m; sourceTree = "<group>"; };
+		D2BAF0A71713CAED006D5518 /* board.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = board.gif; sourceTree = "<group>"; };
 		D2C6454616B490F4007291B7 /* LoneLotusGo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoneLotusGo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2C6454A16B490F4007291B7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D2C6454C16B490F4007291B7 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -488,7 +489,6 @@
 		D2C646E716B491B8007291B7 /* Board.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Board.m; sourceTree = "<group>"; };
 		D2C646E816B491B8007291B7 /* Stone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stone.h; sourceTree = "<group>"; };
 		D2C646E916B491B8007291B7 /* Stone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Stone.m; sourceTree = "<group>"; };
-		D2F24D8216B8C0C600E08872 /* go.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = go.gif; path = ../go.gif; sourceTree = "<group>"; };
 		D2F9E5E616FE3C4400B51F89 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = ../Parse.framework; sourceTree = "<group>"; };
 		D2F9E5E816FF68C300B51F89 /* LLMainMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLMainMenu.h; sourceTree = "<group>"; };
 		D2F9E5E916FF68C300B51F89 /* LLMainMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLMainMenu.m; sourceTree = "<group>"; };
@@ -625,6 +625,7 @@
 		D2C6455D16B490F5007291B7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D2BAF0A71713CAED006D5518 /* board.gif */,
 				D2BAF0A01713ADB1006D5518 /* exclaim.png */,
 				D2BAF09E1713AD03006D5518 /* onlineicon.png */,
 				D287BB261710E37C00C6DD01 /* saveicon.png */,
@@ -640,7 +641,6 @@
 				D2B0935B17078D99009A1579 /* navbarbg.png */,
 				D2B09359170785F3009A1579 /* navbaricon.png */,
 				D281445916D167F8004F4B33 /* blackvswhite.png */,
-				D2F24D8216B8C0C600E08872 /* go.gif */,
 				D2C6455E16B490F5007291B7 /* Default.png */,
 				D2C6456016B490F5007291B7 /* Default-Landscape~ipad.png */,
 				D2C6456216B490F5007291B7 /* fps_images.png */,
@@ -1055,7 +1055,6 @@
 				D2C6456716B490F5007291B7 /* fps_images-ipadhd.png in Resources */,
 				D2C6457616B490F5007291B7 /* iTunesArtwork in Resources */,
 				D2C646B416B490FA007291B7 /* ChangeLog in Resources */,
-				D2F24D8316B8C0C600E08872 /* go.gif in Resources */,
 				D281445A16D167F9004F4B33 /* blackvswhite.png in Resources */,
 				D21D97D516FAA24900727758 /* PlayOnlineViewController.xib in Resources */,
 				D2B0935A170785F3009A1579 /* navbaricon.png in Resources */,
@@ -1072,6 +1071,7 @@
 				D2BAF09A1713A0C9006D5518 /* notificon.png in Resources */,
 				D2BAF09F1713AD03006D5518 /* onlineicon.png in Resources */,
 				D2BAF0A11713ADB1006D5518 /* exclaim.png in Resources */,
+				D2BAF0A81713CAED006D5518 /* board.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

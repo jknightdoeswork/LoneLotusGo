@@ -28,7 +28,7 @@
 @synthesize gameOver;
 
 -(id)initBoard:(int) cap {
-    if(self = [self initWithFile:@"go.gif"]) {
+    if(self = [self initWithFile:@"board.gif"]) {
         [[[CCDirector sharedDirector]touchDispatcher] addStandardDelegate:self priority:2];
         self.isTouchEnabled = YES;
         self.n = cap;
@@ -40,6 +40,7 @@
         float x_scale = size.width / self.contentSize.width;    
         float y_scale = size.height / self.contentSize.height;
         [self setScale:MIN(x_scale, y_scale)];
+        NSLog(@"Initial Scale: %f", MIN(x_scale, y_scale));
 
         // Position
         [self setPosition:ccp(size.width/2, size.height/2)];
@@ -207,6 +208,7 @@
         [unplacedStone setVisible:NO];
         CGPoint double_touch_center = [self getDoubleTouchCenter:touches];
         CGPoint to_move = ccpSub(double_touch_center, previous_double_touch_center);
+
         to_move = ccpMult(to_move, [self scale]);
         CGPoint current_position = [self position];
         CGPoint new_position = ccpAdd(current_position, to_move);
@@ -228,7 +230,7 @@
 			previous_double_touch_distance = currentDistance;
 		} else if (currentDistance - previous_double_touch_distance < 0) {
             // zoom out
-			if (self.scale > 0.5f) {
+			if (self.scale > 0.80f) {
 				self.scale *= 0.95f;
 			}
 			previous_double_touch_distance = currentDistance;

@@ -21,7 +21,8 @@
 @property (retain) PFObject* black_player;
 @property (assign) CCNode<OnlineBoardDelegate>* loadDelegate;
 
--(void)load:(NSString*) boardId;
+-(void)load:(NSString*) boardId callmeback:(BOOL)callmeback;
+-(BOOL)isCurrentPlayersTurn;
 -(void)refresh;
 -(void)save;
 -(void)saveWithName:(NSString*)name;

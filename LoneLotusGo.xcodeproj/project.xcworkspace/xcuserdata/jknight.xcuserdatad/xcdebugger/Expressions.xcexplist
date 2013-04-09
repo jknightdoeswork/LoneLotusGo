@@ -17,13 +17,13 @@
          contextName = "-[PlayLayer load:]:PlayLayer.m">
          <PersistentStrings>
             <PersistentString
+               value = "self.board.white_player">
+            </PersistentString>
+            <PersistentString
                value = "[self.board.white_player objectForKey:@&quot;username&quot;]">
             </PersistentString>
             <PersistentString
                value = "(self.board.black_player)">
-            </PersistentString>
-            <PersistentString
-               value = "self.board.white_player">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -100,6 +100,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "__31-[OnlineBoard load:callmeback:]_block_invoke:OnlineBoard.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "boardId">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[NavBar setScreenSize:]:NavBar.m">
          <PersistentStrings>
             <PersistentString
@@ -134,6 +142,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[OnlineBoard refresh]:OnlineBoard.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[self pf_object] == nil">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[Stone initForGoGame:for_player:x_index:y_index:]:Stone.m">
       </ContextState>
       <ContextState
@@ -148,16 +164,16 @@
          contextName = "-[OnlineBoard save]:OnlineBoard.m">
          <PersistentStrings>
             <PersistentString
-               value = "(char)[ns_c intValue]">
+               value = "[self pf_object]">
             </PersistentString>
             <PersistentString
                value = "[self currentPlayer]">
             </PersistentString>
             <PersistentString
-               value = "pieces">
+               value = "(char)[ns_c intValue]">
             </PersistentString>
             <PersistentString
-               value = "[self pf_object]">
+               value = "pieces">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

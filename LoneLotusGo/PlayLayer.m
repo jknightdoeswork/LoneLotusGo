@@ -54,7 +54,7 @@
 	
 	// 'layer' is an autorelease object.
 	PlayLayer *layer = [PlayLayer node];
-    [[layer board] load:boardId];
+    [[layer board] load:boardId callmeback:YES];
     scene.anchorPoint = ccp(0.5, 0.5);
     layer.anchorPoint = ccp(0.5, 0.5);
     
@@ -165,10 +165,17 @@
         
         //Matchmaker
         self.matchmaker = [[[Matchmaker alloc] init] autorelease];
-        [self schedule:@selector(updateMatchmaker) interval:10.0f];
         [self.matchmaker setDelegate:self];
+        
+        [self schedule:@selector(updateMatchmaker) interval:10.0f];
+        [self schedule:@selector(clickedRefresh) interval:5.0f];
     }
     return self;
+}
+
+-(void)onEnter {
+    [super onEnter];
+    [self updateMatchmaker];
 }
 
 -(void) updateMatchmaker {
@@ -180,6 +187,7 @@
     if([self.llmenu visible]) {
         [self.llmenu updateBoardList];
     }
+    [self.navbar countNotifications:[self.matchmaker currentUsersBoards] ignoreBoardId:[self.board getBoardId]];
 }
 -(NSArray*)getBoardList {
     return [self.matchmaker currentUsersBoards];
@@ -210,7 +218,7 @@
 
 //LLMenu
 -(void)load:(NSString *)boardId {
-    [self.board load:boardId];
+    [self.board load:boardId callmeback:YES];
 }
 -(void)boardDidLoad {
     if(self.board.black_player) {
@@ -233,6 +241,7 @@
     [self.board setIsTouchEnabled:YES];
     [self.navbar setIsTouchEnabled:YES];
     [self.llmenu setVisible:NO];
+//    [self.llmenu setIsTouchEnabled:NO];
     [self.background setVisible:NO];
 }
 
@@ -255,6 +264,7 @@
     [self nextTurn]; // updates nav bar
     [PFUser logOut];
     [self.llmenu onUserChange];
+    [self updateMatchmaker];
 }
 
 -(void)newGame {
@@ -271,9 +281,12 @@
     [self.background setVisible:YES];
     [self.board setIsTouchEnabled:NO];
     [self.navbar setIsTouchEnabled:NO];
+    [self updateMatchmaker];
 }
 -(void)clickedRefresh {
-    [self.board refresh];
+    if (![self.board isCurrentPlayersTurn]) {
+        [self.board refresh];
+    }
 }
 
 -(void)clickedSave {
@@ -372,6 +385,7 @@
 /// Sent to the delegate when a PFUser is logged in.
 - (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user {
     NSLog(@"Logged in!");
+    [self updateMatchmaker];
     [self.llmenu onUserChange];
     // Register for push notifications
 //    PFInstallation* currentInstallation = [PFInstallation currentInstallation];
@@ -390,6 +404,7 @@
 /// Sent to the delegate when the log in attempt fails.
 - (void)logInViewController:(PFLogInViewController *)logInController didFailToLogInWithError:(NSError *)error {
     NSLog(@"Error Logging in!");
+    [self updateMatchmaker];
     [self.llmenu onUserChange];
 }
 
@@ -397,6 +412,7 @@
 - (void)logInViewControllerDidCancelLogIn:(PFLogInViewController *)logInController {
     NSLog(@"Cancel Logging In!");
     [self.llmenu onUserChange];
+    [self updateMatchmaker];
     [self screenSizeChangedTo: [[CCDirector sharedDirector] winSize]];
 //    [[CCDirector sharedDirector] dismissViewControllerAnimated:YES completion:nil];
 }

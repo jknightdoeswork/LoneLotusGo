@@ -20,6 +20,8 @@
 @property(retain) ClickableSprite* save;
 @property(retain) CCSprite* blackStone;
 @property(retain) CCSprite* whiteStone;
+@property(retain) CCSprite* notifSprite;
+@property(retain) CCLabelTTF* notifs;
 @end
 @implementation NavBar
 {
@@ -34,6 +36,8 @@
     [self.score_atlas release];
     [self.blackcaps release];
     [self.whitecaps release];
+    [self.notifs release];
+    [self.notifSprite release];
     [super dealloc];
 }
 -(id) init
@@ -144,10 +148,33 @@
             return NO;
         }];
         [self.save registerTouch];
-        
         [self addChild:self.save z:14];
+        
+        // notification count
+        self.notifSprite = [CCSprite spriteWithFile:@"notificon.png"];
+        [self.notifSprite setAnchorPoint:ccp(1.0f, 1.0f)];
+        [self.notifSprite setVisible:NO];
+        [self addChild:self.notifSprite z:14];
+        self.notifs = [CCLabelTTF labelWithString:@"0" fontName:@"ArialRoundedMTBold" fontSize:18];
+        [self.notifs setVisible:NO];
+        [self.notifs setAnchorPoint:ccp(0.5f, 1.0f)];
+        [self.notifs setColor:ccBLACK];
+        [self addChild:self.notifs z:15];
+        self.notifCount = 0;
 	}
 	return self;
+}
+
+-(void)countNotifications:(NSArray*)boardDisplayDicts ignoreBoardId:(NSString*)activeBoard {
+    self.notifCount = 0;
+    for(NSDictionary* board in boardDisplayDicts) {
+        if(![[board objectForKey:@"boardId"] isEqualToString:activeBoard] && [[board objectForKey:@"isOnlineGame"] boolValue] && [[board objectForKey:@"isCurrentPlayersTurn"]boolValue]) {
+            self.notifCount++;
+        }
+    }
+    [self.notifs setString:[NSString stringWithFormat:@"%d", self.notifCount]];
+    [self.notifs setVisible:(self.notifCount > 0)];
+    [self.notifSprite setVisible:(self.notifCount > 0)];
 }
 
 -(void)setScreenSize:(CGSize)size {
@@ -155,6 +182,8 @@
     [self.score_atlas setPosition:ccp(0.0f, size.height)];
 
     [self.menuIcon setPosition:ccp(size.width, size.height)];
+    [self.notifs setPosition:ccp(size.width-48, size.height-45)];
+    [self.notifSprite setPosition:ccp(size.width-32, size.height-42)];
     [self.save setPosition:ccp(0.0f, size.height)];
     [self.pass setPosition:ccp(32, size.height)];
     [self.refresh setPosition:ccp(64, size.height)];

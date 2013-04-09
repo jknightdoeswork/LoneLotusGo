@@ -167,6 +167,7 @@
     if(!self.isTouchEnabled) return;
     if(![self claimTouches:touches]) return;
 	if ([touches count] == 1) {
+        NSLog(@"Single Touch Start");
         // reset double touch in case touches are at different times
         previous_double_touch_distance      = 0;
 		UITouch *touch                      = [touches anyObject];
@@ -189,8 +190,8 @@
 - (void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     if(!self.isTouchEnabled) return;
     if(![self claimTouches:touches]) return;
-    NSLog(@"CCTouchesMoved: %d", [touches count]);
 	if ([touches count] == 1) {
+        NSLog(@"Single Touch Moved: %d", [touches count]);
         // reset double touch in case touches are at different times
         previous_double_touch_distance      = 0;
         CGPoint transformed_location        = [self getBoardTouchLocation:[touches anyObject]];
@@ -202,9 +203,8 @@
             [unplacedStone setVisible:YES];
         }
 	} else if ([touches count] == 2) {
-        NSLog(@"ccTouchesMoved double touch");
-        
         // Move board
+        [unplacedStone setVisible:NO];
         CGPoint double_touch_center = [self getDoubleTouchCenter:touches];
         CGPoint to_move = ccpSub(double_touch_center, previous_double_touch_center);
         to_move = ccpMult(to_move, [self scale]);

@@ -33,14 +33,13 @@
 @implementation OnlineBoard
 
 -(void)refresh {
-    if([self getBoardId] != nil) {
-        [self load:[self getBoardId]];
+    if([self pf_object] != nil && ![[self getBoardId] isEqualToString: @""]) {
+        [self load:[self getBoardId] callmeback:NO];
     }
 }
 
--(void)load:(NSString*) boardId {
+-(void)load:(NSString*) boardId callmeback:(BOOL)callmeback{
     NSLog(@"Loading with boardId: %@", boardId);
-    [self removeAllChildrenWithCleanup:NO];
     [[self unplacedStone] setVisible:NO];
     
     PFQuery *query = [PFQuery queryWithClassName:@"Board"];
@@ -48,6 +47,7 @@
     [query includeKey:@"black_player"];
 
     [query getObjectInBackgroundWithId:boardId block:^(PFObject* gameState, NSError* error){
+        [self removeAllChildrenWithCleanup:NO];
         self.pf_object = gameState;
         
         if (gameState == nil) {
@@ -89,7 +89,9 @@
             [self addChild:stone z:1.0 tag:[super get_index:x_index j:y_index]];
         }
         
-        [[self loadDelegate] boardDidLoad];
+        if(callmeback) {
+            [[self loadDelegate] boardDidLoad];
+        }
     }];
 }
 
@@ -190,6 +192,9 @@
 }
 
 -(NSString*)getBoardId {
+    if(self.pf_object == nil || ![self.pf_object objectId]) {
+        return @"";
+    }
     return [[self pf_object]objectId];
 }
 
@@ -243,10 +248,28 @@
     if (saveName == nil) {
         saveName = [NSString stringWithFormat:@"vs %@",[[w objectId] isEqualToString:[[PFUser currentUser] objectId]] ? [b username] : [w username]];
     }
-    NSNumber* isCurrentPlayersTurn = [NSNumber numberWithBool:([[board objectForKey:@"current_player"] charValue] == P_BLACK ? [[b objectId] isEqualToString:[PFUser currentUser].objectId] : [[w objectId] isEqualToString:[PFUser currentUser].objectId])];
-    NSNumber* isOnlineGame = [NSNumber numberWithBool:([board objectForKey:@"white_player"] != [NSNull null] && [board objectForKey:@"black_player"] != [NSNull null])];
+    PlayerFlag currentPlayer = [[board objectForKey:@"current_player"]charValue];
+    BOOL onlineGame = [board objectForKey:@"white_player"] != [NSNull null] && [board objectForKey:@"black_player"] != [NSNull null];
+    NSNumber* isOnlineGame = [NSNumber numberWithBool:(onlineGame)];
+    BOOL turn = !onlineGame;
+    if (onlineGame) {
+        turn = (currentPlayer != P_UNDEFINED) && ((currentPlayer == P_BLACK && [[b objectId] isEqualToString:[PFUser currentUser].objectId]) || (currentPlayer == P_WHITE && [[w objectId] isEqualToString:[PFUser currentUser].objectId]));
+    }
+    NSNumber* isCurrentPlayersTurn = [NSNumber numberWithBool:(turn)];
+
+    NSNumber* currentTurn = [board objectForKey:@"current_player"];
     NSLog(@"BoardName: %@,\tisCurrentPlayersTurn: %@,\tisOnlineGame: %@", saveName, isCurrentPlayersTurn, isOnlineGame);
-    return [NSDictionary dictionaryWithObjectsAndKeys:saveName, @"name", isCurrentPlayersTurn, @"isCurrentPlayersTurn", isOnlineGame, @"isOnlineGame", [board objectId], @"boardId", nil];
+    return [NSDictionary dictionaryWithObjectsAndKeys:saveName, @"name", isCurrentPlayersTurn, @"isCurrentPlayersTurn", isOnlineGame, @"isOnlineGame", [board objectId], @"boardId", currentTurn, @"currentTurn", nil];
 }
 
+-(BOOL)isCurrentPlayersTurn {
+    
+    BOOL onlineGame = self.white_player != nil && self.black_player != nil && [PFUser currentUser];
+    BOOL turn = !onlineGame;
+    PlayerFlag currentPlayer = self.currentPlayer;
+    if (onlineGame) {
+        turn = (currentPlayer != P_UNDEFINED) && ((currentPlayer == P_BLACK && [[self.black_player objectId] isEqualToString:[PFUser currentUser].objectId]) || (currentPlayer == P_WHITE && [[self.white_player objectId] isEqualToString:[PFUser currentUser].objectId]));
+    }
+    return turn;
+}
 @end

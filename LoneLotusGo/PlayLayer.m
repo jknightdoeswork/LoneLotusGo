@@ -18,6 +18,11 @@
 @property(retain) CCSprite* background;
 @property(retain) CCLabelTTF* gameOverLabel;
 @property(retain) Matchmaker* matchmaker;
+@property(retain) CCLayer* challengeRecievedUI;
+@property(retain) CCLayer* challengeAcceptedUI;
+@property(assign) CCLabelTTF* challengeAcceptedOtherUserName;
+@property(assign) CCLabelTTF* challengeAcceptedText;
+@property(retain) NSString* challengedBoardId;
 @end
 @implementation PlayLayer
     float v_sw;
@@ -30,6 +35,8 @@
     [self.background release];
     [self.gameOverLabel release];
     [self.matchmaker release];
+    [self.challengeAcceptedUI release];
+    [self.challengeRecievedUI release];
     [super dealloc];
 }
 
@@ -139,8 +146,6 @@
         [self.loginController setSignUpController:signUp];
         [[self.loginController signUpController] setDelegate:self];
 
-        
-
         self.navbar = [[[NavBar alloc]init]autorelease];
         [self.navbar setDelegate:self];
         self.navbar.anchorPoint = ccp(0.0f, 0.0f);
@@ -169,10 +174,32 @@
         
         [self schedule:@selector(updateMatchmaker) interval:10.0f];
         [self schedule:@selector(clickedRefresh) interval:5.0f];
+        
+        //challenge UIs
+        self.challengeAcceptedUI = [CCLayer node];
+        CCLabelTTF* challengeAcceptedLabel = [CCLabelTTF labelWithString:@"Challenge Accepted" fontName:@"Zapfino" fontSize:24];
+        [challengeAcceptedLabel setAnchorPoint:ccp(0.5f, 1.0f)];
+        [self.challengeAcceptedUI addChild:challengeAcceptedLabel];
+        self.challengeAcceptedOtherUserName = [CCLabelTTF labelWithString:@"" fontName:@"HelveticaNeue-UltraLightItalic" fontSize:24];
+        [self.challengeAcceptedUI addChild:self.challengeAcceptedOtherUserName];
+        
+        [self.challengeAcceptedOtherUserName setAnchorPoint:ccp(0.5f, 1.0f)];
+        self.challengeAcceptedText = [CCLabelTTF labelWithString:@"You've been challenged by" fontName:@"Zapfino" fontSize:18];
+        [self.challengeAcceptedText setAnchorPoint:ccp(0.5, 1.0f)];
+        [self.challengeAcceptedUI addChild:self.challengeAcceptedText];
+        [CCMenuItemFont setFontName:@"Zapfino"];
+        [CCMenuItemFont setFontSize:18];
+        CCMenuItem* playTheChallenge = [CCMenuItemFont itemWithString:@"Play" block:^(id sender) {
+            [self playChallenge];
+        }];
+        [self.challengeAcceptedUI addChild:playTheChallenge];
+        
     }
     return self;
 }
-
+-(void)playChallenge {
+    [self load:[self challengedBoardId]];
+}
 -(void)onEnter {
     [super onEnter];
     [self updateMatchmaker];
@@ -180,8 +207,17 @@
 
 -(void) updateMatchmaker {
     NSLog(@"Updating matchmaker");
-    [self.matchmaker doUpdate];
+    [self.matchmaker updateIncomingChallenges];
+    [self.matchmaker updateOutgoingChallenges];
+    [self.matchmaker updateCurrentUsersBoards];
  }
+
+-(void)challengeRecieved:(PFObject *)challenge {
+    NSLog(@"Challenge Recieved.");
+}
+-(void)challengeWasAccepted:(PFObject *)challenge {
+    NSLog(@"Challenge Accepted.");
+}
 
 -(void)boardsDidUpdate {
     if([self.llmenu visible]) {
@@ -194,6 +230,19 @@
 }
 -(void)matchFound:(NSString *)otherUserId {
     NSLog(@"Match found: %@", otherUserId);
+}
+
+-(void)enterMatchmaking {
+    [self.matchmaker enterMatchmaking];
+}
+-(void)exitMatchmaking {
+    [self.matchmaker exitMatchmaking];
+}
+-(void)othersInMatchmakingDidUpdate {
+    [self.llmenu othersInMatchmakingDidUpdate:[self.matchmaker othersInMatchmaking]];
+}
+-(void)challengeOtherUser:(NSString*)otherUserId otherUserName:(NSString *)otherUserName {
+    [self.matchmaker challengeOtherUser:otherUserId otherPlayerName:otherUserName];
 }
 
 -(void)nextTurn {
@@ -282,6 +331,7 @@
     [self.board setIsTouchEnabled:NO];
     [self.navbar setIsTouchEnabled:NO];
     [self updateMatchmaker];
+    [[self matchmaker] updateOthersInMatchmaking];
 }
 -(void)clickedRefresh {
     if (![self.board isCurrentPlayersTurn]) {

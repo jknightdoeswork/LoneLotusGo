@@ -23,6 +23,12 @@
 @property(retain)CCMenuItem* newGame;
 @property(retain)CCMenuItem* signIn;
 @property(retain)CCMenuItem* signOut;
+
+@property(retain)CCLayer* matchmakingLayer;
+@property(retain)CCLabelTTF* matchmakingLabel;
+@property(retain)CCMenuItemToggle* toggleMatchmaking;
+@property(assign)CCMenu* matchmakingMenu;
+
 @end
 @implementation LLMenu
 
@@ -31,6 +37,9 @@
     [self.signIn release];
     [self.signOut release];
     [self.gamesLayer release];
+    [self.matchmakingLayer release];
+    [self.matchmakingLabel release];
+    [self.toggleMatchmaking release];
     [super dealloc];
 }
 -(id)init {
@@ -81,15 +90,49 @@
     self.gamesText = [CCLabelTTF labelWithString:@"Your Games" fontName:@"Zapfino" fontSize:24];
     [self.gamesText setAnchorPoint:ccp(0.5f, 1.0f)];
     [self.gamesLayer addChild:self.gamesText];
-    
+
+    //matchmaking
+    self.matchmakingLayer = [CCLayer node];
+    CCMenuItem* enterMatchmaking = [CCMenuItemFont itemWithString:@"Recieve Game Invites: No" block:^(id sender) {
+        [[self menuDelegate] enterMatchmaking];
+    }];
+    CCMenuItem* exitMatchmaking = [CCMenuItemFont itemWithString:@"Recieve Game Invites: Yes" block:^(id sender) {
+        [[self menuDelegate] exitMatchmaking];
+    }];
+    self.toggleMatchmaking = [CCMenuItemToggle itemWithItems:[NSArray arrayWithObjects:enterMatchmaking,exitMatchmaking, nil] block:^(id sender){
+        if([sender selectedIndex] == 1) {
+            [[self menuDelegate] enterMatchmaking];
+        }
+        else {
+            [[self menuDelegate] exitMatchmaking];
+        }
+        NSLog(@"toggled matchmaking");
+    }];
+    self.matchmakingMenu = [CCMenu menuWithItems:self.toggleMatchmaking, nil];
+    [self.matchmakingLayer addChild:self.matchmakingMenu];
+    self.matchmakingLabel = [CCLabelTTF labelWithString:@"Matchmaking" fontName:@"Zapfino" fontSize:24];
+    [self.matchmakingLabel setAnchorPoint:ccp(0.5f, 1.0f)];
+    [self.matchmakingLayer addChild:self.matchmakingLabel];
+
     [layers addObject:self.mainLayer];
     [layers addObject:self.gamesLayer];
+    [layers addObject:self.matchmakingLayer];
     if(self = [super initWithLayers:layers widthOffset:0]) {
         [self onUserChange];
     }
+    
+
     return self;
 }
 
+-(void)setIsInMatchmaking:(BOOL)inMatchmaking {
+    if (inMatchmaking) {
+        [self.toggleMatchmaking setSelectedIndex:1];
+    }
+    else {
+        [self.toggleMatchmaking setSelectedIndex:0];
+    }
+}
 -(void)onUserChange {
     // Update main page
     [self.mainPage removeAllChildrenWithCleanup:NO];
@@ -100,9 +143,15 @@
         if(![self.pages containsObject:self.gamesLayer]) {
             [self addPage:self.gamesLayer];
         }
+        if(![self.pages containsObject:self.matchmakingLayer]){
+            [self addPage:self.matchmakingLayer];
+        }
+        [self setIsInMatchmaking:[[[PFUser currentUser] objectForKey:@"inMatchmaking"]boolValue]];
     }
+    
     else {
         [self removePage:self.gamesLayer];
+        [self removePage:self.matchmakingLayer];
         [self.mainPage addChild:self.signIn];
     }
     [self setVisible:self.visible];// Will make the pages indicator visible if the users logged in and self is visible
@@ -156,9 +205,27 @@
     
 }
 
+-(void)othersInMatchmakingDidUpdate:(NSArray*)others {
+    [CCMenuItemFont setFontName:@"HelveticaNeue-UltraLightItalic"];
+    [CCMenuItemFont setFontSize:24];
+    [self.matchmakingMenu removeChild:self.toggleMatchmaking cleanup:NO];
+    [self.matchmakingMenu removeAllChildrenWithCleanup:YES];
+    [self.matchmakingMenu addChild:self.toggleMatchmaking];
+    
+    for(PFObject* otherUser in others) {
+        CCMenuItem* item = [CCMenuItemFont itemWithString:[otherUser objectForKey:@"username"] block:^(id sender) {
+            [[self menuDelegate] challengeOtherUser:[otherUser objectId] otherUserName:[otherUser objectForKey:@"username"]];
+        }];
+        [item setAnchorPoint:ccp(0.5f, 2.0f)];
+        [self.matchmakingMenu addChild:item];
+    }
+}
+
 -(void)setScreenSizeChangedTo:(CGSize)size {
     [self.mainPage setPosition:ccp(size.width/2.0, size.height/2.0 - 40)];
     [self.gamesPage setPosition:ccp(size.width/2.0, size.height/2.0)];
+    [self.matchmakingLabel setPosition:ccp(size.width/2.0, size.height)];
+    [self.matchmakingMenu setPosition:ccp(size.width/2.0, size.height-66)];
 //    [self.gamesPage fixPosition];
     [self.logo setPosition:ccp(size.width/2.0f, size.height)];
     [self.gamesText setPosition:ccp(size.width/2.0f, size.height)];

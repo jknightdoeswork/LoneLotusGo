@@ -14,6 +14,9 @@
 -(void)newGame;
 -(void)signIn;
 -(void)signOut;
+-(void)enterMatchmaking;
+-(void)exitMatchmaking;
+-(void)challengeOtherUser:(NSString*)otherUserId otherUserName:(NSString*)otherUserName;
 -(NSArray*)getBoardList;
 @end
 @interface LLMenu : CCScrollLayer
@@ -21,4 +24,5 @@
 -(void)onUserChange;
 -(void)updateBoardList;
 -(void)setScreenSizeChangedTo:(CGSize)size;
+-(void)othersInMatchmakingDidUpdate:(NSArray*)others;
 @end

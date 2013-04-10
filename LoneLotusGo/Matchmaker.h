@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <Parse/Parse.h>
 @protocol MatchmakerDelegate <NSObject>
 -(void)matchFound:(NSString*) otherUserId;
 -(void)boardsDidUpdate;
+-(void)othersInMatchmakingDidUpdate;
 -(void)challengeRecieved:(PFObject*)challenge;
 -(void)challengeWasAccepted:(PFObject*)challenge;
 @end
@@ -19,14 +20,16 @@
 @property(retain) NSMutableArray* currentUsersBoards; //array of board display info dicts for current user
 // TODO make this^^ not a mutable array
 @property(assign) NSObject<MatchmakerDelegate>* delegate;
--(void)doUpdate;
+-(void)updateCurrentUsersBoards;
+-(void)updateIncomingChallenges;
+-(void)updateOutgoingChallenges;
+-(void)updateOthersInMatchmaking;
+-(NSArray*)othersInMatchmaking;
+
 -(void)enterMatchmaking;
 -(void)exitMatchmaking;
 
--(bool)isInMatchmaking;
--(NSArray*)othersInMatchmaking;
-
--(void)challengeOtherPlayer:(NSString*)otherPlayerId;
+-(void)challengeOtherUser:(NSString*)otherPlayerId otherPlayerName:(NSString*)otherPlayerName;
 -(void)acceptChallenge:(PFObject*)challenge;
 -(void)declineChallenge:(PFObject*)challenge;
 @end

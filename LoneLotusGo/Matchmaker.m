@@ -15,7 +15,7 @@
  * user_id      : NSString User Id of user looking for a game
  */
 @interface Matchmaker ()
-
+@property(retain) NSArray* othersInMatchmaking_;
 @end
 
 @implementation Matchmaker
@@ -30,66 +30,63 @@
 -(void)dealloc {
     [self.currentUsersBoards removeAllObjects];
     [self.currentUsersBoards release];
+    [self.othersInMatchmaking_ release];
     [super dealloc];
+}
+
+-(void)updateOthersInMatchmaking {
+    if(![PFUser currentUser]) {
+        NSLog(@"isInMatchmaking. Not logged in.");
+        return;
+    }
+    NSString* uid = [PFUser currentUser].objectId;
+    
+    PFQuery* query = [PFUser query];
+    [query whereKey:@"objectId" notEqualTo:uid];
+    [query whereKey:@"inMatchmaking" equalTo:[NSNumber numberWithBool:YES]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray* objects, NSError* error) {
+        if (error) {
+            NSLog(@"Error: %@ %@\nupdateOthersInMatchmaking", error, [error userInfo]);
+        }
+        else {
+            [self setOthersInMatchmaking_:objects];
+            NSLog(@"Found %d others in matchmaking.", [[self othersInMatchmaking_] count]);
+            [self.delegate othersInMatchmakingDidUpdate];
+        }
+    }];
+}
+-(NSArray*)othersInMatchmaking {
+    return [self othersInMatchmaking_];
 }
 
 -(void)enterMatchmaking {
     if (![PFUser currentUser]) {
-        NSLog(@"EnterMatchmaking. Not logged in");
+        NSLog(@"Warning: enterMatchmaking. Not logged in.");
+        return;
     }
-    NSString* uid = [PFUser currentUser].objectId;
-    PFQuery* query_for_others = [PFQuery queryWithClassName:@"Matchmaker"];
-    [query_for_others whereKey:@"uid" notEqualTo:uid]; // Don't look for yourself!
-    [query_for_others getFirstObjectInBackgroundWithBlock:^(PFObject* object, NSError* error) {
-        if (!error && object) {
-            NSString* other_uid = [object valueForKey:@"uid"];
-            NSLog(@"Found match!: %@", other_uid);
-            [self.delegate matchFound: other_uid];
-            // TODO Tell the other guy that we are a match
-        } else {
-            // There was no other users. Check if were already in matchmaking
-            NSLog(@"%@ %@\nEntering Matchmaking", error, [error userInfo]);
-            PFQuery* query_for_myself = [PFQuery queryWithClassName:@"Matchmaker"];
-            [query_for_myself whereKey:@"uid" equalTo:uid];
-            [query_for_myself countObjectsInBackgroundWithBlock:^(int number, NSError* error) {
-                if (!error && number == 0) {
-                    // this uid has no matchmaker entity
-                    PFObject* entity = [PFObject objectWithClassName:@"Matchmaker"];
-                    [entity setObject:uid forKey:@"uid"];
-                    [entity saveInBackground];
-                }
-                else if (number > 0) {
-                    NSLog(@"We are in matchmaking already");
-                }
-                else {
-                    NSLog(@"Error: %@ %@\nBad Count", error, [error userInfo]);
-                }
-            }];
-
-        }
-    }];
+    if([[[PFUser currentUser] objectForKey:@"inMatchmaking"] boolValue]) {
+        NSLog(@"Warning: enterMatchmaking. Already in matchmaking.");
+        return;
+    }
+    [[PFUser currentUser] setObject:[NSNumber numberWithBool:YES] forKey:@"inMatchmaking"];
+    [[PFUser currentUser] saveInBackground];
+    NSLog(@"Entered matchmaking");
 }
 
 -(void)exitMatchmaking {
     if (![PFUser currentUser]) {
-        NSLog(@"EnterMatchmaking. Not logged in");
+        NSLog(@"Warning: exitMatchmaking. Not logged in.");
+        return;
     }
-    NSString* uid = [PFUser currentUser].objectId;
-    PFQuery* query = [PFQuery queryWithClassName:@"Matchmaker"];
-    [query whereKey:@"uid" equalTo:uid];
-    [query getFirstObjectInBackgroundWithBlock: ^(PFObject *matchmaker, NSError *error) {
-        if (!error) {
-            NSLog(@"Deleting matchmaker entity");
-            [matchmaker deleteInBackground];
-        } else {
-            // Log details of our failure
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
-        }
-    }];
+    if(![[[PFUser currentUser] objectForKey:@"inMatchmaking"] boolValue]) {
+        NSLog(@"Warning: exitMatchmaking: Already not in matchmaking");
+        return;
+    }
+    [[PFUser currentUser] setObject:[NSNumber numberWithBool:NO] forKey:@"inMatchmaking"];
+    [[PFUser currentUser] saveInBackground];
+    NSLog(@"Exited matchmaking");
 }
--(void)doUpdate {
-    [self updateCurrentUsersBoards];
-}
+
 -(void)updateCurrentUsersBoards {
     if(![PFUser currentUser]) {
         return;
@@ -121,5 +118,76 @@
     }];
 }
 
+-(void)challengeOtherUser:(NSString*)otherPlayerId otherPlayerName:(NSString*)otherPlayerName {
+    NSLog(@"challenge other user %@", otherPlayerId);
+    if(![PFUser currentUser]) {
+        NSLog(@"Warning. challengeOtherUser not logged in.");
+        return;
+    }
+    NSString* myUid = [[PFUser currentUser] objectId];
+    NSString* myUsername = [[PFUser currentUser]username];
+    PFObject* challenge = [PFObject objectWithClassName:@"Challenge"];
+    
+    [challenge setObject:otherPlayerId forKey:@"challengee"];
+    [challenge setObject:otherPlayerName forKey:@"challengeeName"];
+    [challenge setObject:myUsername forKey:@"challengerName"];
+    [challenge setObject:myUid forKey:@"challenger"];
+    
+    [challenge setObject:[NSNumber numberWithBool:NO] forKey:@"accepted"];
+    
+    [challenge saveInBackground];
+}
 
+-(void)updateOutgoingChallenges {
+    if(![PFUser currentUser]) {
+        NSLog(@"Warning. updatedOutgoingChallenges not logged in.");
+        return;
+    }
+    NSString* myUid = [[PFUser currentUser] objectId];
+    PFQuery* acceptedquery = [PFQuery queryWithClassName:@"Challenge"];
+    [acceptedquery whereKey:@"challenger" equalTo:myUid];
+    [acceptedquery whereKey:@"accepted" equalTo:[NSNumber numberWithBool:YES]];
+    
+    [acceptedquery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        if(error) {
+            NSLog(@"updateOutgoingChallenges Error %@ %@", error, [error userInfo]);
+        }
+        else {
+            [[self delegate] challengeWasAccepted:object];
+            [object deleteEventually];
+        }
+    }];
+}
+
+-(void)updateIncomingChallenges {
+    if(![PFUser currentUser]) {
+        NSLog(@"Warning. updateIncomingChallenges not logged in.");
+        return;
+    }
+    if(![[[PFUser currentUser] objectForKey:@"inMatchmaking"]boolValue]) {
+        NSLog(@"Warning. updateIncomingChallenges not in matchmaking.");
+        return;
+    }
+    NSString* myUid = [[PFUser currentUser] objectId];
+    PFQuery* incomingquery = [PFQuery queryWithClassName:@"Challenge"];
+    [incomingquery whereKey:@"challengee" equalTo:myUid];
+    
+    [incomingquery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        if(error) {
+            NSLog(@"updateOutgoingChallenges Error %@ %@", error, [error userInfo]);
+        }
+        else {
+            [[self delegate] challengeRecieved:object];
+        }
+    }];
+}
+
+-(void)acceptChallenge:(PFObject*)challenge {
+    [challenge setObject:[NSNumber numberWithBool:YES] forKey:@"accepted"];
+    // TODO Create a new board, reference here.
+    [challenge saveInBackground];
+}
+-(void)declineChallenge:(PFObject*)challenge {
+    [challenge deleteInBackground];
+}
 @end

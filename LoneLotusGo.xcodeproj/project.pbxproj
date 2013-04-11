@@ -23,7 +23,6 @@
 		D249FFCA170D2C95003812CA /* skip.png in Resources */ = {isa = PBXBuildFile; fileRef = D249FFC8170D2C95003812CA /* skip.png */; };
 		D262A4B117027FC10008185A /* OnlineBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = D262A4B017027FC10008185A /* OnlineBoard.m */; };
 		D2707EB01703D2AF00769DCD /* NavBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D2707EAF1703D2AF00769DCD /* NavBar.m */; };
-		D281445816CFE798004F4B33 /* Scoreboard.m in Sources */ = {isa = PBXBuildFile; fileRef = D281445716CFE798004F4B33 /* Scoreboard.m */; };
 		D281445A16D167F9004F4B33 /* blackvswhite.png in Resources */ = {isa = PBXBuildFile; fileRef = D281445916D167F8004F4B33 /* blackvswhite.png */; };
 		D287BB171710A6F300C6DD01 /* CCLayerPanZoom.m in Sources */ = {isa = PBXBuildFile; fileRef = D287BB161710A6F300C6DD01 /* CCLayerPanZoom.m */; };
 		D287BB191710AB1600C6DD01 /* black.bmp in Resources */ = {isa = PBXBuildFile; fileRef = D287BB181710AB1500C6DD01 /* black.bmp */; };
@@ -163,13 +162,11 @@
 		D2C646CE16B490FA007291B7 /* vec4.c in Sources */ = {isa = PBXBuildFile; fileRef = D2C646CD16B490FA007291B7 /* vec4.c */; };
 		D2C646D316B490FA007291B7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C646D216B490FA007291B7 /* main.m */; };
 		D2C646D616B490FA007291B7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C646D516B490FA007291B7 /* AppDelegate.m */; };
-		D2C646D916B490FA007291B7 /* HelloWorldLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C646D816B490FA007291B7 /* HelloWorldLayer.m */; };
 		D2C646DC16B490FA007291B7 /* IntroLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C646DB16B490FA007291B7 /* IntroLayer.m */; };
 		D2C646EA16B491B8007291B7 /* PlayLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C646E316B491B8007291B7 /* PlayLayer.m */; };
 		D2C646EC16B491B8007291B7 /* Board.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C646E716B491B8007291B7 /* Board.m */; };
 		D2C646ED16B491B8007291B7 /* Stone.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C646E916B491B8007291B7 /* Stone.m */; };
 		D2F9E5E716FE3C4400B51F89 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2F9E5E616FE3C4400B51F89 /* Parse.framework */; };
-		D2F9E5EA16FF68C300B51F89 /* LLMainMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F9E5E916FF68C300B51F89 /* LLMainMenu.m */; };
 		D2FA43C4170E1D3C00BEEE45 /* CCScrollLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D2FA43C3170E1D3C00BEEE45 /* CCScrollLayer.m */; };
 		D2FA43C7170E1E0000BEEE45 /* LLMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D2FA43C6170E1E0000BEEE45 /* LLMenu.m */; };
 /* End PBXBuildFile section */
@@ -197,8 +194,6 @@
 		D262A4B017027FC10008185A /* OnlineBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnlineBoard.m; sourceTree = "<group>"; };
 		D2707EAE1703D2AF00769DCD /* NavBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavBar.h; sourceTree = "<group>"; };
 		D2707EAF1703D2AF00769DCD /* NavBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavBar.m; sourceTree = "<group>"; };
-		D281445616CFE798004F4B33 /* Scoreboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Scoreboard.h; path = ../Scoreboard.h; sourceTree = "<group>"; };
-		D281445716CFE798004F4B33 /* Scoreboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Scoreboard.m; path = ../Scoreboard.m; sourceTree = "<group>"; };
 		D281445916D167F8004F4B33 /* blackvswhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackvswhite.png; sourceTree = "<group>"; };
 		D287BB151710A6F300C6DD01 /* CCLayerPanZoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCLayerPanZoom.h; sourceTree = "<group>"; };
 		D287BB161710A6F300C6DD01 /* CCLayerPanZoom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCLayerPanZoom.m; sourceTree = "<group>"; };
@@ -478,8 +473,6 @@
 		D2C646D216B490FA007291B7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D2C646D416B490FA007291B7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D2C646D516B490FA007291B7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		D2C646D716B490FA007291B7 /* HelloWorldLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelloWorldLayer.h; sourceTree = "<group>"; };
-		D2C646D816B490FA007291B7 /* HelloWorldLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelloWorldLayer.m; sourceTree = "<group>"; };
 		D2C646DA16B490FA007291B7 /* IntroLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntroLayer.h; sourceTree = "<group>"; };
 		D2C646DB16B490FA007291B7 /* IntroLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntroLayer.m; sourceTree = "<group>"; };
 		D2C646E216B491B8007291B7 /* PlayLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayLayer.h; sourceTree = "<group>"; };
@@ -490,8 +483,6 @@
 		D2C646E816B491B8007291B7 /* Stone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stone.h; sourceTree = "<group>"; };
 		D2C646E916B491B8007291B7 /* Stone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Stone.m; sourceTree = "<group>"; };
 		D2F9E5E616FE3C4400B51F89 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = ../Parse.framework; sourceTree = "<group>"; };
-		D2F9E5E816FF68C300B51F89 /* LLMainMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLMainMenu.h; sourceTree = "<group>"; };
-		D2F9E5E916FF68C300B51F89 /* LLMainMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLMainMenu.m; sourceTree = "<group>"; };
 		D2FA43C2170E1D3C00BEEE45 /* CCScrollLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCScrollLayer.h; path = libs/cocos2d/CCScrollLayer.h; sourceTree = "<group>"; };
 		D2FA43C3170E1D3C00BEEE45 /* CCScrollLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCScrollLayer.m; path = libs/cocos2d/CCScrollLayer.m; sourceTree = "<group>"; };
 		D2FA43C5170E1E0000BEEE45 /* LLMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLMenu.h; sourceTree = "<group>"; };
@@ -575,8 +566,6 @@
 			isa = PBXGroup;
 			children = (
 				D2A5B6141708DA0300940509 /* scoring.c */,
-				D281445616CFE798004F4B33 /* Scoreboard.h */,
-				D281445716CFE798004F4B33 /* Scoreboard.m */,
 				D2C646E216B491B8007291B7 /* PlayLayer.h */,
 				D2C646E316B491B8007291B7 /* PlayLayer.m */,
 				D2C646E416B491B8007291B7 /* PlayerFlag.h */,
@@ -588,10 +577,6 @@
 				D2C646E916B491B8007291B7 /* Stone.m */,
 				D2C646D416B490FA007291B7 /* AppDelegate.h */,
 				D2C646D516B490FA007291B7 /* AppDelegate.m */,
-				D2C646D716B490FA007291B7 /* HelloWorldLayer.h */,
-				D2C646D816B490FA007291B7 /* HelloWorldLayer.m */,
-				D2F9E5E816FF68C300B51F89 /* LLMainMenu.h */,
-				D2F9E5E916FF68C300B51F89 /* LLMainMenu.m */,
 				D20D78031701310F0084A749 /* LLBaseLayer.h */,
 				D20D78041701310F0084A749 /* LLBaseLayer.m */,
 				D2C646DA16B490FA007291B7 /* IntroLayer.h */,
@@ -1184,16 +1169,13 @@
 				D2C646CE16B490FA007291B7 /* vec4.c in Sources */,
 				D2C646D316B490FA007291B7 /* main.m in Sources */,
 				D2C646D616B490FA007291B7 /* AppDelegate.m in Sources */,
-				D2C646D916B490FA007291B7 /* HelloWorldLayer.m in Sources */,
 				D2C646DC16B490FA007291B7 /* IntroLayer.m in Sources */,
 				D2C646EA16B491B8007291B7 /* PlayLayer.m in Sources */,
 				D2C646EC16B491B8007291B7 /* Board.m in Sources */,
 				D2C646ED16B491B8007291B7 /* Stone.m in Sources */,
 				D2045A2716B8C5CF008C94F9 /* Utilities.m in Sources */,
 				D208561316C6D6CB00FEB519 /* IndexPoint.m in Sources */,
-				D281445816CFE798004F4B33 /* Scoreboard.m in Sources */,
 				D21D97D416FAA24900727758 /* PlayOnlineViewController.m in Sources */,
-				D2F9E5EA16FF68C300B51F89 /* LLMainMenu.m in Sources */,
 				D20D78051701310F0084A749 /* LLBaseLayer.m in Sources */,
 				D262A4B117027FC10008185A /* OnlineBoard.m in Sources */,
 				D2707EB01703D2AF00769DCD /* NavBar.m in Sources */,

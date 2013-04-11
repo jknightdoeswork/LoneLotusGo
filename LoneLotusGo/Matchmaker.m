@@ -118,45 +118,24 @@
     }];
 }
 
--(void)challengeOtherUser:(NSString*)otherPlayerId otherPlayerName:(NSString*)otherPlayerName {
-    NSLog(@"challenge other user %@", otherPlayerId);
+-(void)challengeOtherUser:(PFObject*)otherUser {
+    NSLog(@"challenge other user %@", [otherUser objectId]);
     if(![PFUser currentUser]) {
         NSLog(@"Warning. challengeOtherUser not logged in.");
         return;
     }
-    NSString* myUid = [[PFUser currentUser] objectId];
     NSString* myUsername = [[PFUser currentUser]username];
+    NSString* otherPlayerName = [otherUser objectForKey:@"username"];
     PFObject* challenge = [PFObject objectWithClassName:@"Challenge"];
     
-    [challenge setObject:otherPlayerId forKey:@"challengee"];
+    [challenge setObject:otherUser forKey:@"challengee"];
     [challenge setObject:otherPlayerName forKey:@"challengeeName"];
     [challenge setObject:myUsername forKey:@"challengerName"];
-    [challenge setObject:myUid forKey:@"challenger"];
+    [challenge setObject:[PFUser currentUser] forKey:@"challenger"];
     
     [challenge setObject:[NSNumber numberWithBool:NO] forKey:@"accepted"];
     
     [challenge saveInBackground];
-}
-
--(void)updateOutgoingChallenges {
-    if(![PFUser currentUser]) {
-        NSLog(@"Warning. updatedOutgoingChallenges not logged in.");
-        return;
-    }
-    NSString* myUid = [[PFUser currentUser] objectId];
-    PFQuery* acceptedquery = [PFQuery queryWithClassName:@"Challenge"];
-    [acceptedquery whereKey:@"challenger" equalTo:myUid];
-    [acceptedquery whereKey:@"accepted" equalTo:[NSNumber numberWithBool:YES]];
-    
-    [acceptedquery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-        if(error) {
-            NSLog(@"updateOutgoingChallenges Error %@ %@", error, [error userInfo]);
-        }
-        else {
-            [[self delegate] challengeWasAccepted:object];
-            [object deleteEventually];
-        }
-    }];
 }
 
 -(void)updateIncomingChallenges {
@@ -168,9 +147,11 @@
         NSLog(@"Warning. updateIncomingChallenges not in matchmaking.");
         return;
     }
-    NSString* myUid = [[PFUser currentUser] objectId];
     PFQuery* incomingquery = [PFQuery queryWithClassName:@"Challenge"];
-    [incomingquery whereKey:@"challengee" equalTo:myUid];
+    [incomingquery whereKey:@"challengee" equalTo:[PFUser currentUser]];
+    [incomingquery whereKey:@"accepted" equalTo:[NSNumber numberWithBool:NO]];
+    [incomingquery includeKey:@"challenger"];
+    [incomingquery includeKey:@"challengee"];
     
     [incomingquery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         if(error) {
@@ -184,8 +165,8 @@
 
 -(void)acceptChallenge:(PFObject*)challenge {
     [challenge setObject:[NSNumber numberWithBool:YES] forKey:@"accepted"];
-    // TODO Create a new board, reference here.
     [challenge saveInBackground];
+    [OnlineBoard createOnlineGameInBackground:[challenge objectForKey:@"challengee"] whitePlayer:[challenge objectForKey:@"challenger"]];
 }
 -(void)declineChallenge:(PFObject*)challenge {
     [challenge deleteInBackground];

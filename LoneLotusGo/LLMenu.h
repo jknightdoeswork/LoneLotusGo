@@ -7,7 +7,7 @@
 //
 
 #import "CCScrollLayer.h"
-
+#import <Parse/Parse.h>
 @protocol LLMenuDelegate<NSObject>
 -(void)resume;
 -(void)load:(NSString*)boardId;
@@ -16,7 +16,7 @@
 -(void)signOut;
 -(void)enterMatchmaking;
 -(void)exitMatchmaking;
--(void)challengeOtherUser:(NSString*)otherUserId otherUserName:(NSString*)otherUserName;
+-(void)challengeOtherUser:(PFObject*)otherUser;
 -(NSArray*)getBoardList;
 @end
 @interface LLMenu : CCScrollLayer

@@ -2,6 +2,7 @@
  * reference implementation
  * by user FUZxxl
  * Minor changes by Jason Knight to use existing board data.
+ * Does not work very well. Not shown in final product.
  */
 
 #include <stdbool.h>

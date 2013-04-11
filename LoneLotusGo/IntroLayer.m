@@ -9,8 +9,7 @@
 
 // Import the interfaces
 #import "IntroLayer.h"
-#import "HelloWorldLayer.h"
-
+#import "PlayLayer.h"
 
 #pragma mark - IntroLayer
 

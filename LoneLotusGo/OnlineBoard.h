@@ -28,4 +28,5 @@
 -(void)saveWithName:(NSString*)name;
 -(NSString*)getBoardId;
 +(NSDictionary*)getBoardDisplayInfoDict:(PFObject*)board;
++(void)createOnlineGameInBackground:(PFUser*)blackPlayer whitePlayer:(PFUser*)whitePlayer;
 @end

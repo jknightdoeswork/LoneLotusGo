@@ -13,7 +13,6 @@
 -(void)boardsDidUpdate;
 -(void)othersInMatchmakingDidUpdate;
 -(void)challengeRecieved:(PFObject*)challenge;
--(void)challengeWasAccepted:(PFObject*)challenge;
 @end
 
 @interface Matchmaker : NSObject
@@ -22,14 +21,13 @@
 @property(assign) NSObject<MatchmakerDelegate>* delegate;
 -(void)updateCurrentUsersBoards;
 -(void)updateIncomingChallenges;
--(void)updateOutgoingChallenges;
 -(void)updateOthersInMatchmaking;
 -(NSArray*)othersInMatchmaking;
 
 -(void)enterMatchmaking;
 -(void)exitMatchmaking;
 
--(void)challengeOtherUser:(NSString*)otherPlayerId otherPlayerName:(NSString*)otherPlayerName;
+-(void)challengeOtherUser:(PFObject*)otherUser;
 -(void)acceptChallenge:(PFObject*)challenge;
 -(void)declineChallenge:(PFObject*)challenge;
 @end

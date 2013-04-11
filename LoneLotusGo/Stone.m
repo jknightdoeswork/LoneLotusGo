@@ -57,12 +57,12 @@
  */
 -(void)updateNeighbours {
     NSArray* neighbours = [self getNeighbours];
-    [self shallILive];    
     for (Stone* neighbour in neighbours) {
         if ([neighbour playerFlag] != [self playerFlag]) {
             [neighbour shallILive];
         }
     }
+    [self shallILive];
 }
 
 -(BOOL)shallILive {

@@ -272,4 +272,18 @@
     }
     return turn;
 }
+
++(void)createOnlineGameInBackground:(PFUser*)blackPlayer whitePlayer:(PFUser*)whitePlayer {
+    PFObject* newBoard = [PFObject objectWithClassName:@"Board"];
+    [newBoard setObject:[NSNumber numberWithBool:NO] forKey:@"justpassed"];
+    [newBoard setObject:[NSNumber numberWithBool:NO] forKey:@"gameover"];
+    [newBoard setObject:[NSNumber numberWithInt:P_BLACK] forKey:@"current_player"];
+    [newBoard setObject:[NSNumber numberWithInt:19] forKey:@"n"];
+    [newBoard setObject:[NSNumber numberWithInt:0] forKey:@"white_score"];
+    [newBoard setObject:[NSNumber numberWithInt:0] forKey:@"black_score"];
+    [newBoard setObject:[NSArray array] forKey:@"pieces"];
+    [newBoard setObject:whitePlayer forKey:@"white_player"];
+    [newBoard setObject:blackPlayer forKey:@"black_player"];
+    [newBoard saveInBackground];
+}
 @end

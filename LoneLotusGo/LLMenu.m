@@ -214,7 +214,7 @@
     
     for(PFObject* otherUser in others) {
         CCMenuItem* item = [CCMenuItemFont itemWithString:[otherUser objectForKey:@"username"] block:^(id sender) {
-            [[self menuDelegate] challengeOtherUser:[otherUser objectId] otherUserName:[otherUser objectForKey:@"username"]];
+            [[self menuDelegate] challengeOtherUser:otherUser];
         }];
         [item setAnchorPoint:ccp(0.5f, 2.0f)];
         [self.matchmakingMenu addChild:item];

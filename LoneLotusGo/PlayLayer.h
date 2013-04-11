@@ -10,7 +10,6 @@
 #import "LLMenu.h"
 #import "cocos2d.h"
 #import "OnlineBoard.h"
-#import "Scoreboard.h"
 #import "NavBar.h"
 #import "Matchmaker.h"
 

@@ -377,7 +377,7 @@
  */
 -(Stone*)getPieceAt:(int)x_index y_index:(int)y_index
 {
-    if (x_index > 0 && x_index < n && y_index > 0 && y_index < n)
+    if (x_index >= 0 && x_index <= n && y_index >= 0 && y_index <= n)
     {
         return (Stone*)[self getChildByTag:[self get_index:x_index j:y_index]];
     }

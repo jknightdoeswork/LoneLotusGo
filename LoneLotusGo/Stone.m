@@ -11,8 +11,8 @@
 
 @implementation Stone {
     Board* parentBoard;
+    PlayerFlag playerFlag;
 }
-@synthesize playerFlag;
 @synthesize i;
 @synthesize j;
 
@@ -57,12 +57,12 @@
  */
 -(void)updateNeighbours {
     NSArray* neighbours = [self getNeighbours];
-    [self shallILive];    
     for (Stone* neighbour in neighbours) {
         if ([neighbour playerFlag] != [self playerFlag]) {
             [neighbour shallILive];
         }
     }
+    [self shallILive];
 }
 
 -(BOOL)shallILive {
@@ -131,6 +131,25 @@
     return [self countLiberties] > 0;
 }
 
+-(PlayerFlag)playerFlag {
+    return playerFlag;
+}
+
+-(void)setPlayerFlag:(PlayerFlag)flag {
+    if (flag == P_BLACK) {
+        playerFlag = flag;
+        CCTexture2D *texture = [[CCTextureCache sharedTextureCache] addImage: @"stone_black.png"];
+        [self setTexture:texture];
+    }
+    else if (flag == P_WHITE) {
+        playerFlag = flag;
+        CCTexture2D *texture = [[CCTextureCache sharedTextureCache] addImage: @"stone_white.png"];
+        [self setTexture:texture];
+    }
+}
+-(bool)isUnplacedStone {
+    return i == -1 && j == -1;
+}
 -(id)initWithPlayerFlag:(PlayerFlag) flag {
     if (flag == P_BLACK) {
         playerFlag = flag;
@@ -150,4 +169,10 @@
     }
 }
 
+-(int)getXIndex {
+    return i;
+}
+-(int)getYIndex {
+    return j;
+}
 @end

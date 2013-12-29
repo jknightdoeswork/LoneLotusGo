@@ -3,7 +3,40 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "-[Stone initForGoGame:for_player:x_index:y_index:]:Stone.m">
+         contextName = "-[OnlineBoard save]:OnlineBoard.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "pieces">
+            </PersistentString>
+            <PersistentString
+               value = "[self currentPlayer]">
+            </PersistentString>
+            <PersistentString
+               value = "(char)[ns_c intValue]">
+            </PersistentString>
+            <PersistentString
+               value = "[self pf_object]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__31-[OnlineBoard load:callmeback:]_block_invoke:OnlineBoard.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "boardId">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "+[PlayLayer scene]:PlayLayer.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[navbar.save nodeToWorldTransform]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[Board ccTouchesEnded:withEvent:]:Board.m">
       </ContextState>
       <ContextState
          contextName = "-[Chain initWithStone:]:Chain.m">
@@ -14,7 +47,162 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[PlayLayer signOut]:PlayLayer.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[currentInstallation objectForKey:@&quot;channels&quot;]">
+            </PersistentString>
+            <PersistentString
+               value = "[PFUser currentUser].objectId">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[PlayLayer screenSizeChangedTo:]:PlayLayer.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[self.background nodeToWorldTransform]">
+            </PersistentString>
+            <PersistentString
+               value = "[self.background contentSize]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "+[OnlineBoard getBoardDisplayInfoDict:]:OnlineBoard.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[LLLogInViewController willRotateToInterfaceOrientation:duration:]:LLLogInViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "toInterfaceOrientation == UIDeviceOrientationPortrait">
+            </PersistentString>
+            <PersistentString
+               value = "UIDeviceOrientationIsPortrait(toInterfaceOrientation)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[Matchmaker enterMatchmaking]:Matchmaker.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[PFUser currentUser]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[PlayLayer load:]:PlayLayer.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "(self.board.black_player)">
+            </PersistentString>
+            <PersistentString
+               value = "[self.board.white_player objectForKey:@&quot;username&quot;]">
+            </PersistentString>
+            <PersistentString
+               value = "self.board.white_player">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[Board initBoardWithCapacity:]:Board.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[NavBar setScreenSize:]:NavBar.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[self.save nodeToWorldTransform]">
+            </PersistentString>
+            <PersistentString
+               value = "[[self save] parentToNodeTransform]">
+            </PersistentString>
+            <PersistentString
+               value = "[[self.save parent] parent]">
+            </PersistentString>
+            <PersistentString
+               value = "[[self.save parent] nodeToWorldTransform]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[OnlineBoard refresh]:OnlineBoard.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[self pf_object] == nil">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[OnlineBoard nextTurn]:OnlineBoard.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[Stone initForGoGame:for_player:x_index:y_index:]:Stone.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[OnlineBoard load:]:OnlineBoard.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "gameState">
+            </PersistentString>
+            <PersistentString
+               value = "[[gameState objectForKey:@&quot;current_player&quot;] intValue]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__14-[LLMenu init]_block_invoke132:LLMenu.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.toggleMatchmaking">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__26-[NavBar updateNavBarMenu]_block_invoke:NavBar.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[currentUser objectId]">
+            </PersistentString>
+            <PersistentString
+               value = "[[currentUser objectId] isEqualToString: [w objectId]]">
+            </PersistentString>
+            <PersistentString
+               value = "[w objectId]">
+            </PersistentString>
+            <PersistentString
+               value = "[currentUser objectId] == [w objectId]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__39-[LLMenu othersInMatchmakingDidUpdate:]_block_invoke:LLMenu.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[other use">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[OnlineBoard canPutPieceAt:y_index:]:OnlineBoard.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[[PFUser currentUser] objectId]">
+            </PersistentString>
+            <PersistentString
+               value = "[[self white_player] objectId]">
+            </PersistentString>
+            <PersistentString
+               value = "[[self black_player] objectId]">
+            </PersistentString>
+            <PersistentString
+               value = "[self currentPlayer]">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
    </ContextStates>
 </VariablesViewState>

@@ -11,10 +11,9 @@
 
 @class Board;
 
-#define INITIAL_SCALE 0.5f
+#define INITIAL_SCALE 0.66f
 
 @interface Stone : CCSprite
-@property(nonatomic) PlayerFlag playerFlag;
 @property(nonatomic) int i;
 @property(nonatomic) int j;
 
@@ -27,5 +26,15 @@
  * Updates all the neighbours of this stone, and this stone, to make sure they can live on the board.
  */
 -(void)updateNeighbours;
+
+-(PlayerFlag)playerFlag;
+
+-(void)setPlayerFlag:(PlayerFlag)flag;
+-(int)getXIndex;
+-(int)getYIndex;
+/**
+ * Returns true if this is the stone that floats around under a users finger.
+ */
+-(bool)isUnplacedStone;
 
 @end
